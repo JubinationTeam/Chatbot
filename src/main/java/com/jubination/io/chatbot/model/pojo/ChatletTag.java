@@ -5,6 +5,7 @@
  */
 package com.jubination.io.chatbot.model.pojo;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Document(collection = "chatlet_tag")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatletTag {
      @Id
     String id;

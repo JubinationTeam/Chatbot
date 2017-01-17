@@ -8,6 +8,7 @@ package com.jubination.io.chatbot.model.pojo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Document(collection = "chatlet")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Chatlet {
     @Id
     String id;
