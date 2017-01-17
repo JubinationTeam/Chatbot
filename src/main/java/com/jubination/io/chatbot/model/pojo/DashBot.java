@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author MumbaiZone
  */
-@Component
+
 @Document(collection = "dash_bot")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DashBot {

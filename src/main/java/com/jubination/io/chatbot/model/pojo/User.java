@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
  *
  * @author MumbaiZone
  */
-@Component
+
+
 @Document(collection = "user")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  *
  * @author MumbaiZone
  */
-@Component
+
 @Document(collection = "chatlet")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chatlet {
