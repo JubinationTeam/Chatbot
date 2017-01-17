@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
  * @author MumbaiZone
  */
 @Component
-@Document
+@Document(collection = "chatlet")
 public class Chatlet {
     @Id
-    Long id;
+    String id;
     Chatlet next;
     Chatlet prev;
     HashMap<String,Chatlet> expectionChatlets = new HashMap<>();
@@ -39,13 +39,15 @@ public class Chatlet {
     public Chatlet() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
+
+  
 
     public Chatlet getNext() {
         return next;

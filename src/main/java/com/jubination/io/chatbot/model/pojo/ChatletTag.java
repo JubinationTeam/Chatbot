@@ -5,26 +5,34 @@
  */
 package com.jubination.io.chatbot.model.pojo;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author MumbaiZone
  */
+@Component
+@Document(collection = "chatlet_tag")
 public class ChatletTag {
-    Long id;
+     @Id
+    String id;
     String userId;
     String tag;
     String question;
     String answer;
     String answerType;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
+ 
     public String getUserId() {
         return userId;
     }

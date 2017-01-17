@@ -8,17 +8,21 @@ package com.jubination.io.chatbot.model.dao;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.mongodb.WriteResult;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author MumbaiZone
  */
-public class ChatletDAO implements Repository<Chatlet>{
+@Repository
+public class ChatletDAO  implements GenericDAO<Chatlet>{
 
+    @Autowired
     MongoTemplate mongoTemplate;
     
     public void setMongoTemplate(MongoTemplate mongoTemplate) {
@@ -48,18 +52,26 @@ public class ChatletDAO implements Repository<Chatlet>{
 
     @Override
     public void deleteObject(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), Chatlet.class);
     }
 
     @Override
     public void createCollection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if (!mongoTemplate.collectionExists(Chatlet.class)) {
+			mongoTemplate.createCollection(Chatlet.class);
+		}
     }
 
     @Override
     public void dropCollection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if (mongoTemplate.collectionExists(Chatlet.class)) {
+			mongoTemplate.dropCollection(Chatlet.class);
+		}
     }
+
+  
+
+  
 
   
 }

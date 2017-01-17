@@ -8,6 +8,7 @@ package com.jubination.io.chatbot.service;
 
 import com.jubination.io.chatbot.backend.service.core.DashBotUpdater;
 import com.jubination.io.chatbot.backend.service.core.DietChartUpdater;
+import com.jubination.io.chatbot.model.dao.ChatletDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,14 +22,17 @@ public class ChatBotMaintainService {
     
     
     @Autowired
-    private  DietChartUpdater updater;
+    DietChartUpdater updater;
         
     @Autowired
-    private  DashBotUpdater analyzeUpdater;
+    DashBotUpdater analyzeUpdater;
+    
+    @Autowired
+    ChatletDAO chatletRepository;
        
    public Chatlet createChatlet(Chatlet chatlet){
-       
-       return chatlet;
+       chatletRepository.saveObject(chatlet);
+       return chatletRepository.getObject(chatlet.getId());
    }
     
 }

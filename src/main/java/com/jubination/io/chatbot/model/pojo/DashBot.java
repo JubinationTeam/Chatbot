@@ -6,13 +6,20 @@
 package com.jubination.io.chatbot.model.pojo;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author MumbaiZone
  */
+@Component
+@Document(collection = "dash_bot")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DashBot {
+    @Id
+    String id;
     String text;
     String userId;
 
@@ -38,6 +45,16 @@ public class DashBot {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
     
     
 }

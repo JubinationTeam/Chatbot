@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author MumbaiZone
  */
-public interface Repository<T> {
+public interface GenericDAO<T> {
 
 	public List<T> getAllObjects();
 

@@ -6,12 +6,18 @@
 package com.jubination.io.chatbot.model.pojo;
 
 import java.util.HashMap;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author MumbaiZone
  */
+@Component
+@Document(collection = "user")
 public class User {
+    @Id
     String userId;
     String email;
     String phoneNumber;

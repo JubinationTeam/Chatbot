@@ -10,11 +10,14 @@ package com.jubination.io.chatbot.controller;
 //import com.jubination.chatbot.service.ChatBotMaintainService;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotResponse;
+import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.service.ChatBotMaintainService;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,7 @@ public class ChatBotAPIController {
             
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ChatBotResponse getDump(@RequestBody ChatBotRequest cRequest,HttpServletRequest request) throws IOException{
+    public @ResponseBody ChatBotResponse process(@RequestBody ChatBotRequest cRequest,HttpServletRequest request) throws IOException{
             System.out.println("Chatbot request"+cRequest.getLastId());
        
               return null;
@@ -44,9 +47,19 @@ public class ChatBotAPIController {
     }
     
      @RequestMapping(value="/",method=RequestMethod.GET)
-    public ModelAndView getPage(HttpServletRequest request) throws IOException{
+    public ModelAndView getFirstPage(HttpServletRequest request) throws IOException{
             return new ModelAndView("index");
         
+    }
+    
+    @RequestMapping(value="/chatlet/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ResponseEntity createChatlet(@RequestBody Chatlet chatlet,HttpServletRequest request) throws IOException{
+           
+       if(service.createChatlet(chatlet)!=null){
+              return new ResponseEntity(HttpStatus.OK);
+       }
+       return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            
     }
     
     
