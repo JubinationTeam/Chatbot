@@ -11,6 +11,7 @@ package com.jubination.io.chatbot.controller;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotResponse;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
+import com.jubination.io.chatbot.model.pojo.DashBot;
 import com.jubination.io.chatbot.service.ChatBotMaintainService;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +62,16 @@ public class ChatBotAPIController {
        return new ResponseEntity(HttpStatus.BAD_REQUEST);
             
     }
+      @RequestMapping(value="/dashbot/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ResponseEntity createDashbot(@RequestBody DashBot dashbot,HttpServletRequest request) throws IOException{
+           
+       if(service.createDashBot(dashbot)!=null){
+              return new ResponseEntity(HttpStatus.OK);
+       }
+       return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            
+    }
+    
     
     
 }
