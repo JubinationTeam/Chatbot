@@ -27,6 +27,9 @@ public class DashBot {
         this.text = text;
         this.userId = userId;
     }
+
+    public DashBot() {
+    }
     
     
 

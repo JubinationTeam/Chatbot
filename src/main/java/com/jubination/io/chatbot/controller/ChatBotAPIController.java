@@ -54,21 +54,15 @@ public class ChatBotAPIController {
     }
     
     @RequestMapping(value="/chatlet/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ResponseEntity createChatlet(@RequestBody Chatlet chatlet,HttpServletRequest request) throws IOException{
+    public @ResponseBody Chatlet createChatlet(@RequestBody Chatlet chatlet,HttpServletRequest request) throws IOException{
            
-       if(service.createChatlet(chatlet)!=null){
-              return new ResponseEntity(HttpStatus.OK);
-       }
-       return new ResponseEntity(HttpStatus.BAD_REQUEST);
+       return service.createChatlet(chatlet);
             
     }
       @RequestMapping(value="/dashbot/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ResponseEntity createDashbot(@RequestBody DashBot dashbot,HttpServletRequest request) throws IOException{
+    public @ResponseBody DashBot createDashbot(@RequestBody DashBot dashbot,HttpServletRequest request) throws IOException{
            
-       if(service.createDashBot(dashbot)!=null){
-              return new ResponseEntity(HttpStatus.OK);
-       }
-       return new ResponseEntity(HttpStatus.BAD_REQUEST);
+       return service.createDashBot(dashbot);
             
     }
     

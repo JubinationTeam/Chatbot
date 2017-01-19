@@ -25,10 +25,10 @@ public class Chatlet {
     String id;
     Chatlet next;
     Chatlet prev;
-    HashMap<String,Chatlet> expectionChatlets = new HashMap<>();
-    List<HashMap<String,String>> botMessages = new ArrayList<>();
+    HashMap<String,Chatlet> validationChatlets = new HashMap<>();
+    List<Message> botMessages = new ArrayList<>();
     HashMap<String,Chatlet> options = new HashMap<>();
-      HashMap<List<String>,Chatlet> deciders= new  HashMap<>();
+      List<Decider> deciders= new  ArrayList<>();
     String answerType;
     Boolean validationBlock;
     Boolean conditionBlock;
@@ -49,8 +49,6 @@ public class Chatlet {
         this.id = id;
     }
 
-  
-
     public Chatlet getNext() {
         return next;
     }
@@ -59,31 +57,13 @@ public class Chatlet {
         this.next = next;
     }
 
-    public HashMap<String, Chatlet> getExpectionChatlets() {
-        return expectionChatlets;
+    public Chatlet getPrev() {
+        return prev;
     }
 
-    public void setExpectionChatlets(HashMap<String, Chatlet> expectionChatlets) {
-        this.expectionChatlets = expectionChatlets;
+    public void setPrev(Chatlet prev) {
+        this.prev = prev;
     }
-
-    public List<HashMap<String, String>> getBotMessages() {
-        return botMessages;
-    }
-
-    public void setBotMessages(List<HashMap<String, String>> botMessages) {
-        this.botMessages = botMessages;
-    }
-
-    public HashMap<String, Chatlet> getOptions() {
-        return options;
-    }
-
-    public void setOptions(HashMap<String, Chatlet> options) {
-        this.options = options;
-    }
-
-   
 
     public String getAnswerType() {
         return answerType;
@@ -93,9 +73,6 @@ public class Chatlet {
         this.answerType = answerType;
     }
 
-  
-
-    
     public Boolean getValidationBlock() {
         return validationBlock;
     }
@@ -111,8 +88,6 @@ public class Chatlet {
     public void setConditionBlock(Boolean conditionBlock) {
         this.conditionBlock = conditionBlock;
     }
-
- 
 
     public Boolean getDecisionPossible() {
         return decisionPossible;
@@ -130,22 +105,6 @@ public class Chatlet {
         this.tagType = tagType;
     }
 
-    public Chatlet getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Chatlet prev) {
-        this.prev = prev;
-    }
-
-    public HashMap<List<String>, Chatlet> getDeciders() {
-        return deciders;
-    }
-
-    public void setDeciders(HashMap<List<String>, Chatlet> deciders) {
-        this.deciders = deciders;
-    }
-
     public Boolean getFbVisible() {
         return fbVisible;
     }
@@ -161,6 +120,24 @@ public class Chatlet {
     public void setWebVisible(Boolean webVisible) {
         this.webVisible = webVisible;
     }
+
+    public HashMap<String, Chatlet> getValidationChatlets() {
+        return validationChatlets;
+    }
+
+    public void setValidationChatlets(HashMap<String, Chatlet> validationChatlets) {
+        this.validationChatlets = validationChatlets;
+    }
+
+    public HashMap<String, Chatlet> getOptions() {
+        return options;
+    }
+
+    public void setOptions(HashMap<String, Chatlet> options) {
+        this.options = options;
+    }
+
+  
 
     
     
