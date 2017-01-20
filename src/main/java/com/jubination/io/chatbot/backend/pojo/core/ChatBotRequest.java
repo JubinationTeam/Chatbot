@@ -6,6 +6,7 @@
 package com.jubination.io.chatbot.backend.pojo.core;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
  * @author MumbaiZone
  */
 
+@Component
+@Scope
     @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatBotRequest {
     

@@ -46,7 +46,6 @@
 		<constructor-arg name="mongo" ref="mongo" />
 		<constructor-arg name="databaseName" value="jubination" />
 	</bean>
-
 	<!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
 		<property name="host" value="localhost" />

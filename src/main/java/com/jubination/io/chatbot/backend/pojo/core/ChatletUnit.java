@@ -3,23 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jubination.io.chatbot.model.pojo;
+package com.jubination.io.chatbot.backend.pojo.core;
 
+import com.jubination.io.chatbot.model.pojo.Chatlet;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author MumbaiZone
  */
-@Document(collection = "message")
+@Component
+@Scope("prototype")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Message {
-     @Id
-    String id;
+public class ChatletUnit {
+    
+    
     String type;
-    String value;
+    Chatlet chatlet;
+
+    public ChatletUnit() {
+    }
 
     public String getType() {
         return type;
@@ -29,21 +34,12 @@ public class Message {
         this.type = type;
     }
 
-    public String getValue() {
-        return value;
+    public Chatlet getChatlet() {
+        return chatlet;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setChatlet(Chatlet chatlet) {
+        this.chatlet = chatlet;
     }
     
     

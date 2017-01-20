@@ -8,13 +8,15 @@ package com.jubination.io.chatbot.backend.pojo.core;
 import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author MumbaiZone
  */
-
+@Component
+@Scope
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatBotResponse {
     
@@ -60,10 +62,6 @@ public class ChatBotResponse {
     }
 
    
-
-    
-    
-    
     public int getSerialNumber() {
         return serialNumber;
     }

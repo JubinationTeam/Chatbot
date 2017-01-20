@@ -5,39 +5,34 @@
  */
 package com.jubination.io.chatbot.model.pojo;
 
+import com.jubination.io.chatbot.model.dao.CascadeSave;
+import java.util.ArrayList;
+import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author MumbaiZone
  */
-@Document(collection = "message")
+@Document(collection = "message_set")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Message {
-     @Id
+public class MessageSet {
+  @Id
     String id;
-    String type;
-    String value;
+  @DBRef
+    List<Message> messages = new ArrayList<>();
 
-    public String getType() {
-        return type;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    
     public String getId() {
         return id;
     }

@@ -21,11 +21,13 @@ import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     @Id
+     String Id;
     String userId;
     String email;
     String phoneNumber;
     String city;
     String fbId;
+    String recentSessionId;
     Boolean loggedIn;
     HashMap<String,String> tags =new HashMap<>();
 
@@ -83,6 +85,22 @@ public class User {
 
     public void setLoggedIn(Boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public String getRecentSessionId() {
+        return recentSessionId;
+    }
+
+    public void setRecentSessionId(String recentSessionId) {
+        this.recentSessionId = recentSessionId;
     }
     
 }

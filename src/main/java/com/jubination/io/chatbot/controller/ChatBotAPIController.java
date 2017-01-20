@@ -5,14 +5,14 @@
  */
 package com.jubination.io.chatbot.controller;
 
-//import com.jubination.chatbot.backend.pojo.core.ChatBotRequest;
-//import com.jubination.chatbot.backend.pojo.core.ChatBotResponse;
-//import com.jubination.chatbot.service.ChatBotMaintainService;
+
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotResponse;
+import com.jubination.io.chatbot.backend.pojo.core.Flow;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
-import com.jubination.io.chatbot.service.ChatBotMaintainService;
+import com.jubination.io.chatbot.service.CoreRepositoryService;
+import com.jubination.io.chatbot.service.PreProcessingService;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,9 @@ public class ChatBotAPIController {
     
     
  @Autowired 
-    ChatBotMaintainService service;
-            
+    CoreRepositoryService service;
+     @Autowired 
+    PreProcessingService preService;        
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatBotResponse process(@RequestBody ChatBotRequest cRequest,HttpServletRequest request) throws IOException{
@@ -52,6 +53,15 @@ public class ChatBotAPIController {
             return new ModelAndView("index");
         
     }
+    
+    @RequestMapping(value="/flow/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody Flow createFlow(@RequestBody Flow flow,HttpServletRequest request) throws IOException{
+           
+       return preService.createFlow(flow);
+            
+    }
+    
+     
     
     @RequestMapping(value="/chatlet/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody Chatlet createChatlet(@RequestBody Chatlet chatlet,HttpServletRequest request) throws IOException{

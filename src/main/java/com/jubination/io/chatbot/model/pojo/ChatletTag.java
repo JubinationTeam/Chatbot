@@ -25,6 +25,8 @@ public class ChatletTag {
     String question;
     String answer;
     String answerType;
+    String chatletId;
+    String sessionId;
 
     public String getId() {
         return id;
@@ -73,6 +75,22 @@ public class ChatletTag {
 
     public void setAnswerType(String answerType) {
         this.answerType = answerType;
+    }
+
+    public String getChatletId() {
+        return chatletId;
+    }
+
+    public void setChatletId(String chatletId) {
+        this.chatletId = chatletId;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
     
 }

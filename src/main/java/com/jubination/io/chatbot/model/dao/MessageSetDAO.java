@@ -5,7 +5,7 @@
  */
 package com.jubination.io.chatbot.model.dao;
 
-import com.jubination.io.chatbot.model.pojo.User;
+import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.mongodb.WriteResult;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
  * @author MumbaiZone
  */
 @Repository
-public class UserDAO  implements GenericDAO<User>{
+public class MessageSetDAO implements GenericDAO<MessageSet>{
     
     @Autowired
     MongoTemplate mongoTemplate;
@@ -30,52 +30,43 @@ public class UserDAO  implements GenericDAO<User>{
 	}
     
     @Override
-    public List<User> getAllObjects() {
-        return mongoTemplate.findAll(User.class);
+    public List<MessageSet> getAllObjects() {
+        return mongoTemplate.findAll(MessageSet.class);
     }
 
     @Override
-    public void saveObject(User object) {
+    public void saveObject(MessageSet object) {
         mongoTemplate.insert(object);
     }
 
     @Override
-    public User getObject(String id) {
-        return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),User.class);
-    }
-    
-    public User getObjectBySession(String sessionId) {
-        return mongoTemplate.findOne(new Query(Criteria.where("sessionId").is(sessionId)),User.class);
+    public MessageSet getObject(String id) {
+        return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),MessageSet.class);
     }
 
     @Override
     public WriteResult updateObject(String id, String name) {
         return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
-				Update.update("name", name), User.class);
-    }
-    
-    public WriteResult updatePhoneNumber(String id, String phoneNumber) {
-        return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
-				Update.update("name", phoneNumber), User.class);
+				Update.update("name", name), MessageSet.class);
     }
 
     @Override
     public void deleteObject(String id) {
-        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), User.class);
+        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), MessageSet.class);
     }
 
     @Override
     public void createCollection() {
-       if (!mongoTemplate.collectionExists(User.class)) {
-			mongoTemplate.createCollection(User.class);
+       if (!mongoTemplate.collectionExists(MessageSet.class)) {
+			mongoTemplate.createCollection(MessageSet.class);
 		}
     }
 
     @Override
     public void dropCollection() {
-       if (mongoTemplate.collectionExists(User.class)) {
-			mongoTemplate.dropCollection(User.class);
+       if (mongoTemplate.collectionExists(MessageSet.class)) {
+			mongoTemplate.dropCollection(MessageSet.class);
 		}
     }
-
+    
 }

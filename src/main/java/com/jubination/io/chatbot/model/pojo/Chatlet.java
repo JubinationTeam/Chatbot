@@ -5,13 +5,14 @@
  */
 package com.jubination.io.chatbot.model.pojo;
 
+import com.jubination.io.chatbot.model.dao.CascadeSave;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -23,16 +24,17 @@ import org.springframework.stereotype.Component;
 public class Chatlet {
     @Id
     String id;
-    Chatlet next;
-    Chatlet prev;
-    HashMap<String,Chatlet> validationChatlets = new HashMap<>();
-    List<Message> botMessages = new ArrayList<>();
-    HashMap<String,Chatlet> options = new HashMap<>();
+    String next;
+    String prev;
+    HashMap<String,String> validationChatlets = new HashMap<>();
+     @DBRef
+    List<MessageSet> botMessages = new ArrayList<>();
+    HashMap<String,String> options = new HashMap<>();
+     @DBRef
       List<Decider> deciders= new  ArrayList<>();
     String answerType;
     Boolean validationBlock;
     Boolean conditionBlock;
-      Boolean decisionPossible;
       String tagType;
       Boolean fbVisible;
       Boolean webVisible;
@@ -49,21 +51,7 @@ public class Chatlet {
         this.id = id;
     }
 
-    public Chatlet getNext() {
-        return next;
-    }
-
-    public void setNext(Chatlet next) {
-        this.next = next;
-    }
-
-    public Chatlet getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Chatlet prev) {
-        this.prev = prev;
-    }
+  
 
     public String getAnswerType() {
         return answerType;
@@ -89,13 +77,6 @@ public class Chatlet {
         this.conditionBlock = conditionBlock;
     }
 
-    public Boolean getDecisionPossible() {
-        return decisionPossible;
-    }
-
-    public void setDecisionPossible(Boolean decisionPossible) {
-        this.decisionPossible = decisionPossible;
-    }
 
     public String getTagType() {
         return tagType;
@@ -121,19 +102,52 @@ public class Chatlet {
         this.webVisible = webVisible;
     }
 
-    public HashMap<String, Chatlet> getValidationChatlets() {
+   
+    public List<MessageSet> getBotMessages() {
+        return botMessages;
+    }
+
+    public void setBotMessages(List<MessageSet> botMessages) {
+        this.botMessages = botMessages;
+    }
+
+    public List<Decider> getDeciders() {
+        return deciders;
+    }
+
+    public void setDeciders(List<Decider> deciders) {
+        this.deciders = deciders;
+    }
+
+    public String getNext() {
+        return next;
+    }
+
+    public void setNext(String next) {
+        this.next = next;
+    }
+
+    public String getPrev() {
+        return prev;
+    }
+
+    public void setPrev(String prev) {
+        this.prev = prev;
+    }
+
+    public HashMap<String, String> getValidationChatlets() {
         return validationChatlets;
     }
 
-    public void setValidationChatlets(HashMap<String, Chatlet> validationChatlets) {
+    public void setValidationChatlets(HashMap<String, String> validationChatlets) {
         this.validationChatlets = validationChatlets;
     }
 
-    public HashMap<String, Chatlet> getOptions() {
+    public HashMap<String, String> getOptions() {
         return options;
     }
 
-    public void setOptions(HashMap<String, Chatlet> options) {
+    public void setOptions(HashMap<String, String> options) {
         this.options = options;
     }
 
