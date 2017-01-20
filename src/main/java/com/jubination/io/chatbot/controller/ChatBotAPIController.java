@@ -6,8 +6,8 @@
 package com.jubination.io.chatbot.controller;
 
 
+import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
-import com.jubination.io.chatbot.backend.pojo.core.ChatBotResponse;
 import com.jubination.io.chatbot.backend.pojo.core.Flow;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
@@ -40,8 +40,8 @@ public class ChatBotAPIController {
     PreProcessingService preService;        
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ChatBotResponse process(@RequestBody ChatBotRequest cRequest,HttpServletRequest request) throws IOException{
-            System.out.println("Chatbot request"+cRequest.getLastId());
+    public @ResponseBody ChatBotRequest process(@RequestBody UserResponse cRes,HttpServletRequest request) throws IOException{
+            System.out.println("Chatbot request"+cRes.getLastId());
        
               return null;
             
