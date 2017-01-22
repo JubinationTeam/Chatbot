@@ -21,6 +21,14 @@ public class Message {
     String type;
     String value;
 
+    public Message(String type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+
+    public Message() {
+    }
+
     public String getType() {
         return type;
     }
@@ -46,5 +54,9 @@ public class Message {
         this.id = id;
     }
     
+    @Override
+    public String toString(){
+        return value;
+    }
     
 }

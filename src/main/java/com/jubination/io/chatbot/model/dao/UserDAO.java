@@ -44,9 +44,7 @@ public class UserDAO  implements GenericDAO<User>{
         return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),User.class);
     }
     
-    public User getObjectBySession(String sessionId) {
-        return mongoTemplate.findOne(new Query(Criteria.where("sessionId").is(sessionId)),User.class);
-    }
+   
 
     @Override
     public WriteResult updateObject(String id, String name) {
@@ -54,10 +52,11 @@ public class UserDAO  implements GenericDAO<User>{
 				Update.update("name", name), User.class);
     }
     
-    public WriteResult updatePhoneNumber(String id, String phoneNumber) {
+   public WriteResult updateObject(String id, String value, String type) {
         return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
-				Update.update("name", phoneNumber), User.class);
+				Update.update(type, value), User.class);
     }
+   
 
     @Override
     public void deleteObject(String id) {
@@ -77,5 +76,7 @@ public class UserDAO  implements GenericDAO<User>{
 			mongoTemplate.dropCollection(User.class);
 		}
     }
+
+    
 
 }

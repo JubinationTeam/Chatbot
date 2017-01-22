@@ -19,18 +19,13 @@ import org.springframework.stereotype.Component;
     @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserResponse {
     
-    private int serialNumber;
+    
     private String lastAnswer;
-    private int lastId;
+    private String lastId;
     private String sessionId;
+    
 
-    public int getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(int serialNumber) {
-        this.serialNumber = serialNumber;
-    }
+   
 
     public String getLastAnswer() {
         return lastAnswer;
@@ -40,13 +35,17 @@ public class UserResponse {
         this.lastAnswer = lastAnswer;
     }
 
-    public int getLastId() {
+    public String getLastId() {
         return lastId;
     }
 
-    public void setLastId(int lastId) {
+    public void setLastId(String lastId) {
         this.lastId = lastId;
     }
+
+   
+
+    
 
     public String getSessionId() {
         return sessionId;
@@ -56,6 +55,7 @@ public class UserResponse {
         this.sessionId = sessionId;
     }
 
+    
    
 
     

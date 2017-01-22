@@ -22,9 +22,6 @@ import com.jubination.io.chatbot.model.pojo.Decider;
 import com.jubination.io.chatbot.model.pojo.Message;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.jubination.io.chatbot.model.pojo.User;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,24 +57,28 @@ public class CoreRepositoryService {
         //Chatlet creation
         public Chatlet createChatlet(Chatlet chatlet){
        
-       int outerIndex=0;
-       for(MessageSet messageSet:chatlet.getBotMessages()){
-           int innerIndex=0;
-           for(Message message:messageSet.getMessages()){
-               message.setId(chatlet.getId()+outerIndex+innerIndex);
-               messageRepository.saveObject(message);
-           }
-           messageSet.setId(chatlet.getId()+outerIndex);
-           messageSetRepository.saveObject(messageSet);
-       }
-       outerIndex=0;
-       for(Decider decider:chatlet.getDeciders()){
-           decider.setId(chatlet.getId()+outerIndex);
-           deciderRepository.saveObject(decider);
-       }
-       chatletRepository.saveObject(chatlet);
-       return chatletRepository.getObject(chatlet.getId());
-   }
+                    int outerIndex=0;
+                    for(MessageSet messageSet:chatlet.getBotMessages()){
+                                int innerIndex=0;
+                                for(Message message:messageSet.getMessages()){
+                                    System.out.println(message.getValue()+"::::::::::::::::::::::::::::::::::::::");
+                                            message.setId(chatlet.getId()+outerIndex+innerIndex);
+                                            messageRepository.saveObject(message);
+                                            innerIndex++;
+                                }
+                                messageSet.setId(chatlet.getId()+outerIndex);
+                                messageSetRepository.saveObject(messageSet);
+                                outerIndex++;
+                    }
+                    outerIndex=0;
+                    for(Decider decider:chatlet.getDeciders()){
+                                decider.setId(chatlet.getId()+outerIndex);
+                                deciderRepository.saveObject(decider);
+                                outerIndex++;
+                    }
+                    chatletRepository.saveObject(chatlet);
+                    return chatletRepository.getObject(chatlet.getId());
+        }
         
         //ChatletTag Creation
         public ChatletTag createChatletTag(ChatletTag chatletTag){
@@ -88,7 +89,7 @@ public class CoreRepositoryService {
         //User Creation
         public User createUser(User user){
        userRepository.saveObject(user);
-       return userRepository.getObject(user.getId());
+       return userRepository.getObject(user.getSesId());
    }
         
         //DashBot Creation 

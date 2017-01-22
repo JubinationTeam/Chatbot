@@ -9,7 +9,6 @@ import java.util.HashMap;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -21,24 +20,26 @@ import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     @Id
-     String Id;
-    String userId;
+     String sesId;
     String email;
-    String phoneNumber;
+    String name;
+    String phone;
     String city;
     String fbId;
-    String recentSessionId;
-    Boolean loggedIn;
     HashMap<String,String> tags =new HashMap<>();
 
-    public String getUserId() {
-        return userId;
+    public User() {
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public User(String sesId, String name, String fbId) {
+        this.sesId = sesId;
+        this.name = name;
+        this.fbId = fbId;
     }
 
+   
+
+    
     public HashMap<String, String> getTags() {
         return tags;
     }
@@ -55,13 +56,23 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+   
 
     public String getCity() {
         return city;
@@ -79,28 +90,14 @@ public class User {
         this.fbId = fbId;
     }
 
-    public Boolean getLoggedIn() {
-        return loggedIn;
+   
+    public String getSesId() {
+        return sesId;
     }
 
-    public void setLoggedIn(Boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setSesId(String sesId) {
+        this.sesId = sesId;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String Id) {
-        this.Id = Id;
-    }
-
-    public String getRecentSessionId() {
-        return recentSessionId;
-    }
-
-    public void setRecentSessionId(String recentSessionId) {
-        this.recentSessionId = recentSessionId;
-    }
     
 }

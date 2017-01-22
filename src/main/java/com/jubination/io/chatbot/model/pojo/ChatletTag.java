@@ -8,7 +8,6 @@ package com.jubination.io.chatbot.model.pojo;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -25,8 +24,11 @@ public class ChatletTag {
     String question;
     String answer;
     String answerType;
+    String tagType;
     String chatletId;
     String sessionId;
+    String fbId;
+    String name;
 
     public String getId() {
         return id;
@@ -69,13 +71,15 @@ public class ChatletTag {
         this.answer = answer;
     }
 
-    public String getAnswerType() {
-        return answerType;
+    public String getTagType() {
+        return tagType;
     }
 
-    public void setAnswerType(String answerType) {
-        this.answerType = answerType;
+    public void setTagType(String tagType) {
+        this.tagType = tagType;
     }
+
+    
 
     public String getChatletId() {
         return chatletId;
@@ -91,6 +95,30 @@ public class ChatletTag {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getAnswerType() {
+        return answerType;
+    }
+
+    public void setAnswerType(String answerType) {
+        this.answerType = answerType;
+    }
+
+    public String getFbId() {
+        return fbId;
+    }
+
+    public void setFbId(String fbId) {
+        this.fbId = fbId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

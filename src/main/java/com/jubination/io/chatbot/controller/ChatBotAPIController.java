@@ -11,7 +11,10 @@ import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.Flow;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
+import com.jubination.io.chatbot.service.CoreMessageOperationService;
 import com.jubination.io.chatbot.service.CoreRepositoryService;
+import com.jubination.io.chatbot.service.FlowProcessingService;
+import com.jubination.io.chatbot.service.PostProcessingService;
 import com.jubination.io.chatbot.service.PreProcessingService;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,14 +39,20 @@ public class ChatBotAPIController {
     
  @Autowired 
     CoreRepositoryService service;
+  @Autowired 
+    PreProcessingService preService;
+  @Autowired
+  CoreMessageOperationService operationService;
+    @Autowired 
+    PostProcessingService postService;
      @Autowired 
-    PreProcessingService preService;        
+    FlowProcessingService flowService;        
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ChatBotRequest process(@RequestBody UserResponse cRes,HttpServletRequest request) throws IOException{
-            System.out.println("Chatbot request"+cRes.getLastId());
-       
-              return null;
+    public @ResponseBody ChatBotRequest process(@RequestBody UserResponse uRes,HttpServletRequest request) throws IOException{
+            System.out.println("Chatbot request"+uRes.getLastId());
+              return  postService.convertWebChatletIntoChatBotMessage(operationService.getNextChatlet(preService.convertWebUserResponseIntoChatletTag(uRes)), preService.getRecentSessionId(uRes));
+             
             
         
     }
@@ -57,7 +66,7 @@ public class ChatBotAPIController {
     @RequestMapping(value="/flow/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody Flow createFlow(@RequestBody Flow flow,HttpServletRequest request) throws IOException{
            
-       return preService.createFlow(flow);
+       return flowService.createFlow(flow);
             
     }
     

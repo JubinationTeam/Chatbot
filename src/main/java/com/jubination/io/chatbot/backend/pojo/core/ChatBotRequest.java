@@ -5,6 +5,7 @@
  */
 package com.jubination.io.chatbot.backend.pojo.core;
 
+import com.jubination.io.chatbot.model.pojo.Message;
 import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -21,37 +22,17 @@ import org.springframework.stereotype.Component;
 public class ChatBotRequest {
     
     
-    private int serialNumber;
-    private int id;
-    private List<String> botMessage = new ArrayList<>();
-    private String answerType;
-    private String answer;
+    private String id;
     private String sessionId;
+    private List<Message> botMessage = new ArrayList<>();
+    private String answerType;
     private List<String> options = new ArrayList<>();
+
 
     public ChatBotRequest(){
         
     }
-    
-    public ChatBotRequest(int id, List<String> botMessage, String answerType, List<String> options) {
-        this.id = id;
-        this.botMessage = botMessage;
-        this.answerType = answerType;
-        if(options!=null){
-            this.options=options;
-        }
-    }
-    
-    
-    
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
 
     public List<String> getOptions() {
         return options;
@@ -62,29 +43,6 @@ public class ChatBotRequest {
     }
 
    
-    public int getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(int serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<String> getBotMessage() {
-        return botMessage;
-    }
-
-    public void setBotMessage(List<String> botMessage) {
-        this.botMessage = botMessage;
-    }
 
    
     public String getAnswerType() {
@@ -93,6 +51,25 @@ public class ChatBotRequest {
 
     public void setAnswerType(String answerType) {
         this.answerType = answerType;
+    }
+
+    public List<Message> getBotMessage() {
+        return botMessage;
+    }
+
+    public void setBotMessage(List<Message> botMessage) {
+        this.botMessage = botMessage;
+    }
+
+    
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSessionId() {

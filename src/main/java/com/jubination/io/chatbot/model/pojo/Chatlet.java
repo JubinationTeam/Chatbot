@@ -28,9 +28,12 @@ public class Chatlet {
     String prev;
     HashMap<String,String> validationChatlets = new HashMap<>();
      @DBRef
+//      @CascadeSave
     List<MessageSet> botMessages = new ArrayList<>();
     HashMap<String,String> options = new HashMap<>();
+    
      @DBRef
+//     @CascadeSave
       List<Decider> deciders= new  ArrayList<>();
     String answerType;
     Boolean validationBlock;
@@ -41,6 +44,11 @@ public class Chatlet {
       
 
     public Chatlet() {
+        validationBlock=false;
+        conditionBlock=false;
+        fbVisible=false;
+        webVisible=false;
+        
     }
 
     public String getId() {

@@ -23,6 +23,7 @@ public class MessageSet {
   @Id
     String id;
   @DBRef
+//          @CascadeSave
     List<Message> messages = new ArrayList<>();
 
     public List<Message> getMessages() {
@@ -41,5 +42,13 @@ public class MessageSet {
         this.id = id;
     }
     
+    @Override
+    public String toString(){
+        StringBuilder value = new StringBuilder("");
+        for(Message message:getMessages()){
+            value.append(message);
+        }
+        return messages.toString();
+    }
     
 }
