@@ -31,7 +31,7 @@ public class PostProcessingService {
                 switch(type){
                     
                     case "country-number":
-                                  Pattern re = Pattern.compile("[\\d]+");
+                                  Pattern re = Pattern.compile("[0-9]+");
                                     Matcher reMatcher = re.matcher(text);
                                    while(reMatcher.find()){
                                        return null;
@@ -41,7 +41,7 @@ public class PostProcessingService {
                         break;
                         
                     case "name-number":
-                                    re = Pattern.compile("[\\d]+");
+                                    re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    while(reMatcher.find()){
                                        return null;
@@ -67,17 +67,19 @@ public class PostProcessingService {
                         break;
                         
                     case "age-charactersOnly":
-                                re = Pattern.compile("[\\d]+");
+                                re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()<1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
                                        validatedText= reMatcher.group();
-                                   } 
+                                   } else{
+                                        validatedText=text;
+                                   }
                         break;
                     case "age-tooYoung":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -93,7 +95,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "age-tooOld":
-                         re = Pattern.compile("[\\d]+");
+                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -109,7 +111,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "age-multipleNumbers":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()>1){
                                        return null;
@@ -124,7 +126,7 @@ public class PostProcessingService {
                         break;
                         
                     case "height-huge":
-                              re = Pattern.compile("[\\d]+");
+                              re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.find()){
                                        String val=reMatcher.group();
@@ -145,7 +147,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "height-charactersOnly":
-                                 re = Pattern.compile("[\\d]+");
+                                 re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()<1){
                                        return null;
@@ -163,7 +165,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "height-less":
-                         re = Pattern.compile("[\\d]+");
+                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.find()){
                                        String val=reMatcher.group();
@@ -182,7 +184,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "height-multipleNumbers":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()>2){
                                        return null;
@@ -206,7 +208,7 @@ public class PostProcessingService {
                         break;
                     
                     case "weight-huge":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -222,7 +224,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "weight-charactersOnly":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()<1){
                                        return null;
@@ -234,7 +236,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "weight-less":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -250,7 +252,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "weight-multipleNumbers":
-                         re = Pattern.compile("[\\d]+");
+                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()>1){
                                        return null;
@@ -263,7 +265,7 @@ public class PostProcessingService {
                         break;
                     
                     case "waistSize-huge":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -279,7 +281,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "waistSize-charactersOnly":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()<1){
                                        return null;
@@ -291,7 +293,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "waistSize-less":
-                        re = Pattern.compile("[\\d]+");
+                        re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -307,7 +309,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "waistSize-multipleNumbers":
-                         re = Pattern.compile("[\\d]+");
+                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.groupCount()>1){
                                        return null;
@@ -330,7 +332,7 @@ public class PostProcessingService {
                          }
                         break;
                     case "phone-invalid":
-                         re = Pattern.compile("[\\d]+");
+                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.find()){
                                        String val= reMatcher.group();
