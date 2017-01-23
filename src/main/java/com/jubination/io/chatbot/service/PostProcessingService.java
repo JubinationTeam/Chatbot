@@ -69,7 +69,11 @@ public class PostProcessingService {
                     case "age-charactersOnly":
                                 re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()<1){
+                                   int count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count<1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -113,7 +117,11 @@ public class PostProcessingService {
                     case "age-multipleNumbers":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()>1){
+                                    count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count>1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -149,7 +157,11 @@ public class PostProcessingService {
                     case "height-charactersOnly":
                                  re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()<1){
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count<1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -186,7 +198,11 @@ public class PostProcessingService {
                     case "height-multipleNumbers":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()>2){
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count>2){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -226,7 +242,11 @@ public class PostProcessingService {
                     case "weight-charactersOnly":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()<1){
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count<1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -254,7 +274,11 @@ public class PostProcessingService {
                     case "weight-multipleNumbers":
                          re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()>1){
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count>1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -283,7 +307,11 @@ public class PostProcessingService {
                     case "waistSize-charactersOnly":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()<1){
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count<1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
@@ -311,7 +339,11 @@ public class PostProcessingService {
                     case "waistSize-multipleNumbers":
                          re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   if(reMatcher.groupCount()>1){
+                                  count=0;
+                                   while (reMatcher.find()){
+                                        count++;
+                                   }
+                                   if(count>1){
                                        return null;
                                    }
                                    if(reMatcher.find()){
