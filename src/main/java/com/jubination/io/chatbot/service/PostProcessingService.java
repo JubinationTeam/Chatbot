@@ -374,19 +374,17 @@ public class PostProcessingService {
                          }
                         break;
                     case "phone-invalid":
-                         re = Pattern.compile("[0-9]+");
+                         re = Pattern.compile("[0-9][0-9][0-9][0-9][0-9]([0-9]+)");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.find()){
-                                       String val= reMatcher.group();
-                                       if(val.length()>=6){
-                                                validatedText=val;
-                                       }
-                                       else{
-                                                return null;
-                                       }
+                                                validatedText= reMatcher.group();
+                                       
                                    } 
                                    else{
                                        return null;
+                                   }
+                                    if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     
