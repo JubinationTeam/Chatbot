@@ -71,15 +71,16 @@ public class PostProcessingService {
                                    reMatcher = re.matcher(text);
                                    int count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count<1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   } else{
-                                        validatedText=text;
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     case "age-tooYoung":
@@ -94,7 +95,9 @@ public class PostProcessingService {
                                        else{
                                           validatedText=val;
                                        }
-                                   } else{
+                                   } 
+                                   
+                                  if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
@@ -110,26 +113,26 @@ public class PostProcessingService {
                                        else{
                                            validatedText=val;
                                        }
-                                   } else{
+                                   } 
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "age-multipleNumbers":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                    count=0;
+                                   count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count>1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   } 
-                                   else{
-                                        validatedText=text;
-                                       
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                         
@@ -150,31 +153,33 @@ public class PostProcessingService {
                                                     validatedText=val+"."+subVal;
 
                                             }
-                                   } else{
+                                   } 
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "height-charactersOnly":
                                  re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
+                                  
                                    count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                                    validatedText=reMatcher.group();
+                                        }
+                                        else if(count==1){
+                                            validatedText=validatedText+"."+reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count<1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                        String val=reMatcher.group();
-                                       String subVal="0";
-                                                    if(reMatcher.find()){
-                                                             subVal=reMatcher.group();
-                                                     }
-                                                    validatedText=val+"."+subVal;
-                                   } 
-                                   else{
+                                   
+                                   if(validatedText==null){
                                        validatedText=text;
                                    }
+                                   
                         break;
                     case "height-less":
                          re = Pattern.compile("[0-9]+");
@@ -191,35 +196,33 @@ public class PostProcessingService {
                                                      }
                                                     validatedText=val+"."+subVal;
                                        }
-                                   } else{
+                                   } 
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "height-multipleNumbers":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
+                                   
                                    count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        else if(count==1){
+                                            int inches=Integer.parseInt(reMatcher.group());
+                                            if(inches>12){
+                                                return null;
+                                            }validatedText=validatedText+"."+inches;
+                                        }
                                         count++;
                                    }
                                    if(count>2){
-                                       return null;
-                                   }
-                                   if(reMatcher.find()){
-                                      String val=reMatcher.group();
-                                       String subVal="0";
-                                                    if(reMatcher.find()){
-                                                             subVal=reMatcher.group();
-                                                            
-                                                     }
-                                                     validatedText=val+"."+subVal;
-                                                     if(Integer.parseInt(val)>12){
-                                                         return null;
-                                                     }
-                                                    
-                                   }
-                                   else{
                                                 return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     
@@ -235,24 +238,26 @@ public class PostProcessingService {
                                        else{
                                            validatedText=val;
                                        }
-                                   } else{
+                                   }
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "weight-charactersOnly":
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   count=0;
+                                  count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count<1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   }  else{
-                                        validatedText=text;
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     case "weight-less":
@@ -267,24 +272,26 @@ public class PostProcessingService {
                                        else{
                                           validatedText=val;
                                        }
-                                   } else{
+                                   }
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "weight-multipleNumbers":
                          re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                   count=0;
+                                  count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count>1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   }  else{
-                                        validatedText=text;
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     
@@ -300,7 +307,7 @@ public class PostProcessingService {
                                        else{
                                            validatedText=val;
                                        }
-                                   } else{
+                                   } if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
@@ -309,15 +316,16 @@ public class PostProcessingService {
                                    reMatcher = re.matcher(text);
                                    count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
                                    if(count<1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   }  else{
-                                        validatedText=text;
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                     case "waistSize-less":
@@ -332,24 +340,26 @@ public class PostProcessingService {
                                        else{
                                           validatedText=val;
                                        }
-                                   } else{
+                                   } 
+                                   if(validatedText==null){
                                         validatedText=text;
                                    }
                         break;
                     case "waistSize-multipleNumbers":
                          re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
-                                  count=0;
+                                   count=0;
                                    while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
                                         count++;
                                    }
-                                   if(count>1){
+                                   if(count<1){
                                        return null;
                                    }
-                                   if(reMatcher.find()){
-                                       validatedText= reMatcher.group();
-                                   }  else{
-                                        validatedText=text;
+                                   if(validatedText==null){
+                                       validatedText=text;
                                    }
                         break;
                         
