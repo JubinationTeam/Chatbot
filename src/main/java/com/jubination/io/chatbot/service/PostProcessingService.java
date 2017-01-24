@@ -450,31 +450,41 @@ public class PostProcessingService {
       
        
         while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
-            String preText=text.split("\\[")[0];
+            System.out.println("1::");
+            
             String preTagText="";
             String postTagText="";
+            
+            //pre
+            String preText=text.split("\\[")[0];
+            
+            //pretag
             if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
                 preTagText="";
             }else{
              preTagText=text.split("<")[0].split("\\[")[1];
                 
             }
-        
+            
+        //tag
             String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
       
-        
+        //posttag
          if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
                 postTagText="";
             }else{
              postTagText=text.split("<")[0].split("\\[")[1];
-               System.out.println(text);
+               
                 
             }
-        
-           String postText=text.split("\\]")[1];
-           
-                                                text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
-                                                  System.out.println(text+"||||||||||||||||"+tag);
+        //post
+           String postText="";
+        if(text.split("\\]").length>1){
+           postText=text.split("\\]")[1];
+        }
+           //get tagged text
+                    text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
+                      System.out.println(text+"||||||||||||||||"+tag);
              
         }
         return text;
