@@ -474,7 +474,7 @@ public class PostProcessingService {
            String postText=text.split("\\]")[1];
            
                                                 text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
-                                                  System.out.println(text);
+                                                  System.out.println(text+"||||||||||||||||"+tag);
              
         }
         return text;

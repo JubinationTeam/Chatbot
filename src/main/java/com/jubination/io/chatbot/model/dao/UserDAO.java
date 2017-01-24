@@ -41,26 +41,26 @@ public class UserDAO  implements GenericDAO<User>{
 
     @Override
     public User getObject(String id) {
-        return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),User.class);
+        return mongoTemplate.findOne(new Query(Criteria.where("sesId").is(id)),User.class);
     }
     
    
 
     @Override
     public WriteResult updateObject(String id, String name) {
-        return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
+        return mongoTemplate.updateFirst(new Query(Criteria.where("sesId").is(id)),
 				Update.update("name", name), User.class);
     }
     
    public WriteResult updateObject(String id, String value, String type) {
-        return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
+        return mongoTemplate.updateFirst(new Query(Criteria.where("sesId").is(id)),
 				Update.update(type, value), User.class);
     }
    
 
     @Override
     public void deleteObject(String id) {
-        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), User.class);
+        mongoTemplate.remove(new Query(Criteria.where("sesId").is(id)), User.class);
     }
 
     @Override
