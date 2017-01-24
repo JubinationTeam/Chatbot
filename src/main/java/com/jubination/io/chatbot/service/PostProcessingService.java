@@ -426,8 +426,8 @@ public class PostProcessingService {
                             if(val.length()<lineBreak&reMatcher.find()){
                                 val.append(" ").append(reMatcher.group());
                             }
-                            //System.out.println(val.toString()+"val");
-                            //String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
+                            System.out.println(val.toString()+"val");
+                            String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
                             
                             String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
