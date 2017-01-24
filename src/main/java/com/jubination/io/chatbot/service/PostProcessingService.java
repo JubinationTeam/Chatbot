@@ -417,7 +417,7 @@ public class PostProcessingService {
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
                for(Message message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
-                       Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
+                       Pattern re = Pattern.compile("[^.!?]*[.!?][\\s+]", Pattern.MULTILINE | Pattern.COMMENTS);
                         Matcher reMatcher = re.matcher(message.getValue());
                         System.out.println(message.getValue()+"original message");
                         while (reMatcher.find()) {
