@@ -46,7 +46,7 @@ public class CoreMessageOperationService {
             Chatlet chatletResponse;
             if(chatletTag.getChatletId()==null||chatletTag.getChatletId().isEmpty()){
                 System.out.println("FIRST HIT:");
-                chatletResponse=getFirstChatlet(chatletTag.getSessionId(),chatletTag.getName(),chatletTag.getFbId());
+                chatletResponse=getFirstChatlet();
             }
             else{
                 
@@ -119,8 +119,7 @@ public class CoreMessageOperationService {
         
         
         //Fetch Chatlets
-        private Chatlet getFirstChatlet(String sessionId, String name,String fbId) {
-            userRepository.saveObject(new User(sessionId,name,fbId));
+        private Chatlet getFirstChatlet() {
         return chatletRepository.getObject("0");
     }
         private Chatlet getSOCAndODC(Chatlet chatlet,ChatletTag chatletTag){
