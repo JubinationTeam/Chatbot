@@ -23,7 +23,7 @@ public class UserResponse {
     private String lastAnswer;
     private String lastId;
     private String sessionId;
-    
+    private String webId; 
 
    
 
@@ -53,6 +53,14 @@ public class UserResponse {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getWebId() {
+        return webId;
+    }
+
+    public void setWebId(String webId) {
+        this.webId = webId;
     }
 
     

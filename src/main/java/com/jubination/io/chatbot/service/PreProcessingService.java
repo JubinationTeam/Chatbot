@@ -37,10 +37,10 @@ public class PreProcessingService {
         
     }
     
-     public String getRecentSessionId(UserResponse response) {
+     public String getRecentSessionId(UserResponse response,String webSessionId) {
          Chatlet chatlet = chatletRepository.getObject(response.getLastId());
          if(response.getLastId()==null||(chatlet!=null&&chatlet.getRefresh())){
-              return idHelper.getId();
+              return webSessionId+idHelper.getId()+response.getWebId();
          }
          return response.getSessionId();
     }
