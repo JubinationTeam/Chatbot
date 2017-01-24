@@ -41,6 +41,7 @@ public class Chatlet {
       String tagType;
       Boolean fbVisible;
       Boolean webVisible;
+      Boolean refresh;
       
 
     public Chatlet() {
@@ -48,6 +49,7 @@ public class Chatlet {
         conditionBlock=false;
         fbVisible=false;
         webVisible=false;
+        refresh=false;
         
     }
 
@@ -157,6 +159,14 @@ public class Chatlet {
 
     public void setOptions(HashMap<String, String> options) {
         this.options = options;
+    }
+
+    public Boolean getRefresh() {
+        return refresh;
+    }
+
+    public void setRefresh(Boolean refresh) {
+        this.refresh = refresh;
     }
 
   

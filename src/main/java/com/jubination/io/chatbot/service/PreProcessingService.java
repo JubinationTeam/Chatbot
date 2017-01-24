@@ -7,6 +7,8 @@ package com.jubination.io.chatbot.service;
 
 import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
 import com.jubination.io.chatbot.backend.service.core.UniqueIdHelper;
+import com.jubination.io.chatbot.model.dao.ChatletDAO;
+import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.ChatletTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class PreProcessingService {
     @Autowired
     UniqueIdHelper idHelper;
+    @Autowired
+    ChatletDAO chatletRepository;
     
     public ChatletTag convertWebUserResponseIntoChatletTag(UserResponse response){
                 ChatletTag chatletTag = new ChatletTag();
@@ -34,7 +38,8 @@ public class PreProcessingService {
     }
     
      public String getRecentSessionId(UserResponse response) {
-         if(response.getLastId()==null){
+         Chatlet chatlet = chatletRepository.getObject(response.getLastId());
+         if(response.getLastId()==null||chatlet.getRefresh()){
               return idHelper.getId();
          }
          return response.getSessionId();
