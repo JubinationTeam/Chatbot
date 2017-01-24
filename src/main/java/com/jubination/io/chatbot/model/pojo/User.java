@@ -24,10 +24,11 @@ public class User {
     String email;
     String name;
     String phone;
-    String city;
+    String country;
     String fbId;
     HashMap<String,String> tags =new HashMap<>();
-
+    HashMap<String,String> result =new HashMap<>();
+    
     public User() {
     }
 
@@ -72,15 +73,16 @@ public class User {
         this.phone = phone;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
    
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public String getFbId() {
         return fbId;
@@ -97,6 +99,14 @@ public class User {
 
     public void setSesId(String sesId) {
         this.sesId = sesId;
+    }
+
+    public HashMap<String, String> getResult() {
+        return result;
+    }
+
+    public void setResult(HashMap<String, String> result) {
+        this.result = result;
     }
 
     

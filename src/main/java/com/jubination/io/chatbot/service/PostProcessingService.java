@@ -7,13 +7,16 @@ package com.jubination.io.chatbot.service;
 
 
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
+import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.Message;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
+import com.jubination.io.chatbot.model.pojo.User;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +27,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class PostProcessingService {
-    
+      @Autowired
+    UserDAO userRepository;
+      
+      private static final int imageCount=4;
+      private static final int lineBreak=45;
+      
     //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertimeth case is true
         String validatedText(String type, String text) {
             String validatedText=null;
@@ -412,8 +420,16 @@ public class PostProcessingService {
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
                         Matcher reMatcher = re.matcher(message.getValue());
                         while (reMatcher.find()) {
-                            System.out.println(reMatcher.group());
-                            req.getBotMessage().add(new Message(message.getType(), reMatcher.group()));
+                            StringBuilder val=new StringBuilder(reMatcher.group());
+                            
+                            if(val.length()<lineBreak&reMatcher.find()){
+                                val.append(" ").append(reMatcher.group());
+                            }
+                            
+                            String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
+                            
+                            req.getBotMessage().add(new Message(message.getType(), stringValue));
+                            System.out.println(stringValue);
                         }
                        
                    }
@@ -426,5 +442,84 @@ public class PostProcessingService {
            return req;
 
         }
+
+    private String doDynamicLinking(String text,String sessionId) {
+        
+        System.out.println(text);
+       
+        while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
+            String preText=text.split("\\[")[0];
+            String preTagText="";
+            String postTagText="";
+            if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
+                preTagText="";
+            }else{
+             preTagText=text.split("<")[0].split("\\[")[1];
+                
+            }
+        
+            String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
+      
+        
+         if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
+                postTagText="";
+            }else{
+             postTagText=text.split("<")[0].split("\\[")[1];
+                
+            }
+        
+           String postText=text.split("\\]")[1];
+           
+                                                text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
+             
+        }
+        return text;
+    }
+
+    private String getTagText(String preTag,String tag,String postTag, String  sessionId) {
+        User user=userRepository.getObject(sessionId);
+        String value=null;
+        //User details
+        switch(tag){
+            case "name":
+                value=user.getName();
+                break;
+            case "country":
+                value=user.getCountry();
+                break;
+            case "email":
+                value=user.getEmail();
+                break;
+            case "phone":
+                value=user.getPhone();
+                break;
+            default :
+                value=user.getResult().get(tag);
+                break;
+        }
+        
+        //Image location
+        if(tag.contains("image")){
+            String path="";
+            for(int i=0;i<tag.split("-").length;i++){
+                if(i==0){
+                    path+=tag.split("-")[i];
+                }
+                else{
+                    path+="/"+tag.split("-")[i];
+                }
+            }
+            path+="-"+new Random().nextInt(imageCount);
+            return preTag+path+postTag;
+        }
+        
+        
+        if(value==null){
+            return "";
+        }
+        return preTag+tag+postTag;
+        
+        
+    }
         
 }
