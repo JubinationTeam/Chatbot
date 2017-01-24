@@ -429,7 +429,7 @@ public class PostProcessingService {
                             System.out.println(val.toString()+"val");
                             String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
                             
-                            String stringValue=val.toString();
+//                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
                             System.out.println(stringValue);
                         }
