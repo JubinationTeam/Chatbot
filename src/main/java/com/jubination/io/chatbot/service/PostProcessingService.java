@@ -436,7 +436,11 @@ public class PostProcessingService {
                        
                    }
                    else{
-                       req.getBotMessage().add(message);
+                            String stringValue=doDynamicLinking(message.getValue(),chatlet.getId());
+                            
+//                            String stringValue=val.toString();
+                            req.getBotMessage().add(new Message(message.getType(), stringValue));
+                            System.out.println(stringValue);
                    }
                }
            
@@ -493,6 +497,7 @@ public class PostProcessingService {
     private String getTagText(String preTag,String tag,String postTag, String  sessionId) {
         User user=userRepository.getObject(sessionId);
         String value=null;
+        System.out.println(tag+"TAG:::::::::::::::::::::::;");
         //User details
         switch(tag){
             case "name":
