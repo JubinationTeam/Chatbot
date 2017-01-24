@@ -419,6 +419,7 @@ public class PostProcessingService {
                    if(message.getType().equals("text")){
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
                         Matcher reMatcher = re.matcher(message.getValue());
+                        System.out.println(message.getValue()+"original message");
                         while (reMatcher.find()) {
                             StringBuilder val=new StringBuilder(reMatcher.group());
                             
