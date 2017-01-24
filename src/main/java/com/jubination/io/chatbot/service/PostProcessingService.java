@@ -427,7 +427,7 @@ public class PostProcessingService {
                                 val.append(" ").append(reMatcher.group());
                             }
                             System.out.println(val.toString()+"val");
-                            String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
+                            String stringValue=doDynamicLinking(val.toString(),sessionId);
                             
 //                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
@@ -495,28 +495,31 @@ public class PostProcessingService {
     }
 
     private String getTagText(String preTag,String tag,String postTag, String  sessionId) {
+        System.out.println(sessionId+"SESSION TAG:::::::");
         User user=userRepository.getObject(sessionId);
         String value=null;
         System.out.println(tag+"TAG:::::::::::::::::::::::;");
         //User details
-        switch(tag){
-            case "name":
-                value=user.getName();
-                break;
-            case "country":
-                value=user.getCountry();
-                break;
-            case "email":
-                value=user.getEmail();
-                break;
-            case "phone":
-                value=user.getPhone();
-                break;
-            default :
-                if(user.getResult()!=null){
-                    value=user.getResult().get(tag);
+        if(user!=null){
+                switch(tag){
+                    case "name":
+                        value=user.getName();
+                        break;
+                    case "country":
+                        value=user.getCountry();
+                        break;
+                    case "email":
+                        value=user.getEmail();
+                        break;
+                    case "phone":
+                        value=user.getPhone();
+                        break;
+                    default :
+                        if(user.getResult()!=null){
+                            value=user.getResult().get(tag);
+                        }
+                        break;
                 }
-                break;
         }
         
         //Image location
