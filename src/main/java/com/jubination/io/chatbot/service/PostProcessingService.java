@@ -498,7 +498,9 @@ public class PostProcessingService {
                 value=user.getPhone();
                 break;
             default :
-                value=user.getResult().get(tag);
+                if(user.getResult()!=null){
+                    value=user.getResult().get(tag);
+                }
                 break;
         }
         
