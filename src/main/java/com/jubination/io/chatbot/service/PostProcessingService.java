@@ -425,9 +425,10 @@ public class PostProcessingService {
                             if(val.length()<lineBreak&reMatcher.find()){
                                 val.append(" ").append(reMatcher.group());
                             }
+                            //System.out.println(val.toString()+"val");
+                            //String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
                             
-                            String stringValue=doDynamicLinking(val.toString(),chatlet.getId());
-                            
+                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
                             System.out.println(stringValue);
                         }
@@ -445,7 +446,7 @@ public class PostProcessingService {
 
     private String doDynamicLinking(String text,String sessionId) {
         
-        System.out.println(text);
+      
        
         while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
             String preText=text.split("\\[")[0];
@@ -465,12 +466,14 @@ public class PostProcessingService {
                 postTagText="";
             }else{
              postTagText=text.split("<")[0].split("\\[")[1];
+               System.out.println(text);
                 
             }
         
            String postText=text.split("\\]")[1];
            
                                                 text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
+                                                  System.out.println(text);
              
         }
         return text;
