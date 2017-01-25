@@ -34,7 +34,7 @@ public class DashBotUpdater {
                 //Object to JSON in String
                 String jsonString= mapper.writeValueAsString(dashbot);
                 HttpClient httpClient = HttpClientBuilder.create().build();
-//                System.out.println(jsonString);
+                System.out.println(jsonString);
                 StringEntity requestEntity = new StringEntity(
                 jsonString,
                 ContentType.APPLICATION_JSON);
