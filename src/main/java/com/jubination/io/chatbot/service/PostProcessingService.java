@@ -99,7 +99,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "age-tooYoung":
-                        re = Pattern.compile("[0-9]+");
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -227,7 +227,7 @@ public class PostProcessingService {
                                         }
                                         else if(count==1){
                                             int inches=Integer.parseInt(reMatcher.group());
-                                            if(inches>12){
+                                            if(inches>=12){
                                                 return null;
                                             }validatedText=validatedText+"."+inches;
                                         }
@@ -380,7 +380,7 @@ public class PostProcessingService {
                         
                     case "email-invalid":
                         re = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-                        reMatcher = re.matcher(text);
+                        reMatcher = re.matcher(text.trim());
                          if(reMatcher.find()){
                                        validatedText= reMatcher.group();
                                    } 
@@ -390,7 +390,7 @@ public class PostProcessingService {
                         break;
                     case "phone-invalid":
                          re = Pattern.compile("[0-9][0-9][0-9][0-9][0-9]([0-9]+)");
-                                   reMatcher = re.matcher(text);
+                                   reMatcher = re.matcher(text.trim());
                                    if(reMatcher.find()){
                                                 validatedText= reMatcher.group();
                                        
