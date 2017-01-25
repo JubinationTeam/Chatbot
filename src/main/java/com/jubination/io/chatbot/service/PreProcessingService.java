@@ -43,7 +43,7 @@ public class PreProcessingService {
     
      public String getRecentSessionId(UserResponse response,String webSessionId) {
          Chatlet chatlet = chatletRepository.getObject(response.getLastId());
-         if(response.getLastId()==null){
+         if(response.getLastId()==null||response.getLastId().isEmpty()){
              String val=webSessionId+idHelper.getId()+response.getWebId();
               userRepository.saveObject(new User(val,null,null));
               System.out.println(val+"init");
