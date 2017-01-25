@@ -497,8 +497,8 @@ public class PostProcessingService {
             }
         //post
            String postText="";
-        if(text.split("\\]").length>1){
-           postText=text.split("\\]")[1];
+        if(text.split("]").length>1){
+           postText=text.split("]")[1];
         }
            //get tagged text
                     text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
