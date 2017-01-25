@@ -116,70 +116,57 @@ public class CoreMessageOperationService {
         return chatletRepository.getObject("0");
     }
         private Chatlet getSOCAndODC(Chatlet chatlet,ChatletTag chatletTag){
-                                                //ODC
+            
+                                                //update user details
+                                                chatletTag.setTag(chatletTag.getAnswer());
+                                                 tagSetup(chatletTag);
+                                                
+                                                    //ODC
                                                     if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
                                                         String deciderId=getDeciderId(chatlet, chatletTag);
+                                                        
                                                         if(deciderId!=null){
                                                             System.out.println("ODC:");
                                                                 return chatletRepository.getObject(deciderId);
                                                         }
-                                                        
+                                                            
                                                     }
                                                     //SOC
                                                     System.out.println("SOC:");
-            return chatletRepository.getObject(chatlet.getNext());
+                                                         return chatletRepository.getObject(chatlet.getNext());
         }
         private Chatlet getCOC(Chatlet chatlet,ChatletTag chatletTag){
+             //update user details
+             chatletTag.setTag(chatletTag.getAnswer());
+              tagSetup(chatletTag);
             return chatletRepository.getObject(chatlet.getOptions().get(chatletTag.getAnswer()));
         }
         private Chatlet getSTCAndTDC(Chatlet chatlet, ChatletTag chatletTag){
                                         
                             Iterator<String> iterator=chatlet.getValidationChatlets().keySet().iterator();
                                             while(iterator.hasNext()){
-                                                String nextKey=iterator.next();
-                                                String tag=postProcessor.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer());
-                                                if(tag==null){
-                                                    
-                                                    Chatlet validationChatlet=chatletRepository.getObject(chatlet.getValidationChatlets().get(nextKey));
-                                                    if(validationChatlet.getNext()==null){
-                                                        chatlet.setBotMessages(validationChatlet.getBotMessages());
-                                                        return chatlet;
-                                                    }
-                                                    else{
-                                                        return validationChatlet;
-                                                    }
-                                                }
-                                                else{
+                                                //validating block
+                                                            String nextKey=iterator.next();
+                                                            String tag=postProcessor.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer());
+                                                            if(tag==null){
+
+                                                                Chatlet validationChatlet=chatletRepository.getObject(chatlet.getValidationChatlets().get(nextKey));
+                                                                if(validationChatlet.getNext()==null){
+                                                                    chatlet.setBotMessages(validationChatlet.getBotMessages());
+                                                                    return chatlet;
+                                                                }
+                                                                else{
+                                                                    return validationChatlet;
+                                                                }
+                                                            }
+                                                            
                                                     //replace chatletTag tag with validated answer 
                                                     chatletTag.setTag(tag);
-                                                    User user=null;
-                                                    //update user details
-                                                    System.out.println(chatletTag.getTagType()+"::::::::::"+tag);
-                                                    if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("country")||chatletTag.getTagType().equals("gender")){
-                                                       
-                                                                userRepository.updateObject(chatletTag.getSessionId(),chatletTag.getTag(),chatletTag.getTagType());
-                                                                user=userRepository.getObject(chatletTag.getSessionId());
-                                                                System.out.println(chatletTag.getTagType()+":::::::<><>:::"+tag);
-                                                                if(user!=null){
-                                                                    user.getTags().put(chatletTag.getTagType()+"-presence", chatletTag.getTag());
-                                                                        userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
-                                                                }
-                                                                
-                                                                
-                                                                
-                                                                
-                                                           
-                                                    }
-                                                    
-                                                    else{
-                                                        user=userRepository.getObject(chatletTag.getSessionId());
-                                                        if(user!=null){
-                                                            user.getTags().put(chatletTag.getTagType(), chatletTag.getTag());
-                                                                userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
-                                                        }
-                                                    }
-                                                }
                                             }
+                                            
+                                                    //update user details
+                                                    tagSetup(chatletTag);
+                                                    
                                                 //TDC
                                                     if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
                                                         String deciderId=getDeciderId(chatlet, chatletTag);
@@ -263,7 +250,30 @@ public class CoreMessageOperationService {
                     return id;
     }
 
-   
+   private void tagSetup(ChatletTag chatletTag){
+       //replace chatletTag tag with validated answer 
+                                                    String tag=chatletTag.getTag();
+                                                    User user=null;
+                                                    //update user details
+                                                    if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("country")||chatletTag.getTagType().equals("gender")){
+                                                       
+                                                                userRepository.updateObject(chatletTag.getSessionId(),chatletTag.getTag(),chatletTag.getTagType());
+                                                                user=userRepository.getObject(chatletTag.getSessionId());
+                                                                System.out.println(chatletTag.getTagType()+":::::::<><>:::"+tag);
+                                                                if(user!=null){
+                                                                    user.getTags().put(chatletTag.getTagType()+"-presence", chatletTag.getTag());
+                                                                        userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
+                                                                }
+                                                    }
+                                                    
+                                                    else{
+                                                        user=userRepository.getObject(chatletTag.getSessionId());
+                                                        if(user!=null){
+                                                            user.getTags().put(chatletTag.getTagType(), chatletTag.getTag());
+                                                                userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
+                                                        }
+                                                    }
+   }
         
 
 }
