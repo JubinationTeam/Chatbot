@@ -159,7 +159,7 @@ public class CoreMessageOperationService {
                                                                 userRepository.updateObject(chatletTag.getSessionId(),chatletTag.getTag(),chatletTag.getTagType());
                                                                 user=userRepository.getObject(chatletTag.getSessionId());
                                                                 if(user!=null){
-                                                                    user.getTags().put(chatletTag.getTagType(), chatletTag.getTag()+"-presence");
+                                                                    user.getTags().put(chatletTag.getTagType()+"-presence", chatletTag.getTag());
                                                                         userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
                                                                 }
                                                                 
@@ -223,16 +223,33 @@ public class CoreMessageOperationService {
                                 Iterator<String> iterator=decider.getPossibilities().keySet().iterator();
                                 boolean match=false;
                                 int count=0;
+                                //match
                                 while(iterator.hasNext()){
                                                 String key = iterator.next();
-                                                if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
-                                                    count++;
-                                                    match=true;
+                                                //check presence
+                                                if(key.contains("-presence")){
+                                                        if(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty()){
+                                                            count++;
+                                                            match=true;
+                                                        }
+                                                        else{
+                                                            match=false;
+                                                            break;
+                                                        }
                                                 }
+                                                //check if its equal
                                                 else{
-                                                    match=false;
-                                                    break;
+                                                    if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
+                                                        count++;
+                                                        match=true;
+                                                    }
+                                                    else{
+                                                        match=false;
+                                                        break;
+                                                    }
                                                 }
+                                                
+                                                
                                 }
 
                                 if(match&&count>max){
