@@ -485,20 +485,20 @@ public class PostProcessingService {
             }
             
         //tag
-            String tag=text.split("]")[0].split("\\[")[1].split(">")[0].split("<")[1];
+            String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
       
         //posttag
-         if(text.split("]")[0].charAt(text.split("]")[0].length()-1)=='>'){
+         if(text.split("\\]")[0].charAt(text.split("\\]")[0].length()-1)=='>'){
                 postTagText="";
             }else{
-             postTagText=text.split("]")[0].split(">")[1];
+             postTagText=text.split("\\]")[0].split(">")[1];
                
                 
             }
         //post
            String postText="";
-        if(text.split("]").length>1){
-           postText=text.split("]")[1];
+        if(text.split("\\]").length>1){
+           postText=text.split("\\]")[1];
         }
            //get tagged text
                     text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
