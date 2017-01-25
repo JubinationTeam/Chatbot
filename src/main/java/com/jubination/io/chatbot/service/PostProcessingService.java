@@ -569,6 +569,12 @@ public class PostProcessingService {
             return preTag+path+postTag;
         }
         
+        //font design
+        if(tag.split("%").length>0){
+            String text=tag.split("%")[0];
+            return preTag+"<"+tag.split("%")[1]+">"+text+"</"+tag.split("%")[1]+">"+postTag;
+            
+        }
         
         if(value==null){
             return "";
