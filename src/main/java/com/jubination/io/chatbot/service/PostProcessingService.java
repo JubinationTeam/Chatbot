@@ -423,7 +423,7 @@ public class PostProcessingService {
                         while (reMatcher.find()) {
                             StringBuilder val=new StringBuilder(reMatcher.group());
                             
-                            if(val.length()<lineBreak||val.toString().endsWith("E.g.")){
+                            if(val.length()<lineBreak||val.toString().endsWith("E.g.")||val.toString().endsWith("e.g.")){
                                 if(reMatcher.find()){
                                     val.append(" ").append(reMatcher.group());
                                 }
