@@ -50,18 +50,19 @@ public class ChatBotAPIController {
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatBotRequest process(@RequestBody UserResponse uRes,HttpServletRequest request) throws IOException{
-            System.out.println("Chatbot request"+uRes.getLastId());
-              return  postService.convertWebChatletIntoChatBotMessage(
-                      operationService.getNextChatlet(
-                              preService.convertWebUserResponseIntoChatletTag(
-                                      uRes,request.getSession().getId()
-                              )
-                      ), 
-                      preService.getRecentSessionId(
-                              uRes,
-                              request.getSession().getId()
-                      )
-              );
+            System.out.println("Chatbot request"+uRes.getLastId()+uRes.getWebId());
+              return  
+                      postService.convertWebChatletIntoChatBotMessage(
+                                    operationService.getNextChatlet(
+                                            preService.convertWebUserResponseIntoChatletTag(
+                                                    uRes,request.getSession().getId()
+                                            )
+                                    ), 
+                                    preService.getRecentSessionId(
+                                            uRes,
+                                            request.getSession().getId()
+                                    )
+                            );
              
             
         
