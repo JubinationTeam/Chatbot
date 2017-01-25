@@ -52,7 +52,7 @@ public class UserDAO  implements GenericDAO<User>{
 				Update.update("name", name), User.class);
     }
     
-   public WriteResult updateObject(String id, String value, String type) {
+   public WriteResult updateObject(String id, Object value, String type) {
         return mongoTemplate.updateFirst(new Query(Criteria.where("sesId").is(id)),
 				Update.update(type, value), User.class);
     }

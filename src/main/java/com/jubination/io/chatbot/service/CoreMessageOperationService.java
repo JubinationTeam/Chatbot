@@ -163,7 +163,19 @@ public class CoreMessageOperationService {
                                                     if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("city")){
                                                        
                                                                 userRepository.updateObject(chatletTag.getSessionId(),chatletTag.getTag(),chatletTag.getTagType());
+                                                                User user=userRepository.getObject(chatletTag.getSessionId());
+                                                                if(user!=null){
+                                                                    user.getTags().put(chatletTag.getTagType(), chatletTag.getTag()+"-presence");
+                                                                        userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
+                                                                }
                                                            
+                                                    }
+                                                    else{
+                                                        User user=userRepository.getObject(chatletTag.getSessionId());
+                                                        if(user!=null){
+                                                            user.getTags().put(chatletTag.getTagType(), chatletTag.getTag());
+                                                                userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
+                                                        }
                                                     }
                                                 }
                                             }
@@ -212,24 +224,24 @@ public class CoreMessageOperationService {
                                 Iterator<String> iterator=decider.getPossibilities().keySet().iterator();
                                 boolean match=false;
                                 int count=0;
-                                        while(iterator.hasNext()){
-                                            String key = iterator.next();
-                                            if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
-                                                count++;
-                                                match=true;
-                                            }
-                                            else{
-                                                match=false;
-                                                break;
-                                            }
-                                        }
-                                        
-                                        if(match&&count>max){
-                                            id=decider.getLink();
-                                        }
-                                
-                            }
-                    }
+                                while(iterator.hasNext()){
+                                                String key = iterator.next();
+                                                if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
+                                                    count++;
+                                                    match=true;
+                                                }
+                                                else{
+                                                    match=false;
+                                                    break;
+                                                }
+                                }
+
+                                if(match&&count>max){
+                                                 id=decider.getLink();
+                                }
+
+                       }
+          }
                     return id;
     }
 
