@@ -451,11 +451,13 @@ public class PostProcessingService {
                }
                  
             //save and send outgoing dashBot data
-            if(req!=null&&req.getBotMessage()!=null){
-                DashBot outgoing = new DashBot(req.getSessionId(),req.getBotMessage().toString());
-                dashBotRepository.saveObject(outgoing);
-                dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
-            System.out.println(req.getBotMessage());
+            if(req.getBotMessage()!=null){
+                for(Message message:req.getBotMessage()){
+                        DashBot outgoing = new DashBot(req.getSessionId(),message.getValue());
+                        dashBotRepository.saveObject(outgoing);
+                        dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
+                        System.out.println(message.getValue());
+                }
             }
            
           
