@@ -197,7 +197,7 @@ public class PostProcessingService {
                                    
                         break;
                     case "height-less":
-                         re = Pattern.compile("[0-9]+");
+                         re = Pattern.compile("(\\+|\\-)?[0-9]+");
                                    reMatcher = re.matcher(text);
                                    if(reMatcher.find()){
                                        String val=reMatcher.group();
@@ -276,7 +276,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "weight-less":
-                        re = Pattern.compile("[0-9]+");
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
@@ -344,7 +344,7 @@ public class PostProcessingService {
                                    }
                         break;
                     case "waistSize-less":
-                        re = Pattern.compile("[0-9]+");
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
                                    if(reMatcher.find()){
