@@ -106,14 +106,7 @@ public class CoreMessageOperationService {
             }
             //save chatletTag data
             chatletTagRepository.saveObject(chatletTag);
-            
-            //save and send outgoing dashBot data
-            if(chatletResponse!=null&&chatletResponse.getBotMessages()!=null){
-                DashBot outgoing = new DashBot(chatletTag.getSessionId(),chatletResponse.getBotMessages().toString());
-                dashBotRepository.saveObject(outgoing);
-                dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
-            System.out.println(chatletResponse.getBotMessages());
-            }
+          
             return chatletResponse;
         }
         

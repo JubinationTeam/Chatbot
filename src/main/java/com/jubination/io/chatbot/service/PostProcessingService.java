@@ -7,8 +7,11 @@ package com.jubination.io.chatbot.service;
 
 
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
+import com.jubination.io.chatbot.backend.service.core.DashBotUpdater;
+import com.jubination.io.chatbot.model.dao.DashBotDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
+import com.jubination.io.chatbot.model.pojo.DashBot;
 import com.jubination.io.chatbot.model.pojo.Message;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.jubination.io.chatbot.model.pojo.User;
@@ -29,6 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostProcessingService {
       @Autowired
     UserDAO userRepository;
+      @Autowired
+    DashBotDAO dashBotRepository;
+          @Autowired
+          DashBotUpdater dashBotUpdater;
       
       private static final int imageCount=4;
       private static final int lineBreak=45;
@@ -442,6 +449,14 @@ public class PostProcessingService {
                             System.out.println(stringValue);
                    }
                }
+                 
+            //save and send outgoing dashBot data
+            if(req!=null&&req.getBotMessage()!=null){
+                DashBot outgoing = new DashBot(req.getSessionId(),req.getBotMessage().toString());
+                dashBotRepository.saveObject(outgoing);
+                dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
+            System.out.println(req.getBotMessage());
+            }
            
           
            return req;
