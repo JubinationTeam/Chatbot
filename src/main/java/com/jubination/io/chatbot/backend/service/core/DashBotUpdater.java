@@ -29,7 +29,7 @@ public class DashBotUpdater {
        public String sendAutomatedUpdate(DashBot dashbot, String type){
             String responseText="";
             try {   
-                String url="https://tracker.dashbot.io/track?platform=generic&v=0.8.2-rest&type="+type+"&apiKey=nAVfmFV3AEBIjxngMZ0WAPsfDlBzGTv6bQe4arDZ";
+                String url="https://tracker.dashbot.io/track?platform=generic&v=0.8.2-rest&type="+type+"&apiKey=bJt7U0oEG79HSUm4nJWUQTPm1nhjKu3gieZ83M0O";
                 ObjectMapper mapper = new ObjectMapper();
                 //Object to JSON in String
                 String jsonString= mapper.writeValueAsString(dashbot);
