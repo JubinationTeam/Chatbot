@@ -42,7 +42,7 @@ public class PostProcessingService {
       private static final int imageHabitsCount=4;
       private static final int lineBreak=45;
       
-    //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertimeth case is true
+    //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertime the case is true
         String validatedText(String type, String text) {
             String validatedText=null;
                 switch(type){
@@ -419,8 +419,9 @@ public class PostProcessingService {
            
            //add front end related data
            User user=userRepository.getObject(sessionId);
-           req.setGender(user.getGender());
-           
+           if(user!=null){
+                req.setGender(user.getGender());
+           }
           
            
            Iterator<String> iterator=chatlet.getOptions().keySet().iterator();
@@ -478,7 +479,6 @@ public class PostProcessingService {
       
        
         while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
-            System.out.println("1::");
             
             String preTagText="";
             String postTagText="";
@@ -584,5 +584,7 @@ public class PostProcessingService {
         
         
     }
+    
+    
         
 }

@@ -11,6 +11,7 @@ import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.Flow;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
+import com.jubination.io.chatbot.service.ContextAwareMessageOperationService;
 import com.jubination.io.chatbot.service.CoreMessageOperationService;
 import com.jubination.io.chatbot.service.CoreRepositoryService;
 import com.jubination.io.chatbot.service.FlowProcessingService;
@@ -46,11 +47,20 @@ public class ChatBotAPIController {
     @Autowired 
     PostProcessingService postService;
      @Autowired 
-    FlowProcessingService flowService;        
+    FlowProcessingService flowService;       
+     @Autowired
+     ContextAwareMessageOperationService awareOperationService;
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatBotRequest process(@RequestBody UserResponse uRes,HttpServletRequest request) throws IOException{
             System.out.println("Web Id : "+uRes.getWebId());
+            
+            //context aware reply
+            ChatBotRequest chatRequest=awareOperationService.getContextAwareResponse(uRes);
+            if(chatRequest!=null){
+                return chatRequest;
+            }
+            //normal reply
               return  
                       postService.convertWebChatletIntoChatBotMessage(
                                     operationService.getNextChatlet(
