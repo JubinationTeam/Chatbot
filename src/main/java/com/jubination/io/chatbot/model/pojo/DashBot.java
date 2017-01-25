@@ -23,7 +23,7 @@ public class DashBot {
     String text;
     String userId;
 
-    public DashBot(String text, String userId) {
+    public DashBot(String userId,String text) {
         this.text = text;
         this.userId = userId;
     }
