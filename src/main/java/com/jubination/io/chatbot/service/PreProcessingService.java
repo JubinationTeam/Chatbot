@@ -31,11 +31,11 @@ public class PreProcessingService {
          @Autowired
     UserDAO userRepository;
     
-    public ChatletTag convertWebUserResponseIntoChatletTag(UserResponse response){
+    public ChatletTag convertWebUserResponseIntoChatletTag(UserResponse response,String webSessionId){
                 ChatletTag chatletTag = new ChatletTag();
                 chatletTag.setAnswer(response.getLastAnswer());
                 chatletTag.setChatletId(response.getLastId());
-                chatletTag.setSessionId(response.getSessionId());
+                chatletTag.setSessionId(getRecentSessionId(response,webSessionId));
                 return chatletTag;
 
         
@@ -43,11 +43,17 @@ public class PreProcessingService {
     
      public String getRecentSessionId(UserResponse response,String webSessionId) {
          Chatlet chatlet = chatletRepository.getObject(response.getLastId());
-         if(response.getLastId()==null||(chatlet!=null&&chatlet.getRefresh())){
+         if(response.getLastId()==null){
              String val=webSessionId+idHelper.getId()+response.getWebId();
               userRepository.saveObject(new User(val,null,null));
               return val;
          }
+         if(chatlet!=null&&chatlet.getRefresh()){
+             String val=webSessionId+idHelper.getId()+response.getWebId();
+              userRepository.saveObject(new User(val,null,null));
+              return val;
+         }
+         
          return response.getSessionId();
     }
 }

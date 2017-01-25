@@ -472,7 +472,7 @@ public class PostProcessingService {
             }
             
         //tag
-            String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
+            String tag=text.split("]")[0].split("\\[")[1].split(">")[0].split("<")[1];
       
         //posttag
          if(text.split("]")[0].charAt(text.split("]")[0].length()-1)=='>'){

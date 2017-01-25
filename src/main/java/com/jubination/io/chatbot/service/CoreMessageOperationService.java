@@ -112,8 +112,8 @@ public class CoreMessageOperationService {
                 DashBot outgoing = new DashBot(chatletTag.getSessionId(),chatletResponse.getBotMessages().toString());
                 dashBotRepository.saveObject(outgoing);
                 dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
-            }
             System.out.println(chatletResponse.getBotMessages());
+            }
             return chatletResponse;
         }
         
