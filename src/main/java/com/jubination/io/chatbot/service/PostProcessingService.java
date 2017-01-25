@@ -570,7 +570,7 @@ public class PostProcessingService {
         }
         
         //font design
-        if(tag.split("%")!=null&&tag.split("%").length>0){
+        if(tag.split("%")!=null&&tag.split("%").length>=2){
             String text=tag.split("%")[0];
             return preTag+"<"+tag.split("%")[1]+">"+text+"</"+tag.split("%")[1]+">"+postTag;
             
