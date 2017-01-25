@@ -417,22 +417,20 @@ public class PostProcessingService {
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
                for(Message message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
+                       String taggedValue=doDynamicLinking(message.getValue(),sessionId);
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
-                        Matcher reMatcher = re.matcher(message.getValue());
+                        Matcher reMatcher = re.matcher(taggedValue);
                         while (reMatcher.find()) {
                             StringBuilder val=new StringBuilder(reMatcher.group());
                             
-                            if(val.length()<lineBreak){
+                            if(val.length()<lineBreak||val.toString().endsWith("E.g.")){
                                 if(reMatcher.find()){
                                     val.append(" ").append(reMatcher.group());
                                 }
                             }
-                            System.out.println(val.toString()+"val");
-                            String stringValue=doDynamicLinking(val.toString(),sessionId);
                             
-//                            String stringValue=val.toString();
-                            req.getBotMessage().add(new Message(message.getType(), stringValue));
-                            System.out.println(stringValue);
+                            
+                            req.getBotMessage().add(new Message(message.getType(), val.toString()));
                         }
                        
                    }
