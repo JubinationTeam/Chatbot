@@ -37,7 +37,9 @@ public class PostProcessingService {
           @Autowired
           DashBotUpdater dashBotUpdater;
       
-      private static final int imageCount=4;
+      private static final int imageQuoteCount=16;
+      private static final int imageAgeCount=2;
+      private static final int imageHabitsCount=4;
       private static final int lineBreak=45;
       
     //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertimeth case is true
@@ -415,6 +417,12 @@ public class PostProcessingService {
            req.setId(chatlet.getId());
            req.setSessionId(sessionId);
            
+           //add front end related data
+           User user=userRepository.getObject(sessionId);
+           req.setGender(user.getGender());
+           
+          
+           
            Iterator<String> iterator=chatlet.getOptions().keySet().iterator();
            while(iterator.hasNext()){
                req.getOptions().add(iterator.next());
@@ -424,7 +432,7 @@ public class PostProcessingService {
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
                for(Message message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
-                       String taggedValue=doDynamicLinking(message.getValue(),sessionId);
+                       String taggedValue=doDynamicLinking(user,message.getValue(),sessionId);
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
                         Matcher reMatcher = re.matcher(taggedValue);
                         while (reMatcher.find()) {
@@ -442,7 +450,7 @@ public class PostProcessingService {
                        
                    }
                    else{
-                            String stringValue=doDynamicLinking(message.getValue(),chatlet.getId());
+                            String stringValue=doDynamicLinking(user, message.getValue(),chatlet.getId());
                             
 //                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
@@ -465,7 +473,7 @@ public class PostProcessingService {
 
         }
 
-    private String doDynamicLinking(String text,String sessionId) {
+    private String doDynamicLinking(User user,String text,String sessionId) {
         
       
        
@@ -503,16 +511,16 @@ public class PostProcessingService {
            postText=text.split("\\]")[1];
         }
            //get tagged text
-                    text=preText+getTagText(preTagText,tag, postTagText,sessionId)+postText;
+                    text=preText+getTagText(user,preTagText,tag, postTagText,sessionId)+postText;
                       System.out.println(text+"||||||||||||||||"+tag);
              
         }
         return text;
     }
 
-    private String getTagText(String preTag,String tag,String postTag, String  sessionId) {
+    private String getTagText(User user,String preTag,String tag,String postTag, String  sessionId) {
         System.out.println(sessionId+"SESSION TAG:::::::");
-        User user=userRepository.getObject(sessionId);
+        
         String value=null;
         System.out.println(tag+"TAG:::::::::::::::::::::::;");
         //User details
@@ -549,7 +557,15 @@ public class PostProcessingService {
                     path+="/"+tag.split("-")[i];
                 }
             }
-            path+="-"+new Random().nextInt(imageCount);
+            if(tag.contains("age")){
+                path+="-"+new Random().nextInt(imageAgeCount);
+            }
+            else if(tag.contains("habits")){
+                path+="-"+new Random().nextInt(imageHabitsCount);
+            }
+            else if(tag.contains("quote")){
+                path+="-"+new Random().nextInt(imageQuoteCount);
+            }
             return preTag+path+postTag;
         }
         

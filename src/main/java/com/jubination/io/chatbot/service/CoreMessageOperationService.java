@@ -152,19 +152,25 @@ public class CoreMessageOperationService {
                                                 else{
                                                     //replace chatletTag tag with validated answer 
                                                     chatletTag.setTag(tag);
+                                                    User user=null;
                                                     //update user details
-                                                    if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("city")){
+                                                    if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("country")||chatletTag.getTagType().equals("gender")){
                                                        
                                                                 userRepository.updateObject(chatletTag.getSessionId(),chatletTag.getTag(),chatletTag.getTagType());
-                                                                User user=userRepository.getObject(chatletTag.getSessionId());
+                                                                user=userRepository.getObject(chatletTag.getSessionId());
                                                                 if(user!=null){
                                                                     user.getTags().put(chatletTag.getTagType(), chatletTag.getTag()+"-presence");
                                                                         userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");
                                                                 }
+                                                                
+                                                                
+                                                                
+                                                                
                                                            
                                                     }
+                                                    
                                                     else{
-                                                        User user=userRepository.getObject(chatletTag.getSessionId());
+                                                        user=userRepository.getObject(chatletTag.getSessionId());
                                                         if(user!=null){
                                                             user.getTags().put(chatletTag.getTagType(), chatletTag.getTag());
                                                                 userRepository.updateObject(chatletTag.getSessionId(), user.getTags(), "tags");

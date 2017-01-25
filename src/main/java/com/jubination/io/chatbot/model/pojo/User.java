@@ -24,6 +24,7 @@ public class User {
     String email;
     String name;
     String phone;
+    String gender;
     String country;
     String fbId;
     HashMap<String,String> tags =new HashMap<>();
@@ -107,6 +108,14 @@ public class User {
 
     public void setResult(HashMap<String, String> result) {
         this.result = result;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     

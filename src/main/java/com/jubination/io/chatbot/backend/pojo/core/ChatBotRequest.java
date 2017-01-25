@@ -24,6 +24,7 @@ public class ChatBotRequest {
     
     private String id;
     private String sessionId;
+    private String gender;
     private List<Message> botMessage = new ArrayList<>();
     private String answerType;
     private List<String> options = new ArrayList<>();
@@ -78,6 +79,14 @@ public class ChatBotRequest {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     
