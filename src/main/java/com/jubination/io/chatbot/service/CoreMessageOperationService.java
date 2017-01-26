@@ -240,12 +240,16 @@ public class CoreMessageOperationService {
                                                 
                                                 
                                 }
-
-                                if(match&&count>max){
+                                 
+                                  if(match&&count>max){
+                                                max=count;
                                                  id=decider.getLink();
                                 }
+                              
 
                        }
+                        
+                         
           }
                     return id;
     }
