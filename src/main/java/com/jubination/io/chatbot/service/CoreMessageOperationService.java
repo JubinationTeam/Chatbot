@@ -219,19 +219,26 @@ public class CoreMessageOperationService {
                                                 String key = iterator.next();
                                                 System.out.println("KEY : "+index+":"+key);
                                                 //check presence
+                                                
+                                                System.out.println("presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+
+                                                        decider.getPossibilities().get(key).equalsIgnoreCase("true")+"presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+decider.getPossibilities().get(key).equalsIgnoreCase("false"));
+                                             
                                                 if(key.contains("-presence")){
                                                         if(//if presense true is true
-                                                                (user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())&&decider.getPossibilities().get(key).equalsIgnoreCase("true")
+                                                                ((user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())
+                                                                &&
+                                                                decider.getPossibilities().get(key).equalsIgnoreCase("true"))
                                                                 //if presense false is true
-                                                                &&(user.getTags().get(key.split("-")[0])==null||user.getTags().get(key.split("-")[0]).isEmpty())&&decider.getPossibilities().get(key).equalsIgnoreCase("false")
-                                                                ){
+                                                                ||((user.getTags().get(key.split("-")[0])==null||user.getTags().get(key.split("-")[0]).isEmpty())
+                                                                &&
+                                                                decider.getPossibilities().get(key).equalsIgnoreCase("false")
+                                                                )){
                                                             count++;
-                                                             System.out.println(key+"true-presence");
+                                                             
                                                             match=true;
                                                         }
                                                         else{
                                                             count=0;
-                                                             System.out.println(key+"false-presence");
                                                             match=false;
                                                             break;
                                                         }
@@ -240,12 +247,10 @@ public class CoreMessageOperationService {
                                                 else{
                                                     if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
                                                         count++;
-                                                         System.out.println(key+"true");
                                                         match=true;
                                                     }
                                                     else{
                                                         count=0;
-                                                         System.out.println(key+"false");
                                                         match=false;
                                                         break;
                                                     }
