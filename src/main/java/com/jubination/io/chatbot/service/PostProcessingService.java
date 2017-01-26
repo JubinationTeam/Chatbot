@@ -478,39 +478,39 @@ public class PostProcessingService {
     private String doDynamicLinking(User user,String text) {
         
       
+       text=text.replace("[<>]", "");
        
-        while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
-            
-            String preTagText="";
-            String postTagText="";
-            
-            //pre
-            String preText=text.split("\\[")[0];
-            
-            //pretag
-            if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
-                preTagText="";
-            }else{
-             preTagText=text.split("<")[0].split("\\[")[1];
-                
-            }
-            
-        //tag
-            String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
-      
-        //posttag
-         if(text.split("\\]")[0].charAt(text.split("\\]")[0].length()-1)=='>'){
-                postTagText="";
-            }else{
-             postTagText=text.split("\\]")[0].split(">")[1];
-               
-                
-            }
-        //post
-           String postText="";
-        if(text.split("\\]").length>1){
-           postText=text.split("\\]")[1];
-        }
+          while(text.contains("[")&&text.contains("<")&&text.contains(">")&&text.contains("]")){
+
+                        String preTagText="";
+                        String postTagText="";
+
+                        //pre
+                        String preText=text.split("\\[")[0];
+
+                        //pretag
+                        if(text.split("<")[0].charAt(text.split("<")[0].length()-1)=='['){
+                            preTagText="";
+                        }else{
+                         preTagText=text.split("<")[0].split("\\[")[1];
+
+                        }
+                    //tag
+                        String tag=text.split("\\]")[0].split("\\[")[1].split(">")[0].split("<")[1];
+
+                    //posttag
+                     if(text.split("\\]")[0].charAt(text.split("\\]")[0].length()-1)=='>'){
+                            postTagText="";
+                        }else{
+                         postTagText=text.split("\\]")[0].split(">")[1];
+                        }
+
+                    //post
+                       String postText="";
+                    if(text.split("\\]").length>=2){
+                       postText=text.split("\\]")[1]+"]";
+                    }
+    
            //get tagged text
                     text=preText+getTagText(user,preTagText,tag, postTagText)+postText;
                       // System.out.println(text+"||||||||||||||||"+tag);
@@ -539,28 +539,53 @@ public class PostProcessingService {
                     case "phone":
                         value=user.getPhone();
                         break;
-//                    case "diabetes-count":
-//                        break;
-//                    case "diabetes-text":
-//                        break;
-//                    case "liver-count":
-//                        break;
-//                    case "liver-text":
-//                        break;
-//                    case "kidney-count":
-//                        break;
-//                    case "kidney-text":
-//                        break;
-//                    case "vitamin-count":
-//                        break;
-//                    case "vitamin-text":
-//                        break;
-//                    case "thyroid-count":
-//                        break;
-//                    case "thyroid-text":
-//                        break;    
-//                    case "health-goals": 
-//                        break;      
+                    case "diabetes-count":
+                        value="5";
+                        break;
+                    case "diabetes-text":
+                        value=" Age ( above 40) / Smoking / Drinking / Lack of regular exercise / Overweight ";
+                        break;
+                    case "heart-count":
+                        value="5";
+                        break;
+                    case "heart-text":
+                        value="Age ( above 40) / Smoking / Drinking / Lack of regular exercise / Overweight";
+                        break;
+                    case "liver-count":
+                        value="3";
+                        break;
+                    case "liver-text":
+                        value="Smoking/ Alcohol/ Overweight ";
+                        break;
+                    case "kidney-count":
+                        value="2";
+                        break;
+                    case "kidney-text":
+                        value="Smoking/ Diabetes ";
+                        break;
+                    case "vitamin-count":
+                        value="2";
+                        break;
+                    case "vitamin-text":
+                        value="Overweight / Vegetarian ";
+                        break;
+                    case "health-goals":
+                        value="1) Manage weight ( logic : if BMI is higher / waist-size higher)<br/> " +
+                                    "<br/>" +
+                                    "2) Manage stress-levels ( logic : if Stress is there)<br/> " +
+                                    "<br/>" +
+                                    "3) Opt for a comprehensive health-checkup with the right tests ( logic : if no health checkup done recently) <br/>" +
+                                    " <br/>" +
+                                    "4) Get into a regular regime of managing your condition ( logic: if Heart/ Diabetes) <br/>" +
+                                    "<br/>" +
+                                    "5) Start getting physical active  ( logic: if said no physical) <br/>" +
+                                    "<br/>" +
+                                    "6) Get into a regime of eating healthy ( for everyone) <br/>" +
+                                    "<br/>" +
+                                    "7) Quit smoking <br/>" +
+                                    "<br/>" +
+                                    "8) Moderate alcohol intake ";
+                        break;      
                     case "share-link":
                         value ="<a href='"+link+"'>Mia on Chat</a>";
                         break;
