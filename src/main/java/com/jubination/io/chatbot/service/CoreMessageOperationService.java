@@ -219,10 +219,12 @@ public class CoreMessageOperationService {
                                                 if(key.contains("-presence")){
                                                         if(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty()){
                                                             count++;
+                                                            System.out.println(key+"true-presence");
                                                             match=true;
                                                         }
                                                         else{
                                                             count=0;
+                                                            System.out.println(key+"false-presence");
                                                             match=false;
                                                             break;
                                                         }
@@ -231,10 +233,12 @@ public class CoreMessageOperationService {
                                                 else{
                                                     if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
                                                         count++;
+                                                        System.out.println(key+"true");
                                                         match=true;
                                                     }
                                                     else{
                                                         count=0;
+                                                        System.out.println(key+"false");
                                                         match=false;
                                                         break;
                                                     }
