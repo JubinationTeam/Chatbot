@@ -74,7 +74,7 @@ public class THPResultService {
         
         //WAIST
         Double waistSize=Double.parseDouble(user.getTags().get("waistSize"));
-        waistFat=(gender&&waistSize>40)||(!gender&&waistSize>30);
+        waistFat=(gender&&waistSize>37)||(!gender&&waistSize>31.5);
         
         //HABITS
         if(user.getTags().get("habits").contains("drink")){
