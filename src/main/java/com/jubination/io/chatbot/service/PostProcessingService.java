@@ -508,8 +508,12 @@ public class PostProcessingService {
                     //post
                        String postText="";
                        int index=text.indexOf("]");
-                       if(index>=0){
-                            postText=text.substring(index);
+                       
+                       if(index>=0&&(index<text.length()-1)){
+                            postText=text.substring(index+1);
+                       }
+                       else{
+                           text.replace("]", "");
                        }
                        
            //get tagged text
