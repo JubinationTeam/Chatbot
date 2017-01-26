@@ -217,7 +217,11 @@ public class CoreMessageOperationService {
                                                 String key = iterator.next();
                                                 //check presence
                                                 if(key.contains("-presence")){
-                                                        if(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty()){
+                                                        if(//if presense true is true
+                                                                (user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())&&decider.getPossibilities().get(key).equalsIgnoreCase("true")
+                                                                //if presense false is true
+                                                                &&(user.getTags().get(key.split("-")[0])==null||user.getTags().get(key.split("-")[0]).isEmpty())&&decider.getPossibilities().get(key).equalsIgnoreCase("false")
+                                                                ){
                                                             count++;
                                                             System.out.println(key+"true-presence");
                                                             match=true;
