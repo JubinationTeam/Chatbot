@@ -55,7 +55,7 @@ public class ChatBotAPIController {
     
     @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatBotRequest process(@RequestBody UserResponse uRes,HttpServletRequest request) throws IOException{
-            System.out.println("Web Id : "+uRes.getWebId());
+            // System.out.println("Web Id : "+uRes.getWebId());
             
             //context aware reply
             ChatBotRequest chatRequest=awareOperationService.getContextAwareResponse(uRes);

@@ -62,7 +62,7 @@ public class CoreRepositoryService {
                     for(MessageSet messageSet:chatlet.getBotMessages()){
                                 int innerIndex=0;
                                 for(Message message:messageSet.getMessages()){
-                                    System.out.println(message.getValue()+"::::::::::::::::::::::::::::::::::::::");
+                                    // System.out.println(message.getValue()+"::::::::::::::::::::::::::::::::::::::");
                                             message.setId(chatlet.getId()+outerIndex+innerIndex);
                                             messageRepository.saveObject(message);
                                             innerIndex++;

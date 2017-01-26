@@ -47,13 +47,13 @@ public class PreProcessingService {
          if(response.getLastId()==null||response.getLastId().isEmpty()){
              String val=webSessionId+idHelper.getId()+response.getWebId();
               userRepository.saveObject(new User(val,null,null));
-              System.out.println(val+"init");
+              // System.out.println(val+"init");
               return val;
          }
          if(chatlet!=null&&chatlet.getRefreshSession()!=null&&chatlet.getRefreshSession()){
              String val=webSessionId+idHelper.getId()+response.getWebId();
               userRepository.saveObject(new User(val,null,null));
-              System.out.println(val+"refresh");
+              // System.out.println(val+"refresh");
               return val;
          }
          

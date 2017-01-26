@@ -455,7 +455,7 @@ public class PostProcessingService {
                             
 //                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
-                            System.out.println(stringValue);
+                            // System.out.println(stringValue);
                    }
                }
                  
@@ -465,7 +465,7 @@ public class PostProcessingService {
                         DashBot outgoing = new DashBot(sessionId,message.getValue());
                         dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
                         dashBotRepository.saveObject(outgoing);
-                        System.out.println(message.getValue());
+                        // System.out.println(message.getValue());
                 }
             }
            
@@ -512,17 +512,17 @@ public class PostProcessingService {
         }
            //get tagged text
                     text=preText+getTagText(user,preTagText,tag, postTagText,sessionId)+postText;
-                      System.out.println(text+"||||||||||||||||"+tag);
+                      // System.out.println(text+"||||||||||||||||"+tag);
              
         }
         return text;
     }
 
     private String getTagText(User user,String preTag,String tag,String postTag, String  sessionId) {
-        System.out.println(sessionId+"SESSION TAG:::::::");
+        // System.out.println(sessionId+"SESSION TAG:::::::");
         
         String value=null;
-        System.out.println(tag+"TAG:::::::::::::::::::::::;");
+        // System.out.println(tag+"TAG:::::::::::::::::::::::;");
         //User details
         if(user!=null){
                 switch(tag){
@@ -579,7 +579,7 @@ public class PostProcessingService {
         if(value==null){
             return "";
         }
-        System.out.println(value+"TAG:::::::::::::::::::::::;");
+        // System.out.println(value+"TAG:::::::::::::::::::::::;");
         return preTag+value+postTag;
         
         

@@ -45,7 +45,7 @@ public class CoreMessageOperationService {
         public Chatlet getNextChatlet(ChatletTag chatletTag){
             Chatlet chatletResponse;
             if(chatletTag.getChatletId()==null||chatletTag.getChatletId().isEmpty()){
-                System.out.println("FIRST HIT:");
+                // System.out.println("FIRST HIT:");
                 chatletResponse=getFirstChatlet();
             }
             else{
@@ -78,7 +78,7 @@ public class CoreMessageOperationService {
                                     //TVC
                                     else{
                                             chatletResponse=getTVC(chatlet,chatletTag);
-                                            System.out.println("TVC:");
+                                            // System.out.println("TVC:");
                                     }
                         break;
                     //COC,SOC,ODC
@@ -92,7 +92,7 @@ public class CoreMessageOperationService {
                                     //COC-Conditonal
                                     else{
                                         chatletResponse=getCOC(chatlet, chatletTag);
-                                        System.out.println("COC:");
+                                        // System.out.println("COC:");
                                     }
                         break;
                     //SHC
@@ -126,13 +126,13 @@ public class CoreMessageOperationService {
                                                         String deciderId=getDeciderId(chatlet, chatletTag);
                                                         
                                                         if(deciderId!=null){
-                                                            System.out.println("ODC:");
+                                                            // System.out.println("ODC:");
                                                                 return chatletRepository.getObject(deciderId);
                                                         }
                                                             
                                                     }
                                                     //SOC
-                                                    System.out.println("SOC:");
+                                                    // System.out.println("SOC:");
                                                          return chatletRepository.getObject(chatlet.getNext());
         }
         private Chatlet getCOC(Chatlet chatlet,ChatletTag chatletTag){
@@ -171,13 +171,13 @@ public class CoreMessageOperationService {
                                                     if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
                                                         String deciderId=getDeciderId(chatlet, chatletTag);
                                                         if(deciderId!=null){
-                                                            System.out.println("TDC:");
+                                                            // System.out.println("TDC:");
                                                                 return chatletRepository.getObject(deciderId);
                                                         }
                                                         
                                                     }
                                             //STC
-                                            System.out.println("STC:");
+                                            // System.out.println("STC:");
                                              return chatletRepository.getObject(chatlet.getNext());
         }   
         private Chatlet getTVC(Chatlet chatlet, ChatletTag chatletTag) {
@@ -212,9 +212,11 @@ public class CoreMessageOperationService {
                                 Iterator<String> iterator=decider.getPossibilities().keySet().iterator();
                                 boolean match=false;
                                 int count=0;
+                                int index=0;
                                 //match
                                 while(iterator.hasNext()){
                                                 String key = iterator.next();
+                                                System.out.println("KEY : "+index+":"+key);
                                                 //check presence
                                                 if(key.contains("-presence")){
                                                         if(//if presense true is true
@@ -223,12 +225,12 @@ public class CoreMessageOperationService {
                                                                 &&(user.getTags().get(key.split("-")[0])==null||user.getTags().get(key.split("-")[0]).isEmpty())&&decider.getPossibilities().get(key).equalsIgnoreCase("false")
                                                                 ){
                                                             count++;
-                                                            System.out.println(key+"true-presence");
+                                                             System.out.println(key+"true-presence");
                                                             match=true;
                                                         }
                                                         else{
                                                             count=0;
-                                                            System.out.println(key+"false-presence");
+                                                             System.out.println(key+"false-presence");
                                                             match=false;
                                                             break;
                                                         }
@@ -237,18 +239,18 @@ public class CoreMessageOperationService {
                                                 else{
                                                     if(user.getTags().get(key)!=null&&user.getTags().get(key).equals(decider.getPossibilities().get(key))){
                                                         count++;
-                                                        System.out.println(key+"true");
+                                                         System.out.println(key+"true");
                                                         match=true;
                                                     }
                                                     else{
                                                         count=0;
-                                                        System.out.println(key+"false");
+                                                         System.out.println(key+"false");
                                                         match=false;
                                                         break;
                                                     }
                                                 }
                                                 
-                                                
+                                             index++;
                                 }
                                  
                                   if(match&&count>max){
