@@ -507,10 +507,11 @@ public class PostProcessingService {
 
                     //post
                        String postText="";
-                    if(text.split("\\]").length>=2){
-                       postText=text.split("\\]")[1]+"]";
-                    }
-    
+                       int index=text.indexOf("]");
+                       if(index>=0){
+                            postText=text.substring(index);
+                       }
+                       
            //get tagged text
                     text=preText+getTagText(user,preTagText,tag, postTagText)+postText;
                       // System.out.println(text+"||||||||||||||||"+tag);
