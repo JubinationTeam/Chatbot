@@ -50,7 +50,7 @@ public class PreProcessingService {
               System.out.println(val+"init");
               return val;
          }
-         if(chatlet!=null&&chatlet.getRefreshSession()){
+         if(chatlet!=null&&chatlet.getRefreshSession()!=null&&chatlet.getRefreshSession()){
              String val=webSessionId+idHelper.getId()+response.getWebId();
               userRepository.saveObject(new User(val,null,null));
               System.out.println(val+"refresh");

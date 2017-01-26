@@ -50,7 +50,6 @@ public class Chatlet {
         fbVisible=false;
         webVisible=false;
         refreshSession=false;
-        
     }
 
     public String getId() {
