@@ -209,6 +209,7 @@ public class CoreMessageOperationService {
              int max=0;
               if(user!=null&&user.getTags()!=null&&!user.getTags().isEmpty()){
                         for(Decider decider:chatlet.getDeciders()){
+                                System.out.println("DECIDERS : "+decider.getPossibilities());
                                 Iterator<String> iterator=decider.getPossibilities().keySet().iterator();
                                 boolean match=false;
                                 int count=0;
