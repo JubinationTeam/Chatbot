@@ -222,6 +222,7 @@ public class CoreMessageOperationService {
                                                             match=true;
                                                         }
                                                         else{
+                                                            count=0;
                                                             match=false;
                                                             break;
                                                         }
@@ -233,6 +234,7 @@ public class CoreMessageOperationService {
                                                         match=true;
                                                     }
                                                     else{
+                                                        count=0;
                                                         match=false;
                                                         break;
                                                     }
