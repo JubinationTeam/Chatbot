@@ -22,6 +22,7 @@ import com.jubination.io.chatbot.model.pojo.Decider;
 import com.jubination.io.chatbot.model.pojo.Message;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.jubination.io.chatbot.model.pojo.User;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +79,23 @@ public class CoreRepositoryService {
                     }
                     chatletRepository.saveObject(chatlet);
                     return chatletRepository.getObject(chatlet.getId());
+        }
+        
+        //Chatlet Deletion
+        public void dropAllChatlets(){
+            List<Chatlet> chatlets=chatletRepository.getAllObjects();
+            for(Chatlet chatlet:chatlets){
+                    for(MessageSet messageSet:chatlet.getBotMessages()){
+                                for(Message message:messageSet.getMessages()){
+                                            messageRepository.deleteObject(message.getId());
+                                }
+                                messageSetRepository.deleteObject(messageSet.getId());
+                    }
+                    for(Decider decider:chatlet.getDeciders()){
+                                deciderRepository.deleteObject(decider.getId());
+                    }
+                    chatletRepository.deleteObject(chatlet.getId());
+            }
         }
         
         //ChatletTag Creation

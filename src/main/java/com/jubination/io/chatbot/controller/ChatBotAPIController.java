@@ -44,6 +44,8 @@ public class ChatBotAPIController {
     PreProcessingService preService;
   @Autowired
   CoreMessageOperationService operationService;
+    @Autowired
+  CoreRepositoryService repService;
     @Autowired 
     PostProcessingService postService;
      @Autowired 
@@ -86,7 +88,7 @@ public class ChatBotAPIController {
     
     @RequestMapping(value="/flow/create",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody Flow createFlow(@RequestBody Flow flow,HttpServletRequest request) throws IOException{
-           
+        repService.dropAllChatlets();
        return flowService.createFlow(flow);
             
     }
