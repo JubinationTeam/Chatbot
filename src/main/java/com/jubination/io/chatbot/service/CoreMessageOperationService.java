@@ -144,6 +144,8 @@ public class CoreMessageOperationService {
         private Chatlet getSTCAndTDC(Chatlet chatlet, ChatletTag chatletTag){
                                         
                             Iterator<String> iterator=chatlet.getValidationChatlets().keySet().iterator();
+                            
+                            if(chatlet.getValidationChatlets().keySet().size()>0){
                                             while(iterator.hasNext()){
                                                 //validating block
                                                             String nextKey=iterator.next();
@@ -163,6 +165,10 @@ public class CoreMessageOperationService {
                                                     //replace chatletTag tag with validated answer 
                                                     chatletTag.setTag(tag);
                                             }
+                            }
+                            else{
+                                chatletTag.setTag(chatletTag.getAnswer());
+                            }
                                             
                                                     //update user details
                                                     tagSetup(chatletTag);
