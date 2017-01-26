@@ -40,6 +40,8 @@ public class CoreMessageOperationService {
           DashBotUpdater dashBotUpdater;
         @Autowired
         PostProcessingService postProcessor;
+        @Autowired
+        THPResultService thpResultService;
     
          //Bussiness Logic
         public Chatlet getNextChatlet(ChatletTag chatletTag){
@@ -278,7 +280,8 @@ public class CoreMessageOperationService {
                     return id;
     }
 
-   private void tagSetup(ChatletTag chatletTag){
+         //Prepare and Save tags in user
+          private void tagSetup(ChatletTag chatletTag){
        //replace chatletTag tag with validated answer 
                                                     User user=null;
                                                     
@@ -304,6 +307,18 @@ public class CoreMessageOperationService {
                                                                     }
                                                                 }
                                                     }
+                                                    else{
+                                                         user=userRepository.getObject(chatletTag.getSessionId());
+                                                    }
+                                                    
+                                                    //calculate result
+                                                    if(chatletTag.getTagType().contains("result")){
+                                                        if(user!=null){
+                                                                thpResultService.saveResultsForTHP(user);
+                                                        }
+                                                    }
+                                                    
+                                                    
    }
         
 

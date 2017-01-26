@@ -41,6 +41,7 @@ public class PostProcessingService {
       private static final int imageAgeCount=2;
       private static final int imageHabitsCount=4;
       private static final int lineBreak=45;
+      private static final String link = "www.jubination.com/jubichatnew/index.html";
       
     //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertime the case is true
         String validatedText(String type, String text) {
@@ -433,7 +434,7 @@ public class PostProcessingService {
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
                for(Message message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
-                       String taggedValue=doDynamicLinking(user,message.getValue(),sessionId);
+                       String taggedValue=doDynamicLinking(user,message.getValue());
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
                         Matcher reMatcher = re.matcher(taggedValue);
                         while (reMatcher.find()) {
@@ -451,7 +452,7 @@ public class PostProcessingService {
                        
                    }
                    else{
-                            String stringValue=doDynamicLinking(user, message.getValue(),chatlet.getId());
+                            String stringValue=doDynamicLinking(user, message.getValue());
                             
 //                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
@@ -474,7 +475,7 @@ public class PostProcessingService {
 
         }
 
-    private String doDynamicLinking(User user,String text,String sessionId) {
+    private String doDynamicLinking(User user,String text) {
         
       
        
@@ -511,14 +512,14 @@ public class PostProcessingService {
            postText=text.split("\\]")[1];
         }
            //get tagged text
-                    text=preText+getTagText(user,preTagText,tag, postTagText,sessionId)+postText;
+                    text=preText+getTagText(user,preTagText,tag, postTagText)+postText;
                       // System.out.println(text+"||||||||||||||||"+tag);
              
         }
         return text;
     }
 
-    private String getTagText(User user,String preTag,String tag,String postTag, String  sessionId) {
+    private String getTagText(User user,String preTag,String tag,String postTag) {
         // System.out.println(sessionId+"SESSION TAG:::::::");
         
         String value=null;
@@ -538,7 +539,32 @@ public class PostProcessingService {
                     case "phone":
                         value=user.getPhone();
                         break;
-                    default :
+//                    case "diabetes-count":
+//                        break;
+//                    case "diabetes-text":
+//                        break;
+//                    case "liver-count":
+//                        break;
+//                    case "liver-text":
+//                        break;
+//                    case "kidney-count":
+//                        break;
+//                    case "kidney-text":
+//                        break;
+//                    case "vitamin-count":
+//                        break;
+//                    case "vitamin-text":
+//                        break;
+//                    case "thyroid-count":
+//                        break;
+//                    case "thyroid-text":
+//                        break;    
+//                    case "health-goals": 
+//                        break;      
+                    case "share-link":
+                        value ="<a href='"+link+"'>Mia on Chat</a>";
+                        break;
+                    default:
                         if(user.getResult()!=null){
                             value=user.getResult().get(tag);
                         }
