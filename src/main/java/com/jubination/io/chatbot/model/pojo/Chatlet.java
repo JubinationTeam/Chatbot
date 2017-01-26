@@ -41,7 +41,7 @@ public class Chatlet {
       String tagType;
       Boolean fbVisible;
       Boolean webVisible;
-      Boolean refresh;
+      Boolean refreshSession;
       
 
     public Chatlet() {
@@ -49,7 +49,7 @@ public class Chatlet {
         conditionBlock=false;
         fbVisible=false;
         webVisible=false;
-        refresh=false;
+        refreshSession=false;
         
     }
 
@@ -161,15 +161,15 @@ public class Chatlet {
         this.options = options;
     }
 
-    public Boolean getRefresh() {
-        return refresh;
+    public Boolean getRefreshSession() {
+        return refreshSession;
     }
 
-    public void setRefresh(Boolean refresh) {
-        this.refresh = refresh;
+    public void setRefreshSession(Boolean refreshSession) {
+        this.refreshSession = refreshSession;
     }
 
-  
+   
 
     
     
