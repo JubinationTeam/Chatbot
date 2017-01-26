@@ -40,6 +40,7 @@ public class PostProcessingService {
       private static final int imageQuoteCount=16;
       private static final int imageAgeCount=2;
       private static final int imageHabitsCount=4;
+      private static final int imageStressCount=3;
       private static final int lineBreak=45;
       private static final String link = "www.jubination.com/jubichatnew/index.html";
       
@@ -544,53 +545,6 @@ public class PostProcessingService {
                     case "phone":
                         value=user.getPhone();
                         break;
-//                    case "diabetes-count":
-//                        value="5";
-//                        break;
-//                    case "diabetes-text":
-//                        value=" Age ( above 40) / Smoking / Drinking / Lack of regular exercise / Overweight ";
-//                        break;
-//                    case "heart-count":
-//                        value="5";
-//                        break;
-//                    case "heart-text":
-//                        value="Age ( above 40) / Smoking / Drinking / Lack of regular exercise / Overweight";
-//                        break;
-//                    case "liver-count":
-//                        value="3";
-//                        break;
-//                    case "liver-text":
-//                        value="Smoking/ Alcohol/ Overweight ";
-//                        break;
-//                    case "kidney-count":
-//                        value="2";
-//                        break;
-//                    case "kidney-text":
-//                        value="Smoking/ Diabetes ";
-//                        break;
-//                    case "vitamin-count":
-//                        value="2";
-//                        break;
-//                    case "vitamin-text":
-//                        value="Overweight / Vegetarian ";
-//                        break;
-//                    case "health-goals":
-//                        value="1) Manage weight ( logic : if BMI is higher / waist-size higher)<br/> " +
-//                                    "<br/>" +
-//                                    "2) Manage stress-levels ( logic : if Stress is there)<br/> " +
-//                                    "<br/>" +
-//                                    "3) Opt for a comprehensive health-checkup with the right tests ( logic : if no health checkup done recently) <br/>" +
-//                                    " <br/>" +
-//                                    "4) Get into a regular regime of managing your condition ( logic: if Heart/ Diabetes) <br/>" +
-//                                    "<br/>" +
-//                                    "5) Start getting physical active  ( logic: if said no physical) <br/>" +
-//                                    "<br/>" +
-//                                    "6) Get into a regime of eating healthy ( for everyone) <br/>" +
-//                                    "<br/>" +
-//                                    "7) Quit smoking <br/>" +
-//                                    "<br/>" +
-//                                    "8) Moderate alcohol intake ";
-//                        break;      
                     case "share-link":
                         value ="<a href='"+link+"'>Mia on Chat</a>";
                         break;
@@ -621,6 +575,9 @@ public class PostProcessingService {
             }
             else if(tag.contains("quote")){
                 path+="-"+new Random().nextInt(imageQuoteCount);
+            }
+             else if(tag.contains("stress")){
+                path+="-"+new Random().nextInt(imageStressCount);
             }
             return preTag+path+postTag;
         }
