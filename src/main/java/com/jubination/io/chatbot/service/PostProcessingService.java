@@ -481,7 +481,7 @@ public class PostProcessingService {
         }
 
     private String doDynamicLinking(User user,String text) {
-        System.out.println(text);
+        System.out.println("in : "+text);
         if(text!=null){
       
        text=text.replace("[<>]", "");
@@ -528,6 +528,8 @@ public class PostProcessingService {
              
         }
         }
+        
+        System.out.println("out : "+text);
         return text;
     }
 
