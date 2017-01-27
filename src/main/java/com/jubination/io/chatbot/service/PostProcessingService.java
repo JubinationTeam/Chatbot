@@ -8,6 +8,7 @@ package com.jubination.io.chatbot.service;
 
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.service.core.DashBotUpdater;
+import com.jubination.io.chatbot.backend.service.core.RandomNumberGenerator;
 import com.jubination.io.chatbot.model.dao.DashBotDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
@@ -36,6 +37,8 @@ public class PostProcessingService {
     DashBotDAO dashBotRepository;
           @Autowired
           DashBotUpdater dashBotUpdater;
+          @Autowired
+          RandomNumberGenerator gen;
       
       private static final int imageQuoteCount=16;
       private static final int imageAgeCount=2;
@@ -576,13 +579,13 @@ public class PostProcessingService {
                 }
             }
             if(tag.contains("age")){
-                path+="-"+new Random().nextInt(imageAgeCount);
+                path+="-"+gen.generate(imageAgeCount+1);
             }
             else if(tag.contains("habits")){
                 path+="-"+new Random().nextInt(imageHabitsCount);
             }
             else if(tag.contains("quote")){
-                path+="-"+new Random().nextInt(imageQuoteCount);
+                path+="-"+gen.generate(imageQuoteCount+1);
             }
              else if(tag.contains("stress")){
                 path+="-"+new Random().nextInt(imageStressCount);
