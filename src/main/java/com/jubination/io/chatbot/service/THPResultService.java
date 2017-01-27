@@ -176,27 +176,37 @@ public class THPResultService {
          
          //Health Goals
           if(waistFat||overweight){
-                healthGoals+="&#9679; Manage weight<br/><br/>";
+                healthGoals+="&#9679; Manage your <b>Weight</b><br/><br/>";
             }
           if(stressed){
-               healthGoals+="&#9679; Manage stress-levels<br/><br/>";
+               healthGoals+="&#9679; Manage your <b>Stress-Levels</b><br/><br/>";
           }
           if(!checkup){
-              healthGoals+="&#9679; Opt for a comprehensive health-checkup with the right tests<br/><br/>";
+              healthGoals+="&#9679; Opt for a <b>Comprehensive Health-checkup</b> with the right tests<br/><br/>";
           }
            if(heartFlag||diabetesFlag){
-              healthGoals+="&#9679; Get into a regular regime of managing your health condition <br/><br/>";
+               String illness="";
+               if(heartFlag){
+                   illness+="Heart";
+               }
+               if(heartFlag&&diabetesFlag){
+                   illness+=" and ";
+               }
+               if(diabetesFlag){
+                   illness+="Diabetes";
+               }
+              healthGoals+="&#9679; Get into a regular regime of <b>Managing your Health condition</b> ("+illness+") <br/><br/>";
           }
            if(!exercise){
-               healthGoals+="&#9679; Start getting physical active  <br/><br/>";
+               healthGoals+="&#9679; Start getting <b>Physically active</b>  <br/><br/>";
            }
-            healthGoals+="&#9679; Get into a regime of eating healthy <br/><br/>";
+            healthGoals+="&#9679; Get into a regime of <b>Eating healthy</b> <br/><br/>";
 
             if(smoke){
-                 healthGoals+="&#9679; Quit smoking <br/><br/>";
+                 healthGoals+="&#9679; Quit <b>Smoking</b> <br/><br/>";
             }
            if(drink){
-                    healthGoals+="&#9679; Moderate alcohol intake <br/><br/>";
+                    healthGoals+="&#9679; Moderate <b>Alcohol intake</b> <br/><br/>";
            }
            
             user.getResult().put("diabetes-text", diabetes);
@@ -228,6 +238,15 @@ public class THPResultService {
             user.getTriggers().put("aged", aged);
             
             userRepository.updateObject(user.getSesId(), user.getTriggers(), "triggers");
+            
+            
+            
+            user.getTags().put("smoke", String.valueOf(smoke));
+            user.getTags().put("drink", String.valueOf(drink));
+            user.getTags().put("heart", String.valueOf(heartFlag));
+            user.getTags().put("diabetes", String.valueOf(diabetesFlag));
+            
+             userRepository.updateObject(user.getSesId(), user.getResult(), "tags");
             
     }
     
