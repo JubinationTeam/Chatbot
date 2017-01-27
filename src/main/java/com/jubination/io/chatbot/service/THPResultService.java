@@ -246,7 +246,7 @@ public class THPResultService {
             user.getTags().put("heart", String.valueOf(heartFlag));
             user.getTags().put("diabetes", String.valueOf(diabetesFlag));
             
-             userRepository.updateObject(user.getSesId(), user.getResult(), "tags");
+             userRepository.updateObject(user.getSesId(), user.getTags(), "tags");
             
     }
     
