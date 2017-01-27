@@ -217,19 +217,19 @@ public class CoreMessageOperationService {
              int max=0;
               if(user!=null&&user.getTags()!=null&&!user.getTags().isEmpty()){
                         for(Decider decider:chatlet.getDeciders()){
-                                System.out.println("DECIDERS : "+decider.getPossibilities());
+                          //    System.out.println("DECIDERS : "+decider.getPossibilities());
                                 Iterator<String> iterator=decider.getPossibilities().keySet().iterator();
                                 boolean match=false;
                                 int count=0;
-                                int index=0;
+                           //     int index=0;
                                 //match
                                 while(iterator.hasNext()){
                                                 String key = iterator.next();
-                                                System.out.println("KEY : "+index+":"+key);
+                                             //   System.out.println("KEY : "+index+":"+key);
                                                 //check presence
                                                 
-                                                System.out.println("presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+
-                                                        decider.getPossibilities().get(key).equalsIgnoreCase("true")+"presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+decider.getPossibilities().get(key).equalsIgnoreCase("false"));
+                                           //     System.out.println("presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+
+                                             //           decider.getPossibilities().get(key).equalsIgnoreCase("true")+"presence"+(user.getTags().get(key.split("-")[0])!=null&&!user.getTags().get(key.split("-")[0]).isEmpty())+decider.getPossibilities().get(key).equalsIgnoreCase("false"));
                                              
                                                 if(key.contains("-presence")){
                                                         if(//if presense true is true
@@ -264,7 +264,7 @@ public class CoreMessageOperationService {
                                                     }
                                                 }
                                                 
-                                             index++;
+                                            // index++;
                                 }
                                  
                                   if(match&&count>max){

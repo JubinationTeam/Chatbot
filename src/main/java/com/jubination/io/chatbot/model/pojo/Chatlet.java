@@ -9,6 +9,7 @@ import com.jubination.io.chatbot.model.dao.CascadeSave;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -30,7 +31,7 @@ public class Chatlet {
      @DBRef
 //      @CascadeSave
     List<MessageSet> botMessages = new ArrayList<>();
-    HashMap<String,String> options = new HashMap<>();
+    TreeMap<String,String> options = new TreeMap<>();
     
      @DBRef
 //     @CascadeSave
@@ -152,13 +153,15 @@ public class Chatlet {
         this.validationChatlets = validationChatlets;
     }
 
-    public HashMap<String, String> getOptions() {
+    public TreeMap<String, String> getOptions() {
         return options;
     }
 
-    public void setOptions(HashMap<String, String> options) {
+    public void setOptions(TreeMap<String, String> options) {
         this.options = options;
     }
+
+   
 
     public Boolean getRefreshSession() {
         return refreshSession;

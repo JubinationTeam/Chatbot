@@ -221,6 +221,9 @@ public class PostProcessingService {
                                    }
                         break;
                     case "height-multipleNumbers":
+                        if(text.startsWith(".")){
+                            return null;
+                        }
                         re = Pattern.compile("[0-9]+");
                                    reMatcher = re.matcher(text);
                                    
@@ -231,7 +234,7 @@ public class PostProcessingService {
                                         }
                                         else if(count==1){
                                             int inches=Integer.parseInt(reMatcher.group());
-                                            if(inches>=12){
+                                            if(inches>12){
                                                 return null;
                                             }validatedText=validatedText+"."+inches;
                                         }
@@ -383,6 +386,7 @@ public class PostProcessingService {
                         break;
                         
                     case "email-invalid":
+                        
                         re = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
                         reMatcher = re.matcher(text.trim());
                          if(reMatcher.find()){
@@ -477,7 +481,8 @@ public class PostProcessingService {
         }
 
     private String doDynamicLinking(User user,String text) {
-        
+        System.out.println(text);
+        if(text!=null){
       
        text=text.replace("[<>]", "");
        
@@ -521,6 +526,7 @@ public class PostProcessingService {
                     text=preText+getTagText(user,preTagText,tag, postTagText)+postText;
                       // System.out.println(text+"||||||||||||||||"+tag);
              
+        }
         }
         return text;
     }
@@ -583,11 +589,11 @@ public class PostProcessingService {
         }
         
         //font design
-        if(tag.split("%")!=null&&tag.split("%").length>=2){
-            String text=tag.split("%")[0];
-            return preTag+"<"+tag.split("%")[1]+">"+text+"</"+tag.split("%")[1]+">"+postTag;
-            
-        }
+//        if(tag.split("%")!=null&&tag.split("%").length>=2){
+//            String text=tag.split("%")[0];
+//            return preTag+"<"+tag.split("%")[1]+">"+text+"</"+tag.split("%")[1]+">"+postTag;
+//            
+//        }
         
         if(value==null){
             return "";

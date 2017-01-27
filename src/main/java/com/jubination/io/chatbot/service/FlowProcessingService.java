@@ -12,6 +12,7 @@ import com.jubination.io.chatbot.model.pojo.Decider;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -138,7 +139,7 @@ public class FlowProcessingService {
      chatlet.setValidationChatlets(validationChatlet);
      return service.createChatlet(chatlet);
  }
-        public Chatlet createSHC(String prev, String id, String next,List<MessageSet> botMessages, HashMap<String, String> validationChatlet, HashMap<String, String> options, String tagType, Boolean web, Boolean fb){
+        public Chatlet createSHC(String prev, String id, String next,List<MessageSet> botMessages, HashMap<String, String> validationChatlet, TreeMap<String, String> options, String tagType, Boolean web, Boolean fb){
             Chatlet chatlet = new Chatlet();
             chatlet.setAnswerType("text-option");
             chatlet.setBotMessages(botMessages);
@@ -152,7 +153,7 @@ public class FlowProcessingService {
             chatlet.setOptions(options);
             return service.createChatlet(chatlet);
         }
-        public Chatlet createSOC(String prev, String id, String next,List<MessageSet> botMessages, HashMap<String, String> options, String tagType, Boolean web, Boolean fb){
+        public Chatlet createSOC(String prev, String id, String next,List<MessageSet> botMessages, TreeMap<String, String> options, String tagType, Boolean web, Boolean fb){
             Chatlet chatlet = new Chatlet();
             chatlet.setAnswerType("option");
             chatlet.setBotMessages(botMessages);
@@ -165,7 +166,7 @@ public class FlowProcessingService {
             chatlet.setOptions(options);
             return service.createChatlet(chatlet);
         }
-        public Chatlet createCOC(String prev, String id, List<MessageSet> botMessages, HashMap<String, String> options, String tagType, Boolean web, Boolean fb){
+        public Chatlet createCOC(String prev, String id, List<MessageSet> botMessages, TreeMap<String, String> options, String tagType, Boolean web, Boolean fb){
             Chatlet chatlet = new Chatlet();
             chatlet.setAnswerType("option");
             chatlet.setBotMessages(botMessages);
@@ -205,7 +206,7 @@ public class FlowProcessingService {
             chatlet.setDeciders(deciders);
             return service.createChatlet(chatlet);
         }
-        public Chatlet createODC(String prev, String id, String next,List<MessageSet> botMessages, HashMap<String, String> options,List<Decider> deciders,  String tagType, Boolean web, Boolean fb){
+        public Chatlet createODC(String prev, String id, String next,List<MessageSet> botMessages, TreeMap<String, String> options,List<Decider> deciders,  String tagType, Boolean web, Boolean fb){
                 Chatlet chatlet = new Chatlet();
                 chatlet.setAnswerType("option");
                 chatlet.setBotMessages(botMessages);
