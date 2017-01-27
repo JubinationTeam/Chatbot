@@ -214,6 +214,20 @@ public class THPResultService {
             user.getResult().put("health-goals", healthGoals);
             
             userRepository.updateObject(user.getSesId(), user.getResult(), "result");
+
+            user.getTriggers().put("gender", gender);
+            user.getTriggers().put("smoke", smoke);
+            user.getTriggers().put("drink", drink);
+            user.getTriggers().put("exercise", exercise);
+            user.getTriggers().put("heart", heartFlag);
+            user.getTriggers().put("diabetes", diabetesFlag);
+            user.getTriggers().put("checkup", checkup);
+            user.getTriggers().put("overweight", overweight);
+            user.getTriggers().put("waistSize", waistFat);
+            user.getTriggers().put("stressed", stressed);
+            user.getTriggers().put("aged", aged);
+            
+            userRepository.updateObject(user.getSesId(), user.getTriggers(), "triggers");
             
     }
     

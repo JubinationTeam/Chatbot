@@ -29,6 +29,7 @@ public class User {
     String fbId;
     HashMap<String,String> tags =new HashMap<>();
     HashMap<String,String> result =new HashMap<>();
+  HashMap<String,Boolean> triggers =new HashMap<>();
     
     public User() {
     }
@@ -116,6 +117,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public HashMap<String, Boolean> getTriggers() {
+        return triggers;
+    }
+
+    public void setTriggers(HashMap<String, Boolean> triggers) {
+        this.triggers = triggers;
     }
 
     

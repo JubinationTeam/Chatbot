@@ -42,7 +42,7 @@ public class PostProcessingService {
       private static final int imageHabitsCount=4;
       private static final int imageStressCount=3;
       private static final int lineBreak=45;
-      private static final String link = "www.jubination.com/jubichatnew/index.html";
+      private static final String link = "mailto:?subject=I wanted you to see this&amp;body=Check out Mia http://bit.ly/2jYG0xz";
       
     //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertime the case is true
         String validatedText(String type, String text) {
@@ -481,7 +481,7 @@ public class PostProcessingService {
         }
 
     private String doDynamicLinking(User user,String text) {
-        System.out.println("in : "+text);
+//        System.out.println("in : "+text);
         if(text!=null){
       
        text=text.replace("[<>]", "");
@@ -529,7 +529,7 @@ public class PostProcessingService {
         }
         }
         
-        System.out.println("out : "+text);
+//        System.out.println("out : "+text);
         return text;
     }
 
