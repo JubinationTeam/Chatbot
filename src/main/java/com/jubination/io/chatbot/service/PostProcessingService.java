@@ -8,6 +8,7 @@ package com.jubination.io.chatbot.service;
 
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
 import com.jubination.io.chatbot.backend.service.core.DashBotUpdater;
+import com.jubination.io.chatbot.backend.service.core.RandomNumberGenerator;
 import com.jubination.io.chatbot.model.dao.DashBotDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
@@ -36,11 +37,13 @@ public class PostProcessingService {
     DashBotDAO dashBotRepository;
           @Autowired
           DashBotUpdater dashBotUpdater;
+          @Autowired
+          RandomNumberGenerator gen;
       
-      private static final int imageQuoteCount=16;
-      private static final int imageAgeCount=2;
-      private static final int imageHabitsCount=4;
-      private static final int imageStressCount=3;
+      private static final int imageQuoteCount=17;
+      private static final int imageAgeCount=3;
+      private static final int imageHabitsCount=5;
+      private static final int imageStressCount=4;
       private static final int lineBreak=45;
       private static final String link = "mailto:?subject=I wanted you to see this&amp;body=Check out Mia http://bit.ly/2jYG0xz";
       
@@ -576,16 +579,16 @@ public class PostProcessingService {
                 }
             }
             if(tag.contains("age")){
-                path+="-"+new Random().nextInt(imageAgeCount);
+                path+="-"+gen.generate(imageAgeCount);
             }
             else if(tag.contains("habits")){
-                path+="-"+new Random().nextInt(imageHabitsCount);
+                path+="-"+gen.generate(imageHabitsCount);
             }
             else if(tag.contains("quote")){
-                path+="-"+new Random().nextInt(imageQuoteCount);
+                path+="-"+gen.generate(imageQuoteCount);
             }
              else if(tag.contains("stress")){
-                path+="-"+new Random().nextInt(imageStressCount);
+                path+="-"+gen.generate(imageStressCount);
             }
             return preTag+path+postTag;
         }
