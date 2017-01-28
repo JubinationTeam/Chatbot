@@ -181,13 +181,13 @@ public class THPResultService {
          
          //Health Goals
           if(waistFat||overweight){
-                healthGoals+="&#9679; Manage your <b>Weight</b><br/><br/>";
+                healthGoals+="&#9679; Manage your <b>Weight</b> (With this one step, we can reverse a lot of your health-risks) <br/><br/>";
             }
           if(stressed){
-               healthGoals+="&#9679; Manage your <b>Stress-Levels</b><br/><br/>";
+               healthGoals+="&#9679; Manage your <b>Stress-Levels</b> (Stress affects our mind, body and productivity. I will help you manage stress better)  <br/><br/>";
           }
           if(!checkup){
-              healthGoals+="&#9679; Opt for a <b>Comprehensive Health-checkup</b> with the right tests<br/><br/>";
+              healthGoals+="&#9679; Opt for a <b>Comprehensive Health-checkup</b> (I will also tell you the exact package you require) <br/><br/>";
           }
            if(heartFlag||diabetesFlag){
                String illness="";
@@ -205,10 +205,10 @@ public class THPResultService {
            if(!exercise){
                healthGoals+="&#9679; Start getting <b>Physically active</b>  <br/><br/>";
            }
-            healthGoals+="&#9679; Get into a regime of <b>Eating healthy</b> <br/><br/>";
+            healthGoals+="&#9679; Get into a regime of <b>Eating healthy</b> (I will get my experts involved and suggest what's right)  <br/><br/>";
 
             if(smoke){
-                 healthGoals+="&#9679; Quit <b>Smoking</b> <br/><br/>";
+                 healthGoals+="&#9679; Quit <b>Smoking</b> (You would have read the warnings I am sure, still :(  )  <br/><br/>";
             }
            if(drink){
                     healthGoals+="&#9679; Moderate <b>Alcohol intake</b> <br/><br/>";
