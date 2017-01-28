@@ -215,7 +215,7 @@ public class THPResultService {
            }
            
            if(!gender){
-               user.getResult().put("thyroid-text", diabetes);
+               user.getResult().put("thyroid-text", thyroidText);
            }
             user.getResult().put("diabetes-text", diabetes);
             user.getResult().put("heart-text", heart);
