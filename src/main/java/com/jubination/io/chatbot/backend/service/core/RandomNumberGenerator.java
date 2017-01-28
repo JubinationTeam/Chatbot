@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 public class RandomNumberGenerator {
     
     public int generate(int maxInt){
-        return (int) System.currentTimeMillis()%maxInt;
+        int value= (int) System.currentTimeMillis()%maxInt;
+        return (value>0)?value:-value;
     }
     
 }
