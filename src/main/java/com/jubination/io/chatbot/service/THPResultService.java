@@ -23,9 +23,9 @@ public class THPResultService {
         UserDAO  userRepository;  
     private final String overweightText="You are over-weight,";
     private final String exerciseText="You don't exercise regularly,";
-    private final String smokeText="Your habits of smoking";
-    private final String drinkText="Alcohol consumption";
-    private final String ageText="Your age is in the high risk-group";
+    private final String smokeText="Your habits of smoking, ";
+    private final String drinkText="Alcohol consumption, ";
+    private final String ageText="Your age is in the high risk-group, ";
     private final String thyroidText="6) <b>Thyroid </b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
     void saveResultsForTHP(User user) {
