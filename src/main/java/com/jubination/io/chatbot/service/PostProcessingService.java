@@ -526,7 +526,7 @@ public class PostProcessingService {
                             postText=text.substring(index+1);
                        }
                        else{
-                           text=text.replace("]", "");
+                           postText=text.replace("]", "");
                        }
                        
            //get tagged text
