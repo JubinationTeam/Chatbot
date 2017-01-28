@@ -175,6 +175,7 @@ public class CoreMessageOperationService {
                                                     //update user details
                                                     tagSetup(chatletTag);
                                                     
+                                                    System.out.println(chatlet.getDeciders()+" "+chatlet.getTagType());
                                                 //TDC
                                                     if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
                                                         String deciderId=getDeciderId(chatlet, chatletTag);
