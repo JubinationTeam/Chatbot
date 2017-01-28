@@ -21,7 +21,12 @@ public class THPResultService {
 
     @Autowired
         UserDAO  userRepository;  
-    
+    private final String overweightText="You are over-weight,";
+    private final String exerciseText="You don't exercise regularly,";
+    private final String smokeText="Your habits of smoking";
+    private final String drinkText="Alcohol consumption";
+    private final String ageText="Your age is in the high risk-group";
+    private final String thyroidText="6) <b>Thyroid </b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
     void saveResultsForTHP(User user) {
         
@@ -128,49 +133,49 @@ public class THPResultService {
         
        //RISKS
         if(overweight){
-            vitamin+="Overweight, ";
+            vitamin+=overweightText;
             vitaminCount++;
-            liver+="Overweight, ";
+            liver+=overweightText;
             liverCount++;
-            diabetes+="Overweight, ";
+            diabetes+=overweightText;
             diabetesCount++;
-            heart+="Overweight, ";
+            heart+=overweightText;
             heartCount++;
         }
         
         if(aged){
-            diabetes+="Age, ";
+            diabetes+=ageText;
             diabetesCount++;
-            heart+="Age, ";
+            heart+=ageText;
             heartCount++;
         }
         
         if(smoke){
-            diabetes+="Smoke, ";
+            diabetes+=smokeText;
             diabetesCount++;
-            heart+="Smoke, ";
+            heart+=smokeText;
             heartCount++;
-            liver+="Smoke, ";
+            liver+=smokeText;
             liverCount++;
-            kidney+="Smoke, ";
+            kidney+=smokeText;
             kidneyCount++;
             
         }
          if(drink){
-            diabetes+="Drink, ";
+            diabetes+=drinkText;
             diabetesCount++;
-            heart+="Drink, ";
+            heart+=drinkText;
             heartCount++;
-            liver+="Drink, ";
+            liver+=drinkText;
             liverCount++;
-            kidney+="Drink, ";
+            kidney+=drinkText;
             kidneyCount++;
         }
          
          if(!exercise){
-            diabetes+="Lack of exercise, ";
+            diabetes+=exerciseText;
             diabetesCount++;
-            heart+="Lack of exercise, ";
+            heart+=exerciseText;
             heartCount++;
         }
          
@@ -209,6 +214,9 @@ public class THPResultService {
                     healthGoals+="&#9679; Moderate <b>Alcohol intake</b> <br/><br/>";
            }
            
+           if(!gender){
+               user.getResult().put("thyroid-text", diabetes);
+           }
             user.getResult().put("diabetes-text", diabetes);
             user.getResult().put("heart-text", heart);
             user.getResult().put("kidney-text", kidney);
