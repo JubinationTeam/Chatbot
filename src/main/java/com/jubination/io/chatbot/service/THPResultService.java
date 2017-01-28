@@ -222,12 +222,14 @@ public class THPResultService {
             user.getResult().put("kidney-text", kidney);
             user.getResult().put("liver-text", liver);
             user.getResult().put("vitamin-text", vitamin);
+            user.getResult().put("name-of-tests", "<br/>&#9679; <b>Diabetes</b><br/><br/>&#9679; <b>Lipid Profile</b><br/><br/>&#9679; <b>Liver Profile</b><br/><br/>&#9679; <b>Kidney Profile</b><br/><br/>");
             
             user.getResult().put("diabetes-count", String.valueOf(diabetesCount));
             user.getResult().put("heart-count", String.valueOf(heartCount));
             user.getResult().put("kidney-count", String.valueOf(kidneyCount));
             user.getResult().put("liver-count", String.valueOf(liverCount));
             user.getResult().put("vitamin-count", String.valueOf(vitaminCount));
+            
             
             user.getResult().put("health-goals", healthGoals);
             
