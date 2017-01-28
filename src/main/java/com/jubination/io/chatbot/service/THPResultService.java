@@ -26,7 +26,7 @@ public class THPResultService {
     private final String smokeText="Your habits of smoking, ";
     private final String drinkText="Alcohol consumption, ";
     private final String ageText="Your age is in the high risk-group, ";
-    private final String thyroidText="6) <b>Thyroid </b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
+    private final String thyroidText="6) Thyroid : Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
     void saveResultsForTHP(User user) {
         
