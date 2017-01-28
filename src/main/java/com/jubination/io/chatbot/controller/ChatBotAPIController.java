@@ -70,6 +70,7 @@ public class ChatBotAPIController {
                                                     uRes,request.getSession().getId()
                                             )
                                     ), 
+                              uRes,
                                     preService.getRecentSessionId(
                                             uRes,
                                             request.getSession().getId()

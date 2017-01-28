@@ -7,6 +7,7 @@ package com.jubination.io.chatbot.service;
 
 
 import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
+import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
 import com.jubination.io.chatbot.backend.service.core.DashBotUpdater;
 import com.jubination.io.chatbot.backend.service.core.RandomNumberGenerator;
 import com.jubination.io.chatbot.model.dao.DashBotDAO;
@@ -420,7 +421,7 @@ public class PostProcessingService {
             return validatedText;
         }
         
-        public ChatBotRequest convertWebChatletIntoChatBotMessage(Chatlet chatlet, String sessionId){
+        public ChatBotRequest convertWebChatletIntoChatBotMessage(Chatlet chatlet, UserResponse res,String sessionId){
             
            ChatBotRequest req=new ChatBotRequest();
            req.setAnswerType(chatlet.getAnswerType());
@@ -441,6 +442,9 @@ public class PostProcessingService {
           
            
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
+            if(res.getLastAnswer().equalsIgnoreCase("I am Interested")){
+                            req.getBotMessage().add(new Message("text", "Thank you, my team will get back to you."));
+        }
                for(Message message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
                        String taggedValue=doDynamicLinking(user,message.getValue());
@@ -462,7 +466,6 @@ public class PostProcessingService {
                    }
                    else{
                             String stringValue=doDynamicLinking(user, message.getValue());
-                            
 //                            String stringValue=val.toString();
                             req.getBotMessage().add(new Message(message.getType(), stringValue));
                             // System.out.println(stringValue);
