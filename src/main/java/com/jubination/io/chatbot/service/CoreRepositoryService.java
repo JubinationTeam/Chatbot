@@ -83,6 +83,7 @@ public class CoreRepositoryService {
         
         //Chatlet Deletion
         public void dropAllChatlets(){
+            try{
             List<Chatlet> chatlets=chatletRepository.getAllObjects();
             for(Chatlet chatlet:chatlets){
                     for(MessageSet messageSet:chatlet.getBotMessages()){
@@ -95,6 +96,10 @@ public class CoreRepositoryService {
                                 deciderRepository.deleteObject(decider.getId());
                     }
                     chatletRepository.deleteObject(chatlet.getId());
+            }
+            }
+            catch(Exception e){
+                e.printStackTrace();
             }
         }
         
