@@ -184,7 +184,7 @@ public class THPResultService {
                 healthGoals+="&#9679; Manage your <b>Weight</b> (With this one step, we can reverse a lot of your health-risks) <br/><br/>";
             }
           if(stressed){
-               healthGoals+="&#9679; Manage your <b>Stress-Levels</b> (Stress affects our mind, body and productivity. I will help you manage stress better)  <br/><br/>";
+               healthGoals+="&#9679; Manage your <b>Stress-Levels</b> (Stress affects our mind, body and productivity, I will help you manage stress better)  <br/><br/>";
           }
           if(!checkup){
               healthGoals+="&#9679; Opt for a <b>Comprehensive Health-checkup</b> (I will also tell you the exact package you require) <br/><br/>";
