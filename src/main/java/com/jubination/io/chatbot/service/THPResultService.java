@@ -97,10 +97,10 @@ public class THPResultService {
         if(user.getTags().get("illness").contains("Heart")){
             heartFlag=true;
         }
-       else  if(user.getTags().get("illness").contains("Diabetes")){
+       if(user.getTags().get("illness").contains("Diabetes")){
             diabetesFlag=true;
         }
-        else if(user.getTags().get("illness").contains("both")){
+       if(user.getTags().get("illness").contains("both")){
             heartFlag=true;
             diabetesFlag=true;
         }
