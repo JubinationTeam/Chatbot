@@ -217,6 +217,35 @@ public class THPResultService {
            if(!gender){
                user.getResult().put("thyroid-text", thyroidText);
            }
+           if(smoke&&drink){
+               user.getResult().put("number-checkup", "<b>1 out of 6</b>");
+           user.getResult().put("number-phy", "<b>2 out of 6</b>");
+            user.getResult().put("number-diet", "<b>3 out of 6</b>");
+            user.getResult().put("number-smoke", "<b>4 out of 6</b>");
+            user.getResult().put("number-drink", "<b>5 out of 6</b>");
+            user.getResult().put("number-med", "<b>6 out of 6</b>");
+           }
+           else if(smoke){
+               user.getResult().put("number-checkup", "<b>1 out of 5</b>");
+           user.getResult().put("number-phy", "<b>2 out of 5</b>");
+            user.getResult().put("number-diet", "<b>3 out of 5</b>");
+            user.getResult().put("number-smoke", "<b>4 out of 5</b>");
+            user.getResult().put("number-med", "<b>5 out of 5</b>");
+            }
+           else if(drink){
+            user.getResult().put("number-checkup", "<b>1 out of 5</b>");
+           user.getResult().put("number-phy", "<b>2 out of 5</b>");
+            user.getResult().put("number-diet", "<b>3 out of 5</b>");
+            user.getResult().put("number-drink", "<b>4 out of 5</b>");
+            user.getResult().put("number-med", "<b>5 out of 5</b>");
+           }
+           else{
+                user.getResult().put("number-checkup", "<b>1 out of 4</b>");
+           user.getResult().put("number-phy", "<b>2 out of 4</b>");
+            user.getResult().put("number-diet", "<b>3 out of 4</b>");
+            user.getResult().put("number-med", "<b>4 out of 4</b>");
+           }
+           
             user.getResult().put("diabetes-text", diabetes);
             user.getResult().put("heart-text", heart);
             user.getResult().put("kidney-text", kidney);
