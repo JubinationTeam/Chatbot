@@ -582,7 +582,10 @@ public class PostProcessingService {
                     path+="/"+tag.split("-")[i];
                 }
             }
-            if(tag.contains("age")){
+            if(tag.contains("drinkAdvice")){
+                path=path+"-0";
+            }
+            else if(tag.contains("age")){
                 path+="-"+gen.generate(imageAgeCount+1);
             }
             else if(tag.contains("habits")){
