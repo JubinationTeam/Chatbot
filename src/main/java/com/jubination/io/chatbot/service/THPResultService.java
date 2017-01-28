@@ -77,13 +77,13 @@ public class THPResultService {
         waistFat=(gender&&waistSize>37)||(!gender&&waistSize>31.5);
         
         //HABITS
-        if(user.getTags().get("habits").contains("drink")){
+        if(user.getTags().get("habits").contains("drink")||user.getTags().get("habits").contains("alcohol")){
             drink=true;
         }
-       else  if(user.getTags().get("habits").contains("smoke")){
+       if(user.getTags().get("habits").contains("smoke")){
             smoke=true;
         }
-        else if(user.getTags().get("habits").contains("both")){
+        if(user.getTags().get("habits").contains("both")){
             smoke=true;
             drink=true;
         }
