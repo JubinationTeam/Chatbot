@@ -287,7 +287,7 @@ public class CoreMessageOperationService {
                                                     User user=null;
                                                     
                                                     //exclusion
-                                                    if(!chatletTag.getTag().trim().equalsIgnoreCase("I want to answer this later")&&!chatletTag.getTag().trim().equalsIgnoreCase("Skip")){
+                                                    if(!chatletTag.getTag().trim().equalsIgnoreCase("I want to answer this later")&&!chatletTag.getTag().trim().equalsIgnoreCase("Skip for now")){
                                                         
                                                                 //update user details
                                                                 if(chatletTag.getTagType().equals("name")||chatletTag.getTagType().equals("email")||chatletTag.getTagType().equals("phone")||chatletTag.getTagType().equals("country")||chatletTag.getTagType().equals("gender")){
