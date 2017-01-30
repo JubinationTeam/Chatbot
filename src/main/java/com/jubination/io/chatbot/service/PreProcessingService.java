@@ -5,7 +5,7 @@
  */
 package com.jubination.io.chatbot.service;
 
-import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
+import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.backend.service.core.UniqueIdHelper;
 import com.jubination.io.chatbot.model.dao.ChatletDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
@@ -27,9 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class PreProcessingService {
     @Autowired
     UniqueIdHelper idHelper;
+    @Autowired 
+    ChatFuelFilter filter;
     @Autowired
     ChatletDAO chatletRepository;
-         @Autowired
+    @Autowired
     UserDAO userRepository;
     
     public ChatletTag convertWebUserResponseIntoChatletTag(UserResponse response,String webSessionId){
@@ -44,15 +46,18 @@ public class PreProcessingService {
     
      public String getRecentSessionId(UserResponse response,String webSessionId) {
          Chatlet chatlet = chatletRepository.getObject(response.getLastId());
-         if(response.getLastId()==null||response.getLastId().isEmpty()){
+         if(response.getLastId()==null||response.getLastId().isEmpty()||response.getLastId().equals("start")){
              String val=webSessionId+idHelper.getId()+response.getWebId();
-              userRepository.saveObject(new User(val,null,null));
+              userRepository.saveObject(new User(val,response.getName(),response.getGender(),response.getFbId()));
               // System.out.println(val+"init");
               return val;
          }
          if(chatlet!=null&&chatlet.getRefreshSession()!=null&&chatlet.getRefreshSession()){
              String val=webSessionId+idHelper.getId()+response.getWebId();
-              userRepository.saveObject(new User(val,null,null));
+             
+              filter.refreshSessionIndex(response.getFbId(),val);
+              userRepository.saveObject(new User(val,response.getName(),response.getGender(),response.getFbId()));
+              
               // System.out.println(val+"refresh");
               return val;
          }
@@ -60,6 +65,6 @@ public class PreProcessingService {
          return response.getSessionId();
     }
      
-    
+      
      
 }

@@ -16,6 +16,8 @@ import com.jubination.io.chatbot.model.pojo.DashBot;
 import com.jubination.io.chatbot.model.pojo.Decider;
 import com.jubination.io.chatbot.model.pojo.User;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,12 +43,12 @@ public class CoreMessageOperationService {
         @Autowired
         PostProcessingService postProcessor;
         @Autowired
-        THPResultService thpResultService;
+        THPResultService resultService;
     
          //Bussiness Logic
         public Chatlet getNextChatlet(ChatletTag chatletTag){
             Chatlet chatletResponse;
-            if(chatletTag.getChatletId()==null||chatletTag.getChatletId().isEmpty()){
+            if(chatletTag.getChatletId()==null||chatletTag.getChatletId().isEmpty()||chatletTag.getChatletId().equals("start")){
                 // System.out.println("FIRST HIT:");
                 chatletResponse=getFirstChatlet();
             }
@@ -151,7 +153,7 @@ public class CoreMessageOperationService {
                                             while(iterator.hasNext()){
                                                 //validating block
                                                             String nextKey=iterator.next();
-                                                            String tag=postProcessor.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer());
+                                                            String tag=resultService.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer());
                                                             if(tag==null){
 
                                                                 Chatlet validationChatlet=chatletRepository.getObject(chatlet.getValidationChatlets().get(nextKey));
@@ -315,12 +317,11 @@ public class CoreMessageOperationService {
                                                     //calculate result
                                                     if(chatletTag.getTagType().contains("result")){
                                                         if(user!=null){
-                                                                thpResultService.saveResultsForTHP(user);
+                                                                resultService.saveResults(user);
                                                         }
                                                     }
                                                     
                                                     
    }
-        
 
 }

@@ -6,8 +6,8 @@
 package com.jubination.io.chatbot.controller;
 
 
-import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
-import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
+import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
+import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.core.Flow;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
@@ -53,33 +53,7 @@ public class ChatBotAPIController {
      @Autowired
      ContextAwareMessageOperationService awareOperationService;
     
-    @RequestMapping(value="/process",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ChatBotRequest process(@RequestBody UserResponse uRes,HttpServletRequest request) throws IOException{
-            // System.out.println("Web Id : "+uRes.getWebId());
-            
-            //context aware reply
-            ChatBotRequest chatRequest=awareOperationService.getContextAwareResponse(uRes);
-            if(chatRequest!=null){
-                return chatRequest;
-            }
-            //normal reply
-              return  
-                      postService.convertWebChatletIntoChatBotMessage(
-                                    operationService.getNextChatlet(
-                                            preService.convertWebUserResponseIntoChatletTag(
-                                                    uRes,request.getSession().getId()
-                                            )
-                                    ), 
-                              uRes,
-                                    preService.getRecentSessionId(
-                                            uRes,
-                                            request.getSession().getId()
-                                    )
-                            );
-             
-            
-        
-    }
+    
     
      @RequestMapping(value="/",method=RequestMethod.GET)
     public ModelAndView getFirstPage(HttpServletRequest request) throws IOException{

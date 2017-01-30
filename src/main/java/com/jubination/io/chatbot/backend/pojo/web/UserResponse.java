@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jubination.io.chatbot.backend.pojo.core;
+package com.jubination.io.chatbot.backend.pojo.web;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.context.annotation.Scope;
@@ -24,6 +24,9 @@ public class UserResponse {
     private String lastId;
     private String sessionId;
     private String webId; 
+    private String name; 
+    private String gender;
+    private String fbId;
 
    
 
@@ -61,6 +64,30 @@ public class UserResponse {
 
     public void setWebId(String webId) {
         this.webId = webId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getFbId() {
+        return fbId;
+    }
+
+    public void setFbId(String fbId) {
+        this.fbId = fbId;
     }
 
     

@@ -7,6 +7,8 @@ package com.jubination.io.chatbot.service;
 
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.User;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class THPResultService {
+public class THPResultService extends ResultService{
 
     @Autowired
         UserDAO  userRepository;  
@@ -28,7 +30,8 @@ public class THPResultService {
     private final String ageText="Your age is in the high risk-group, ";
     private final String thyroidText="6) Thyroid : Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
-    void saveResultsForTHP(User user) {
+    @Override
+    void saveResults(User user) {
         
         Boolean gender=false;
         Boolean smoke =false;
@@ -288,5 +291,381 @@ public class THPResultService {
              userRepository.updateObject(user.getSesId(), user.getTags(), "tags");
             
     }
-    
+          
+    //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertime the case is true
+    @Override
+        String validatedText(String type, String text) {
+            String validatedText=null;
+                switch(type){
+                    
+                    case "country-number":
+                                  Pattern re = Pattern.compile("[0-9]+");
+                                    Matcher reMatcher = re.matcher(text);
+                                   while(reMatcher.find()){
+                                       return null;
+                                   } 
+                                   validatedText=text.substring(0, 1).toUpperCase()+text.substring(1).toLowerCase();
+                       
+                        break;
+                        
+                    case "name-number":
+                                    re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   while(reMatcher.find()){
+                                       return null;
+                                   } 
+                                   if(text!=null){
+                                    text=text.trim();
+                                    if(text.contains(" ")){
+                                         
+                                         if(text.split(" ")[text.split(" ").length-1].length()==1&&text.split(" ").length>1){
+                                             text=text.split(" ")[text.split(" ").length-2];
+                                             validatedText=text.substring(0, 1).toUpperCase()+text.substring(1).toLowerCase();
+                                         }
+                                         else{
+                                             text=text.split(" ")[text.split(" ").length-1];
+                                             validatedText=text.substring(0, 1).toUpperCase()+text.substring(1).toLowerCase();
+                                         }
+
+                                      }
+                                    else{
+                                        validatedText=text.substring(0, 1).toUpperCase()+text.substring(1).toLowerCase();
+                                    }
+                                }
+                        break;
+                        
+                    case "age-charactersOnly":
+                                re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   int count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count<1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    case "age-tooYoung":
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)<1){
+                                           return null;
+                                       }
+                                       else{
+                                          validatedText=val;
+                                       }
+                                   } 
+                                   
+                                  if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "age-tooOld":
+                         re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)>100){
+                                           return null;
+                                       }
+                                       else{
+                                           validatedText=val;
+                                       }
+                                   } 
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "age-multipleNumbers":
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count>1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                        
+                    case "height-huge":
+                              re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)>8){
+                                           return null;
+                                       }
+                                       else{
+                                           
+                                                String subVal="0";
+                                                    if(reMatcher.find()){
+                                                             subVal=reMatcher.group();
+                                                     }
+                                                    validatedText=val+"."+subVal;
+
+                                            }
+                                   } 
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "height-charactersOnly":
+                                 re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                  
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                                    validatedText=reMatcher.group();
+                                        }
+                                        else if(count==1){
+                                            validatedText=validatedText+"."+reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count<1){
+                                       return null;
+                                   }
+                                   
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                                   
+                        break;
+                    case "height-less":
+                         re = Pattern.compile("(\\+|\\-)?[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)<2){
+                                           return null;
+                                       }
+                                       else{
+                                           String subVal="0";
+                                                    if(reMatcher.find()){
+                                                             subVal=reMatcher.group();
+                                                     }
+                                                    validatedText=val+"."+subVal;
+                                       }
+                                   } 
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "height-multipleNumbers":
+                        if(text.startsWith(".")){
+                            return null;
+                        }
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        else if(count==1){
+                                            int inches=Integer.parseInt(reMatcher.group());
+                                            if(inches>12){
+                                                return null;
+                                            }validatedText=validatedText+"."+inches;
+                                        }
+                                        count++;
+                                   }
+                                   if(count>2){
+                                                return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    
+                    case "weight-huge":
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)>650){
+                                           return null;
+                                       }
+                                       else{
+                                           validatedText=val;
+                                       }
+                                   }
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "weight-charactersOnly":
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                  count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count<1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    case "weight-less":
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)<10){
+                                           return null;
+                                       }
+                                       else{
+                                          validatedText=val;
+                                       }
+                                   }
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "weight-multipleNumbers":
+                         re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                  count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count>1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    
+                    case "waistSize-huge":
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)>100){
+                                           return null;
+                                       }
+                                       else{
+                                           validatedText=val;
+                                       }
+                                   } if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "waistSize-charactersOnly":
+                        re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count<1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    case "waistSize-less":
+                        re = Pattern.compile("(\\+|\\-)?[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   
+                                   if(reMatcher.find()){
+                                       String val=reMatcher.group();
+                                       if(Integer.parseInt(val)<10){
+                                           return null;
+                                       }
+                                       else{
+                                          validatedText=val;
+                                       }
+                                   } 
+                                   if(validatedText==null){
+                                        validatedText=text;
+                                   }
+                        break;
+                    case "waistSize-multipleNumbers":
+                         re = Pattern.compile("[0-9]+");
+                                   reMatcher = re.matcher(text);
+                                   count=0;
+                                   while (reMatcher.find()){
+                                        if(count==0){
+                                            validatedText= reMatcher.group();
+                                        }
+                                        count++;
+                                   }
+                                   if(count<1){
+                                       return null;
+                                   }
+                                   if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                        
+                    case "email-invalid":
+                        
+                        re = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                        reMatcher = re.matcher(text.trim());
+                         if(reMatcher.find()){
+                                       validatedText= reMatcher.group();
+                                   } 
+                         else{
+                             return null;
+                         }
+                        break;
+                    case "phone-invalid":
+                         re = Pattern.compile("[0-9][0-9][0-9][0-9][0-9]([0-9]+)");
+                                   reMatcher = re.matcher(text.trim());
+                                   if(reMatcher.find()){
+                                                validatedText= reMatcher.group();
+                                       
+                                   } 
+                                   else{
+                                       return null;
+                                   }
+                                    if(validatedText==null){
+                                       validatedText=text;
+                                   }
+                        break;
+                    
+                }
+            
+            return validatedText;
+        }
+
+ 
+           
+
 }

@@ -5,8 +5,8 @@
  */
 package com.jubination.io.chatbot.service;
 
-import com.jubination.io.chatbot.backend.pojo.core.ChatBotRequest;
-import com.jubination.io.chatbot.backend.pojo.core.UserResponse;
+import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
+import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.model.dao.ChatletDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
@@ -53,4 +53,7 @@ public class ContextAwareMessageOperationService {
          }
          return null;
      }
+     
+      
+    
 }

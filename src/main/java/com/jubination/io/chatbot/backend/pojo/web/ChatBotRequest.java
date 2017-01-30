@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jubination.io.chatbot.backend.pojo.core;
+package com.jubination.io.chatbot.backend.pojo.web;
 
 import com.jubination.io.chatbot.model.pojo.Message;
 import java.util.ArrayList;

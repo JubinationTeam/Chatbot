@@ -34,10 +34,11 @@ public class User {
     public User() {
     }
 
-    public User(String sesId, String name, String fbId) {
+    public User(String sesId, String name, String gender,String fbId) {
         this.sesId = sesId;
         this.name = name;
         this.fbId = fbId;
+        this.gender=gender;
     }
 
    
