@@ -53,7 +53,7 @@ public class ChatBotChatFuelAPIController {
         
     @RequestMapping(value="/chatfuel/{fb_id}/{fb_name}/{fb_gender}/{last_processed_block_name}/{last_clicked_button_name}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatFuelet process(@PathVariable("fb_id") String fbId,@PathVariable("fb_name") String name,@PathVariable("fb_gender") String gender,@PathVariable("last_processed_block_name") String lastId,@PathVariable("last_clicked_button_name") String lastAnswer,HttpServletRequest request) throws IOException{
-        
+        System.out.println("input");
         
         
            UserResponse uRes=filter.createUserResponse(fbId, lastId, lastAnswer, name, gender);
