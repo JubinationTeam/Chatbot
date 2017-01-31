@@ -62,6 +62,15 @@ public class THPResultService extends ResultService{
         //BMI
         String height=user.getTags().get("height");
         String weight=user.getTags().get("weight");
+         if(height.length()>4){
+            height=height.substring(0, 4);
+        }
+         if(weight.length()>3){
+            weight=weight.substring(0, 3);
+        }
+          if(user.getTags().get("waistSize").length()>3){
+            user.getTags().replace("waistSize", user.getTags().get("waistSize").substring(0, 3));
+        }
         Double heightMeters=0d;
         if(height.split(".").length>=2){
            heightMeters= Double.parseDouble(height.split(".")[0])*0.3048+Double.parseDouble(height.split(".")[1])*0.0254;
@@ -72,6 +81,10 @@ public class THPResultService extends ResultService{
         Double bmi = Double.parseDouble(weight)/(Math.pow(heightMeters,2));
         
         //AGED
+        if(user.getTags().get("age").length()>3){
+            user.getTags().replace("age", user.getTags().get("age").substring(0, 3));
+        }
+       
         Double age=Double.parseDouble(user.getTags().get("age"));
         aged=age>=40;
         
@@ -81,6 +94,10 @@ public class THPResultService extends ResultService{
         }
         
         //WAIST
+        if(user.getTags().get("waistSize").length()>3){
+            user.getTags().replace("waistSize", user.getTags().get("waistSize").substring(0, 3));
+        }
+        
         Double waistSize=Double.parseDouble(user.getTags().get("waistSize"));
         waistFat=(gender&&waistSize>37)||(!gender&&waistSize>31.5);
         
