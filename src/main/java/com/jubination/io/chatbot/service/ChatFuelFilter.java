@@ -56,33 +56,53 @@ public class ChatFuelFilter {
       }
     
     //output
-    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest,Chatlet chatlet) {
-        
-        ChatFuelet fuelet= new ChatFuelet();
-        
-        
-        
-     if(chatRequest!=null){
-   
-         for(Message msg:chatRequest.getBotMessage()){
-             if(msg.getType().equalsIgnoreCase("text")){
-                    fuelet.getMessages().add(new CFMessage(msg.getValue()));
-             }
-//             else{
-//                 fuelet.getMessages().add(new CFMessage(new Attachment(msg.getType(),new Payload(url+msg.getValue()))));
-//             }
-         }
-         QuickReplies quickReplies = new QuickReplies();
-        quickReplies.setTitle("option");
-        Iterator<String> iterator=chatlet.getOptions().keySet().iterator();
-         while(iterator.hasNext()){
-             String option=iterator.next();
-            fuelet.getMessages().get(fuelet.getMessages().size()-1).getQuick_replies().add(new QuickReplies(option,chatlet.getOptions().get(option)));
-         }
-        
-   
-    }
-     return fuelet;
+    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest,Chatlet chatlet,String type) {
+                    ChatFuelet fuelet= new ChatFuelet();
+                    if(chatRequest!=null){
+                        
+                    if(chatlet.getAnswerType().equalsIgnoreCase("text")){
+                        for(Message msg:chatRequest.getBotMessage()){
+                            if(msg.getType().equalsIgnoreCase("text")){
+                                   fuelet.getMessages().add(new CFMessage(msg.getValue()));
+                            }
+                            else{
+                                fuelet.getMessages().add(new CFMessage(new Attachment(msg.getType(),new Payload(url+msg.getValue()))));
+                            }
+                        }
+                    }
+                    else if(type.equalsIgnoreCase("textofoption")){
+                        for(Message msg:chatRequest.getBotMessage()){
+                            if(msg.getType().equalsIgnoreCase("text")){
+                                   fuelet.getMessages().add(new CFMessage(msg.getValue()));
+                            }
+                            else{
+                                fuelet.getMessages().add(new CFMessage(new Attachment(msg.getType(),new Payload(url+msg.getValue()))));
+                            }
+                        }
+                        fuelet.getMessages().remove(fuelet.getMessages().size()-1);
+                     
+                    }
+                    else if(type.equalsIgnoreCase("option")){
+                        for(Message msg:chatRequest.getBotMessage()){
+                            if(msg.getType().equalsIgnoreCase("text")){
+                                   fuelet.getMessages().add(new CFMessage(msg.getValue()));
+                            }
+                            else{
+                                fuelet.getMessages().add(new CFMessage(new Attachment(msg.getType(),new Payload(url+msg.getValue()))));
+                            }
+                        }
+                        fuelet.getMessages().remove(fuelet.getMessages().size()-1);
+                       QuickReplies quickReplies = new QuickReplies();
+                       quickReplies.setTitle("option");
+                       Iterator<String> iterator=chatlet.getOptions().keySet().iterator();
+                        while(iterator.hasNext()){
+                            String option=iterator.next();
+                           fuelet.getMessages().get(fuelet.getMessages().size()-1).getQuick_replies().add(new QuickReplies(option,chatlet.getOptions().get(option)));
+                        }
+                    }
+                       
+                   }
+                    return fuelet;
     }
 
 
