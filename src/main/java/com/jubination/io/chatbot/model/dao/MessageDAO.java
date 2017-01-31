@@ -5,7 +5,7 @@
  */
 package com.jubination.io.chatbot.model.dao;
 
-import com.jubination.io.chatbot.model.pojo.Message;
+import com.jubination.io.chatbot.model.pojo.ChatletMessage;
 import com.mongodb.WriteResult;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
  * @author MumbaiZone
  */
 @Repository
-public class MessageDAO implements GenericDAO<Message>{
+public class MessageDAO implements GenericDAO<ChatletMessage>{
     
     @Autowired
     MongoTemplate mongoTemplate;
@@ -30,42 +30,42 @@ public class MessageDAO implements GenericDAO<Message>{
 	}
     
     @Override
-    public List<Message> getAllObjects() {
-        return mongoTemplate.findAll(Message.class);
+    public List<ChatletMessage> getAllObjects() {
+        return mongoTemplate.findAll(ChatletMessage.class);
     }
 
     @Override
-    public void saveObject(Message object) {
+    public void saveObject(ChatletMessage object) {
         mongoTemplate.insert(object);
     }
 
     @Override
-    public Message getObject(String id) {
-        return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),Message.class);
+    public ChatletMessage getObject(String id) {
+        return mongoTemplate.findOne(new Query(Criteria.where("id").is(id)),ChatletMessage.class);
     }
 
     @Override
     public WriteResult updateObject(String id, String name) {
         return mongoTemplate.updateFirst(new Query(Criteria.where("id").is(id)),
-				Update.update("name", name), Message.class);
+				Update.update("name", name), ChatletMessage.class);
     }
 
     @Override
     public void deleteObject(String id) {
-        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), Message.class);
+        mongoTemplate.remove(new Query(Criteria.where("id").is(id)), ChatletMessage.class);
     }
 
     @Override
     public void createCollection() {
-       if (!mongoTemplate.collectionExists(Message.class)) {
-			mongoTemplate.createCollection(Message.class);
+       if (!mongoTemplate.collectionExists(ChatletMessage.class)) {
+			mongoTemplate.createCollection(ChatletMessage.class);
 		}
     }
 
     @Override
     public void dropCollection() {
-       if (mongoTemplate.collectionExists(Message.class)) {
-			mongoTemplate.dropCollection(Message.class);
+       if (mongoTemplate.collectionExists(ChatletMessage.class)) {
+			mongoTemplate.dropCollection(ChatletMessage.class);
 		}
     }
     

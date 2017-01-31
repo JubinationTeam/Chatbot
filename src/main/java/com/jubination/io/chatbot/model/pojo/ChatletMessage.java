@@ -15,18 +15,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "message")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Message {
+public class ChatletMessage {
      @Id
     String id;
     String type;
     String value;
 
-    public Message(String type, String value) {
+    public ChatletMessage(String type, String value) {
         this.type = type;
         this.value = value;
     }
 
-    public Message() {
+    public ChatletMessage() {
     }
 
     public String getType() {

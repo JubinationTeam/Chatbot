@@ -14,7 +14,7 @@ import com.jubination.io.chatbot.model.dao.DashBotDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.DashBot;
-import com.jubination.io.chatbot.model.pojo.Message;
+import com.jubination.io.chatbot.model.pojo.ChatletMessage;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.jubination.io.chatbot.model.pojo.User;
 import java.util.Iterator;
@@ -71,9 +71,9 @@ public class PostProcessingService {
            
            MessageSet messageSet=chatlet.getBotMessages().get(new Random().nextInt(chatlet.getBotMessages().size()));
             if(res.getLastAnswer().equalsIgnoreCase("I am Interested")){
-                            req.getBotMessage().add(new Message("text", "Thank you, my team will get back to you."));
+                            req.getBotMessage().add(new ChatletMessage("text", "Thank you, my team will get back to you."));
         }
-               for(Message message:messageSet.getMessages()){
+               for(ChatletMessage message:messageSet.getMessages()){
                    if(message.getType().equals("text")){
                        String taggedValue=doDynamicLinking(user,message.getValue());
                        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
@@ -88,21 +88,21 @@ public class PostProcessingService {
                             }
                             
                             
-                            req.getBotMessage().add(new Message(message.getType(), val.toString()));
+                            req.getBotMessage().add(new ChatletMessage(message.getType(), val.toString()));
                         }
                        
                    }
                    else{
                             String stringValue=doDynamicLinking(user, message.getValue());
 //                            String stringValue=val.toString();
-                            req.getBotMessage().add(new Message(message.getType(), stringValue));
+                            req.getBotMessage().add(new ChatletMessage(message.getType(), stringValue));
                             // System.out.println(stringValue);
                    }
                }
                  
             //save and send outgoing dashBot data
             if(req.getBotMessage()!=null){
-                for(Message message:req.getBotMessage()){
+                for(ChatletMessage message:req.getBotMessage()){
                         DashBot outgoing = new DashBot(sessionId,message.getValue());
                         dashBotUpdater.sendAutomatedUpdate(outgoing, "outgoing");
                         dashBotRepository.saveObject(outgoing);

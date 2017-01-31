@@ -18,19 +18,19 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CFMessage {
+public class Message {
     String text;
     Attachment attachment;
     List<QuickReplies> quick_replies = new ArrayList<>();
 
-    public CFMessage() {
+    public Message() {
     }
 
-    public CFMessage(String text) {
+    public Message(String text) {
         this.text = text;
     }
 
-    public CFMessage(Attachment attachment) {
+    public Message(Attachment attachment) {
         this.attachment = attachment;
     }
 

@@ -24,13 +24,13 @@ public class MessageSet {
     String id;
   @DBRef
 //          @CascadeSave
-    List<Message> messages = new ArrayList<>();
+    List<ChatletMessage> messages = new ArrayList<>();
 
-    public List<Message> getMessages() {
+    public List<ChatletMessage> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(List<ChatletMessage> messages) {
         this.messages = messages;
     }
 
@@ -45,7 +45,7 @@ public class MessageSet {
     @Override
     public String toString(){
         StringBuilder value = new StringBuilder("");
-        for(Message message:getMessages()){
+        for(ChatletMessage message:getMessages()){
             value.append(message);
         }
         return messages.toString();

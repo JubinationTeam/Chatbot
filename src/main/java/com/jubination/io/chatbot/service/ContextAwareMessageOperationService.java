@@ -10,7 +10,7 @@ import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.model.dao.ChatletDAO;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
-import com.jubination.io.chatbot.model.pojo.Message;
+import com.jubination.io.chatbot.model.pojo.ChatletMessage;
 import com.jubination.io.chatbot.model.pojo.User;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class ContextAwareMessageOperationService {
                     for(String options:chatlet.getOptions().keySet()){
                         request.getOptions().add(options);
                     }
-                    request.getBotMessage().add(new Message("text","I look like a nice person. But, very averse to abuses. Plase enter details correctly."));
+                    request.getBotMessage().add(new ChatletMessage("text","I look like a nice person. But, very averse to abuses. Plase enter details correctly."));
                     User user=userRepository.getObject(res.getSessionId());
                     if(user!=null){
                         request.setGender(user.getGender());

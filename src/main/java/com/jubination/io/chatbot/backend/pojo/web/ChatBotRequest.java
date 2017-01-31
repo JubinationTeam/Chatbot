@@ -5,7 +5,7 @@
  */
 package com.jubination.io.chatbot.backend.pojo.web;
 
-import com.jubination.io.chatbot.model.pojo.Message;
+import com.jubination.io.chatbot.model.pojo.ChatletMessage;
 import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -25,7 +25,7 @@ public class ChatBotRequest {
     private String id;
     private String sessionId;
     private String gender;
-    private List<Message> botMessage = new ArrayList<>();
+    private List<ChatletMessage> botMessage = new ArrayList<>();
     private String answerType;
     private List<String> options = new ArrayList<>();
 
@@ -54,11 +54,11 @@ public class ChatBotRequest {
         this.answerType = answerType;
     }
 
-    public List<Message> getBotMessage() {
+    public List<ChatletMessage> getBotMessage() {
         return botMessage;
     }
 
-    public void setBotMessage(List<Message> botMessage) {
+    public void setBotMessage(List<ChatletMessage> botMessage) {
         this.botMessage = botMessage;
     }
 

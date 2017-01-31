@@ -19,7 +19,7 @@ import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.ChatletTag;
 import com.jubination.io.chatbot.model.pojo.DashBot;
 import com.jubination.io.chatbot.model.pojo.Decider;
-import com.jubination.io.chatbot.model.pojo.Message;
+import com.jubination.io.chatbot.model.pojo.ChatletMessage;
 import com.jubination.io.chatbot.model.pojo.MessageSet;
 import com.jubination.io.chatbot.model.pojo.User;
 import java.util.List;
@@ -61,7 +61,7 @@ public class CoreRepositoryService {
                     int outerIndex=0;
                     for(MessageSet messageSet:chatlet.getBotMessages()){
                                 int innerIndex=0;
-                                for(Message message:messageSet.getMessages()){
+                                for(ChatletMessage message:messageSet.getMessages()){
                                     // System.out.println(message.getValue()+"::::::::::::::::::::::::::::::::::::::");
                                             message.setId(chatlet.getId()+outerIndex+innerIndex);
                                             messageRepository.saveObject(message);
@@ -87,7 +87,7 @@ public class CoreRepositoryService {
             List<Chatlet> chatlets=chatletRepository.getAllObjects();
             for(Chatlet chatlet:chatlets){
                     for(MessageSet messageSet:chatlet.getBotMessages()){
-                                for(Message message:messageSet.getMessages()){
+                                for(ChatletMessage message:messageSet.getMessages()){
                                             messageRepository.deleteObject(message.getId());
                                 }
                                 messageSetRepository.deleteObject(messageSet.getId());

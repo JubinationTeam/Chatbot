@@ -23,42 +23,18 @@ import org.springframework.stereotype.Component;
 public class ChatFuelet {
     
     
-    String block_name;
-    String title;
-    List<String> block_names = new ArrayList<>();
-    List<CFMessage> messages = new ArrayList<>();
+  
+    List<Message> messages = new ArrayList<>();
     LinkedHashMap<String,String> set_attributes = new LinkedHashMap<>();
     
 
-    public String getBlock_name() {
-        return block_name;
-    }
+    
 
-    public void setBlock_name(String block_name) {
-        this.block_name = block_name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<String> getBlock_names() {
-        return block_names;
-    }
-
-    public void setBlock_names(List<String> block_names) {
-        this.block_names = block_names;
-    }
-
-    public List<CFMessage> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<CFMessage> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 
