@@ -160,14 +160,18 @@ public class ChatFuelService {
    
     public ChatFuelet prepareRisk(String fbId) {
         ChatFuelet fuelet = new ChatFuelet();
-        fuelet.getMessages().add(new Message("Lifestyle diseases pose a large threat to our health and families."));
-       fuelet.getMessages().add(new Message("Good thing however is they are preventable and we can help you take early action."));
-       fuelet.getMessages().add(new Message("Anyways, here are your risks we need to manage. We are discussing the most prevelant lifestyle diseases here."));
-       fuelet.getMessages().add(new Message("1) Diabetes: You have [<diabetes-count>] risk-factors : [<diabetes-text>]"));
-       fuelet.getMessages().add(new Message("2) Heart Disease: You have [<heart-count>] risk-factors : [<heart-text>]"));
-       fuelet.getMessages().add(new Message("3) Chronic Liver Disease: You have [<liver-count>] risk-factors : [<liver-text>]"));
-       fuelet.getMessages().add(new Message("4) Chronic Kidney Disease: You have [<kidney-count>] risk-factors : [<kidney-text>]"));
-       fuelet.getMessages().add(new Message("5) Vitamin D and Vitamin B12 deficiencies: You have [<vitamin-count>] risk-factors : [<vitamin-text>]"));
+        fuelet.getMessages().add(new Message("Thanks for sharing your details. Let me get these processed to generate your customized results. We have crunched all the data and have your results ready. Let's get started with your 'Health risks' that we could assess from the conversation."
+//                + "Lifestyle diseases pose a large threat to our health and families. "+
+//       "Good thing however is they are preventable and we can help you take early action. "+
+//       "Anyways, here are your risks we need to manage. We are discussing the most prevelant lifestyle diseases here. "+
+//       "1) Diabetes: You have [<diabetes-count>] risk-factors : [<diabetes-text>] "+
+//       "2) Heart Disease: You have [<heart-count>] risk-factors : [<heart-text>] "+
+//       "3) Chronic Liver Disease: You have [<liver-count>] risk-factors : [<liver-text>] "+
+//       "4) Chronic Kidney Disease: You have [<kidney-count>] risk-factors : [<kidney-text>] "+
+//       "5) Vitamin D and Vitamin B12 deficiencies: You have [<vitamin-count>] risk-factors : [<vitamin-text>] "
+        ));
+        fuelet.getMessages().get(0).getQuick_replies().add(new QuickReplies("Show my risks"));
+        
        return fuelet;
     
     }
