@@ -28,7 +28,7 @@ public class PreProcessingService {
     @Autowired
     UniqueIdHelper idHelper;
     @Autowired 
-    ChatFuelFilter filter;
+    ChatFuelService filter;
     @Autowired
     ChatletDAO chatletRepository;
     @Autowired

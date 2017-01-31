@@ -9,7 +9,8 @@ import com.jubination.io.chatbot.backend.pojo.chatfuel.ChatFuelet;
 import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
-import com.jubination.io.chatbot.service.ChatFuelFilter;
+import com.jubination.io.chatbot.model.pojo.User;
+import com.jubination.io.chatbot.service.ChatFuelService;
 import com.jubination.io.chatbot.service.ContextAwareMessageOperationService;
 import com.jubination.io.chatbot.service.CoreMessageOperationService;
 import com.jubination.io.chatbot.service.CoreRepositoryService;
@@ -49,7 +50,7 @@ public class ChatBotChatFuelAPIController {
      @Autowired
      ContextAwareMessageOperationService awareOperationService;
      @Autowired
-      ChatFuelFilter filter;     
+      ChatFuelService filter;     
     
         
     @RequestMapping(value="/chatfuel/{fb_id}/{fb_name}/{fb_gender}/{last_processed_block_name}/{last_clicked_button_name}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
@@ -85,4 +86,27 @@ public class ChatBotChatFuelAPIController {
             
         
     }
+    @RequestMapping(value="/chatfuelInit/{fb_id}/{fb_name}/{fb_gender}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ChatFuelet init(@PathVariable("fb_id") String fbId,@PathVariable("fb_name") String name,@PathVariable("fb_gender") String gender,HttpServletRequest request) throws IOException{
+        System.out.println("init:"+fbId+name+gender);
+        
+        name=name.replace("$"," ");
+           filter.createUser(fbId,name,gender);
+           
+           return new ChatFuelet();
+           
+             
+            
+        
+    }
+    @RequestMapping(value="/chatfuelDetails/{fb_id}/{last_processed_block_name}/{type}/{value}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ChatFuelet simpleProcess(@PathVariable("fb_id") String fbId,@PathVariable("type") String type,@PathVariable("value") String value,HttpServletRequest request) throws IOException{
+        
+             System.out.println("update:"+fbId+type+value);
+            filter.updateUser(fbId,type,value);
+            return new ChatFuelet();
+        
+    }
+
+
 }
