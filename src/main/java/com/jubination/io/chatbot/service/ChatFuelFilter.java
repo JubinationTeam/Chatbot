@@ -13,8 +13,10 @@ import com.jubination.io.chatbot.backend.pojo.chatfuel.QuickReplies;
 import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.model.dao.FbSessionDAO;
+import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.model.pojo.FbSessionIndices;
 import com.jubination.io.chatbot.model.pojo.Message;
+import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +56,7 @@ public class ChatFuelFilter {
       }
     
     //output
-    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest) {
+    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest,Chatlet chatlet) {
         
         ChatFuelet fuelet= new ChatFuelet();
         
@@ -72,10 +74,11 @@ public class ChatFuelFilter {
          }
          QuickReplies quickReplies = new QuickReplies();
         quickReplies.setTitle("option");
-         for(String options:chatRequest.getOptions()){
-             quickReplies.getBlock_names().add(options);
+        Iterator<String> iterator=chatlet.getOptions().keySet().iterator();
+         while(iterator.hasNext()){
+             String option=iterator.next();
+            fuelet.getMessages().get(fuelet.getMessages().size()-1).getQuick_replies().add(new QuickReplies(option,chatlet.getOptions().get(option)));
          }
-            fuelet.getMessages().get(fuelet.getMessages().size()-1).getQuick_replies().add(quickReplies);
         
    
     }

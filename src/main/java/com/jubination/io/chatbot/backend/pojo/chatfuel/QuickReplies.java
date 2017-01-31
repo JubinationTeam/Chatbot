@@ -20,7 +20,21 @@ import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuickReplies {
     String title;
+    String block_name;
     List<String> block_names = new ArrayList<>();
+
+    public QuickReplies() {
+    }
+
+    public QuickReplies(String title) {
+        this.title = title;
+    }
+
+    public QuickReplies(String title, String block_name) {
+        this.title = title;
+        this.block_name = block_name;
+    }
+    
 
     public String getTitle() {
         return title;
@@ -36,6 +50,14 @@ public class QuickReplies {
 
     public void setBlock_names(List<String> block_names) {
         this.block_names = block_names;
+    }
+
+    public String getBlock_name() {
+        return block_name;
+    }
+
+    public void setBlock_name(String block_name) {
+        this.block_name = block_name;
     }
     
 }

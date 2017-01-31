@@ -8,6 +8,7 @@ package com.jubination.io.chatbot.controller;
 import com.jubination.io.chatbot.backend.pojo.chatfuel.ChatFuelet;
 import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
+import com.jubination.io.chatbot.model.pojo.Chatlet;
 import com.jubination.io.chatbot.service.ChatFuelFilter;
 import com.jubination.io.chatbot.service.ContextAwareMessageOperationService;
 import com.jubination.io.chatbot.service.CoreMessageOperationService;
@@ -61,23 +62,24 @@ public class ChatBotChatFuelAPIController {
         
             ChatBotRequest chatRequest=awareOperationService.getContextAwareResponse(uRes);
             if(chatRequest!=null){
-                return filter.convertChatBotRequestToUserResponse(chatRequest);
+                return filter.convertChatBotRequestToUserResponse(chatRequest,null);
             }
             //normal reply
-              return  
-                      filter.convertChatBotRequestToUserResponse(
-                      postService.convertWebChatletIntoChatBotMessage(
-                                    operationService.getNextChatlet(
+            String sessionId=preService.getRecentSessionId(
+                                            uRes,
+                                            ""
+                                    );
+            Chatlet chatlet= operationService.getNextChatlet(
                                             preService.convertWebUserResponseIntoChatletTag(
                                                     uRes,""
                                             )
-                                    ), 
-                              uRes,
-                                    preService.getRecentSessionId(
-                                            uRes,
-                                            ""
-                                    )
-                            )
+                                    );
+              return  
+                      filter.convertChatBotRequestToUserResponse(
+                      postService.convertWebChatletIntoChatBotMessage(
+                                chatlet, 
+                              uRes,sessionId
+                            ),chatlet
                       );
              
             
