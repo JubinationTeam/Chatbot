@@ -56,7 +56,7 @@ public class ChatFuelFilter {
       }
     
     //output
-    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest,Chatlet chatlet,String type) {
+    public ChatFuelet convertChatBotRequestToUserResponse(ChatBotRequest chatRequest,Chatlet chatlet) {
                     ChatFuelet fuelet= new ChatFuelet();
                     if(chatRequest!=null){
                         

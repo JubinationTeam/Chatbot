@@ -52,8 +52,8 @@ public class ChatBotChatFuelAPIController {
       ChatFuelFilter filter;     
     
         
-    @RequestMapping(value="/chatfuel/{type}/{fb_id}/{fb_name}/{fb_gender}/{last_processed_block_name}/{last_clicked_button_name}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
-    public @ResponseBody ChatFuelet process(@PathVariable("fb_id") String fbId,@PathVariable("fb_name") String name,@PathVariable("fb_gender") String gender,@PathVariable("type") String type,@PathVariable("last_processed_block_name") String lastId,@PathVariable("last_clicked_button_name") String lastAnswer,HttpServletRequest request) throws IOException{
+    @RequestMapping(value="/chatfuel/{fb_id}/{fb_name}/{fb_gender}/{last_processed_block_name}/{last_clicked_button_name}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ChatFuelet process(@PathVariable("fb_id") String fbId,@PathVariable("fb_name") String name,@PathVariable("fb_gender") String gender,@PathVariable("last_processed_block_name") String lastId,@PathVariable("last_clicked_button_name") String lastAnswer,HttpServletRequest request) throws IOException{
         System.out.println("input:"+fbId+name+gender);
         
         
@@ -62,7 +62,7 @@ public class ChatBotChatFuelAPIController {
         
             ChatBotRequest chatRequest=awareOperationService.getContextAwareResponse(uRes);
             if(chatRequest!=null){
-                return filter.convertChatBotRequestToUserResponse(chatRequest,null,"text");
+                return filter.convertChatBotRequestToUserResponse(chatRequest,null);
             }
             //normal reply
             String sessionId=preService.getRecentSessionId(
@@ -79,7 +79,7 @@ public class ChatBotChatFuelAPIController {
                       postService.convertWebChatletIntoChatBotMessage(
                                 chatlet, 
                               uRes,sessionId
-                            ),chatlet,type
+                            ),chatlet
                       );
              
             
