@@ -5,6 +5,8 @@
  */
 package com.jubination.io.chatbot.backend.pojo.chatfuel;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class CFMessage {
     String text;
     Attachment attachment;
-    QuickReplies quick_replies;
+    List<QuickReplies> quick_replies = new ArrayList<>();
 
     public CFMessage() {
     }
@@ -48,13 +50,14 @@ public class CFMessage {
         this.attachment = attachment;
     }
 
-    public QuickReplies getQuick_replies() {
+    public List<QuickReplies> getQuick_replies() {
         return quick_replies;
     }
 
-    public void setQuick_replies(QuickReplies quick_replies) {
+    public void setQuick_replies(List<QuickReplies> quick_replies) {
         this.quick_replies = quick_replies;
     }
+
     
             
 }
