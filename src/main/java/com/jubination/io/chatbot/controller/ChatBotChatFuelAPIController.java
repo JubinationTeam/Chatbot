@@ -100,7 +100,7 @@ public class ChatBotChatFuelAPIController {
             return fuelet;
         
     }
-    @RequestMapping(value="/chatfuelDetails/{fb_id}/{last_processed_block_name}/{type}/{value}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    @RequestMapping(value="/chatfuelDetails/{fb_id}/{type}/{value}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatFuelet simpleProcess(@PathVariable("fb_id") String fbId,@PathVariable("type") String type,@PathVariable("value") String value,HttpServletRequest request) throws IOException{
         
              System.out.println("update:"+fbId+type+value);
