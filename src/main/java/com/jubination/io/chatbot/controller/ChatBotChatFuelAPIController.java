@@ -97,7 +97,7 @@ public class ChatBotChatFuelAPIController {
            
            ChatFuelet fuelet=new ChatFuelet();
            Message message=new Message("initialized");
-           message.getQuick_replies().add(new QuickReplies("init"));
+           message.getQuick_replies().add(new QuickReplies(""));
            fuelet.getMessages().add(message);
              
             return fuelet;
