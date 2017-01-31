@@ -102,7 +102,9 @@ public class ChatBotChatFuelAPIController {
     }
     @RequestMapping(value="/chatfuelDetails/{fb_id}/{type}/{value}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
     public @ResponseBody ChatFuelet simpleProcess(@PathVariable("fb_id") String fbId,@PathVariable("type") String type,@PathVariable("value") String value,HttpServletRequest request) throws IOException{
-        
+         if(type.equals("height")){
+            value=value.replace("$", ".");
+        }
              System.out.println("update:"+fbId+type+value);
             filter.updateUser(fbId,type,value);
             
@@ -114,5 +116,11 @@ public class ChatBotChatFuelAPIController {
         
     }
 
+    @RequestMapping(value="/chatfuelResult/{fb_id}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ChatFuelet getResult(@PathVariable("fb_id") String fbId,HttpServletRequest request) throws IOException{
+        System.out.println("result:"+fbId);
+              filter.saveResult(fbId);
+        return filter.prepareRisk(fbId);
+    }
 
 }
