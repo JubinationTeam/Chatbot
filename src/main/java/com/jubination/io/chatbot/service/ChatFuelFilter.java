@@ -71,7 +71,7 @@ public class ChatFuelFilter {
 //             }
          }
          QuickReplies quickReplies = new QuickReplies();
-        
+        quickReplies.setTitle("option");
          for(String options:chatRequest.getOptions()){
              quickReplies.getBlock_names().add(options);
          }
