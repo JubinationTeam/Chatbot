@@ -61,21 +61,22 @@ public class ChatFuelFilter {
         
         
      if(chatRequest!=null){
-   
+   StringBuilder text= new StringBuilder();
          for(Message msg:chatRequest.getBotMessage()){
              if(msg.getType().equalsIgnoreCase("text")){
-                    fuelet.getMessages().add(new CFMessage(msg.getValue()));
+                    text.append(msg.getValue());
              }
 //             else{
 //                 fuelet.getMessages().add(new CFMessage(new Attachment(msg.getType(),new Payload(url+msg.getValue()))));
 //             }
          }
-//         QuickReplies quickReplies = new QuickReplies();
+         fuelet.getMessages().add(new CFMessage(text.toString()));
+         QuickReplies quickReplies = new QuickReplies();
          
-//         for(String options:chatRequest.getOptions()){
-//             quickReplies.getBlock_names().add(options);
-//         }
-//            fuelet.getMessages().get(fuelet.getMessages().size()-1).setQuick_replies(quickReplies);
+         for(String options:chatRequest.getOptions()){
+             quickReplies.getBlock_names().add(options);
+         }
+            fuelet.getMessages().get(0).setQuick_replies(quickReplies);
         
    
     }
