@@ -173,11 +173,11 @@ public class ChatFuelService {
         User user=userRepository.getObject(fbId+":cf:fb");
         fuelet.getMessages().add(new Message( 
        "Here are your risks we need to manage. We are discussing the most prevelant lifestyle diseases here. "+
-       "1) Diabetes: "+user.getResult().get("diabetes-count")+", risk-factors : "+user.getResult().get("diabetes-text")+
-       "2) Heart Disease: "+user.getResult().get("heart-count")+", risk-factors : "+user.getResult().get("heart-text")+
-       "3) Chronic Liver Disease: "+user.getResult().get("liver-count")+", risk-factors : "+user.getResult().get("liver-text")+
-       "4) Chronic Kidney Disease: "+user.getResult().get("kidney-count")+", risk-factors : "+user.getResult().get("kidney-text")+
-       "5) Vitamin D and Vitamin B12 deficiencies: "+user.getResult().get("vitamin-count")+", risk-factors : "+user.getResult().get("vitamin-text")
+       "1) Diabetes: "+user.getResult().get("diabetes-count")+" risk-factors : "+user.getResult().get("diabetes-text")+
+       "2) Heart Disease: "+user.getResult().get("heart-count")+" risk-factors : "+user.getResult().get("heart-text")+
+       "3) Chronic Liver Disease: "+user.getResult().get("liver-count")+" risk-factors : "+user.getResult().get("liver-text")+
+       "4) Chronic Kidney Disease: "+user.getResult().get("kidney-count")+" risk-factors : "+user.getResult().get("kidney-text")+
+       "5) Vitamin D and Vitamin B12 deficiencies: "+user.getResult().get("vitamin-count")+" risk-factors : "+user.getResult().get("vitamin-text")
         ));
         if(!user.getTriggers().get("gender")){
             fuelet.getMessages().get(0).setText(fuelet.getMessages().get(0).getText()+user.getResult().get("thyroid-text"));
