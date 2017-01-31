@@ -122,6 +122,12 @@ public class ChatBotChatFuelAPIController {
     public @ResponseBody ChatFuelet getResult(@PathVariable("fb_id") String fbId,HttpServletRequest request) throws IOException{
         System.out.println("result:"+fbId);
               filter.saveResult(fbId);
+        return filter.prepareResult(fbId);
+    }
+    
+    @RequestMapping(value="/chatfuelRisks/{fb_id}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
+    public @ResponseBody ChatFuelet getRisk(@PathVariable("fb_id") String fbId,HttpServletRequest request) throws IOException{
+        System.out.println("risk:"+fbId);
         return filter.prepareRisk(fbId);
     }
 

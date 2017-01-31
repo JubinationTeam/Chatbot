@@ -158,7 +158,7 @@ public class ChatFuelService {
     }
 
    
-    public ChatFuelet prepareRisk(String fbId) {
+    public ChatFuelet prepareResult(String fbId) {
         ChatFuelet fuelet = new ChatFuelet();
         fuelet.getMessages().add(new Message("Thanks for sharing your details. Let me get these processed to generate your customized results. We have crunched all the data and have your results ready. Let's get started with your 'Health risks' that we could assess from the conversation."
 //                + "Lifestyle diseases pose a large threat to our health and families. "+
@@ -175,6 +175,26 @@ public class ChatFuelService {
        return fuelet;
     
     }
+    public ChatFuelet prepareRisk(String fbId) {
+        ChatFuelet fuelet = new ChatFuelet();
+        User user=userRepository.getObject(fbId+":cf:fb");
+        fuelet.getMessages().add(new Message(  "Lifestyle diseases pose a large threat to our health and families. "+
+       "Good thing however is they are preventable and we can help you take early action. "+
+       "Anyways, here are your risks we need to manage. We are discussing the most prevelant lifestyle diseases here. "+
+       "1) Diabetes: You have "+user.getResult().get("diabetes-count")+" risk-factors : "+user.getResult().get("diabetes-text")+
+       "2) Heart Disease: You have "+user.getResult().get("heart-count")+" risk-factors : "+user.getResult().get("heart-text")+
+       "3) Chronic Liver Disease: You have "+user.getResult().get("liver-count")+"risk-factors : "+user.getResult().get("liver-text")+
+       "4) Chronic Kidney Disease: You have "+user.getResult().get("kidney-count")+"risk-factors : "+user.getResult().get("kidney-text")+
+       "5) Vitamin D and Vitamin B12 deficiencies: You have "+user.getResult().get("vitamin-count")+"risk-factors : "+user.getResult().get("vitamin-text")
+        ));
+        if(!user.getTriggers().get("gender")){
+            fuelet.getMessages().get(0).setText(fuelet.getMessages().get(0).getText()+user.getResult().get("thyroid-text"));
+        }
+        fuelet.getMessages().get(0).setText(fuelet.getMessages().get(0).getText()+"Let's proceed to the next-step?");
+        fuelet.getMessages().get(0).getQuick_replies().add(new QuickReplies("Yes, show my health goals"));
+        
+       return fuelet;
     
+    }
     
 }
