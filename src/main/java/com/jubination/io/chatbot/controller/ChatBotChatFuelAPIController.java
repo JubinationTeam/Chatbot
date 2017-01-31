@@ -5,6 +5,7 @@
  */
 package com.jubination.io.chatbot.controller;
 
+import com.jubination.io.chatbot.backend.pojo.chatfuel.CFMessage;
 import com.jubination.io.chatbot.backend.pojo.chatfuel.ChatFuelet;
 import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
@@ -93,10 +94,10 @@ public class ChatBotChatFuelAPIController {
         name=name.replace("$"," ");
            filter.createUser(fbId,name,gender);
            
-           return new ChatFuelet();
-           
+           ChatFuelet fuelet=new ChatFuelet();
+           fuelet.getMessages().add(new CFMessage("initialized"));
              
-            
+            return fuelet;
         
     }
     @RequestMapping(value="/chatfuelDetails/{fb_id}/{last_processed_block_name}/{type}/{value}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE,headers="Accept=*/*")
@@ -104,7 +105,12 @@ public class ChatBotChatFuelAPIController {
         
              System.out.println("update:"+fbId+type+value);
             filter.updateUser(fbId,type,value);
-            return new ChatFuelet();
+            
+            
+            ChatFuelet fuelet=new ChatFuelet();
+           fuelet.getMessages().add(new CFMessage("updated"));
+             
+            return fuelet;
         
     }
 
