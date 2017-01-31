@@ -7,6 +7,7 @@ package com.jubination.io.chatbot.controller;
 
 import com.jubination.io.chatbot.backend.pojo.chatfuel.Message;
 import com.jubination.io.chatbot.backend.pojo.chatfuel.ChatFuelet;
+import com.jubination.io.chatbot.backend.pojo.chatfuel.QuickReplies;
 import com.jubination.io.chatbot.backend.pojo.web.ChatBotRequest;
 import com.jubination.io.chatbot.backend.pojo.web.UserResponse;
 import com.jubination.io.chatbot.model.pojo.Chatlet;
@@ -95,7 +96,9 @@ public class ChatBotChatFuelAPIController {
            filter.createUser(fbId,name,gender);
            
            ChatFuelet fuelet=new ChatFuelet();
-           fuelet.getMessages().add(new Message("initialized"));
+           Message message=new Message("initialized");
+           message.getQuick_replies().add(new QuickReplies("init"));
+           fuelet.getMessages().add(message);
              
             return fuelet;
         
