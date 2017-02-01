@@ -56,30 +56,28 @@ public class LMSUpdater {
                                     CloseableHttpClient httpclient = HttpClients.createDefault();
                                     HttpPost httpPost = new HttpPost("http://188.166.253.79/save_enquiry");
                                     List<NameValuePair> formparams = new ArrayList<>();
-                                    
-                                    
-                                    formparams.add(new BasicNameValuePair("full_name",user.getName()));
-                                    formparams.add(new BasicNameValuePair("email",user.getEmail()));
-                                    formparams.add(new BasicNameValuePair("phone",user.getEmail()));
-                                    formparams.add(new BasicNameValuePair("contact_no",user.getPhone()));
-                                    formparams.add(new BasicNameValuePair("city",user.getCountry()));
-                                    formparams.add(new BasicNameValuePair("ip","na"));
+                              
+                                    formparams.add(new BasicNameValuePair("form_data[0][email_id]",user.getEmail()));
+                                    formparams.add(new BasicNameValuePair("form_data[0][full_name]",user.getName()));
+                                    formparams.add(new BasicNameValuePair("form_data[0][contact_no]",user.getPhone()));
+                                    formparams.add(new BasicNameValuePair("form_data[0][city]",user.getCountry()));
+                                    formparams.add(new BasicNameValuePair("form_data[0][ip]","na"));
                                     if(user.getFbId()!=null){
-                                        formparams.add(new BasicNameValuePair("campaign_id","162"));
-                                            formparams.add(new BasicNameValuePair("source","fb-chatbot"));
+                                        formparams.add(new BasicNameValuePair("form_data[0][campaign_id]","162"));
+                                            formparams.add(new BasicNameValuePair("form_data[0][source]","fb-chatbot"));
                                     }
                                     else{
-                                        formparams.add(new BasicNameValuePair("campaign_id","161"));
-                                        formparams.add(new BasicNameValuePair("source","web-chatbot"));
+                                        formparams.add(new BasicNameValuePair("form_data[0][campaign_id]","161"));
+                                        formparams.add(new BasicNameValuePair("form_data[0][source]","web-chatbot"));
                                     }
-                                    formparams.add(new BasicNameValuePair("step_2","no"));
-                                    formparams.add(new BasicNameValuePair("step_2_created_at",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
+                                    formparams.add(new BasicNameValuePair("form_data[0][step_2]","no"));
+                                    formparams.add(new BasicNameValuePair("form_data[0][step_2_created_at]",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
                                     LocalDateTime backdate = LocalDateTime.of(2013, Month.JANUARY, 1, 0, 0);
                                     DateTimeFormatter formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                                    formparams.add(new BasicNameValuePair("step_2_inform_at",backdate.format(formatter)));
-                                    formparams.add(new BasicNameValuePair("chat_id",user.getSesId()));
+                                    formparams.add(new BasicNameValuePair("form_data[0][step_2_inform_at]",backdate.format(formatter)));
+                                    formparams.add(new BasicNameValuePair("form_data[0][chat_id]",user.getSesId()));
                                     for(Entry<String, Boolean> trigger:user.getTriggers().entrySet()){
-                                            formparams.add(new BasicNameValuePair("chat_"+trigger.getKey(),trigger.getValue().toString()));
+                                            formparams.add(new BasicNameValuePair("form_data[0][chat_"+trigger.getKey()+"]",trigger.getValue().toString()));
                                     }
                                     
                                     UrlEncodedFormEntity uEntity = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
