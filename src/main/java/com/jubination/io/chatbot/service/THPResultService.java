@@ -5,8 +5,12 @@
  */
 package com.jubination.io.chatbot.service;
 
+import com.jubination.io.chatbot.backend.service.core.LMSUpdater;
 import com.jubination.io.chatbot.model.dao.UserDAO;
 import com.jubination.io.chatbot.model.pojo.User;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,8 @@ public class THPResultService extends ResultService{
 
     @Autowired
         UserDAO  userRepository;  
+    @Autowired
+    LMSUpdater updater;
     private final String overweightText="You are over-weight,";
     private final String exerciseText="You don't exercise regularly,";
     private final String smokeText="Your habits of smoking, ";
@@ -285,9 +291,9 @@ public class THPResultService extends ResultService{
             userRepository.updateObject(user.getSesId(), user.getResult(), "result");
 
             user.getTriggers().put("gender", gender);
-            user.getTriggers().put("smoke", smoke);
-            user.getTriggers().put("drink", drink);
-            user.getTriggers().put("exercise", exercise);
+            user.getTriggers().put("smokes", smoke);
+            user.getTriggers().put("drinks", drink);
+            user.getTriggers().put("exercises", exercise);
             user.getTriggers().put("heart", heartFlag);
             user.getTriggers().put("diabetes", diabetesFlag);
             user.getTriggers().put("checkup", checkup);
@@ -306,6 +312,11 @@ public class THPResultService extends ResultService{
             user.getTags().put("diabetes", String.valueOf(diabetesFlag));
             
              userRepository.updateObject(user.getSesId(), user.getTags(), "tags");
+        try {
+            updater.createLead(userRepository.getObject(user.getSesId()));
+        } catch (IOException ex) {
+            Logger.getLogger(THPResultService.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
     }
           
