@@ -72,9 +72,9 @@ public class LMSUpdater {
                                         formparams.add(new BasicNameValuePair("source","web-chatbot"));
                                     }
                                     formparams.add(new BasicNameValuePair("step_2","no"));
-                                    formparams.add(new BasicNameValuePair("step_2_created_at",new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())));
+                                    formparams.add(new BasicNameValuePair("step_2_created_at",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
                                     LocalDateTime backdate = LocalDateTime.of(2013, Month.JANUARY, 1, 0, 0);
-                                    DateTimeFormatter formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+                                    DateTimeFormatter formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                                     formparams.add(new BasicNameValuePair("step_2_inform_at",backdate.format(formatter)));
                                     formparams.add(new BasicNameValuePair("chat_id",user.getSesId()));
                                     for(Map.Entry<String, Boolean> trigger:user.getTriggers().entrySet()){
