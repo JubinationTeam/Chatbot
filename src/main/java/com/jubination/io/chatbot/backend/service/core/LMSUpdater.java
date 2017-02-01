@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.http.Consts;
@@ -77,7 +78,7 @@ public class LMSUpdater {
                                     DateTimeFormatter formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                                     formparams.add(new BasicNameValuePair("step_2_inform_at",backdate.format(formatter)));
                                     formparams.add(new BasicNameValuePair("chat_id",user.getSesId()));
-                                    for(Map.Entry<String, Boolean> trigger:user.getTriggers().entrySet()){
+                                    for(Entry<String, Boolean> trigger:user.getTriggers().entrySet()){
                                             formparams.add(new BasicNameValuePair("chat_"+trigger.getKey(),trigger.getValue().toString()));
                                     }
                                     
@@ -96,6 +97,7 @@ public class LMSUpdater {
                                             response.close();
                                     }
                            }
+                            System.out.println(responseText);
         return responseText!=null;
     }
     
