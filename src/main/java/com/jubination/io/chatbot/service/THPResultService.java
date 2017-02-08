@@ -73,7 +73,7 @@ public class THPResultService extends ResultService{
         String vitaminPreText="<b>Vitamin D and Vitamin B12 Deficiencies</b>: You have ";
         String midText=" risk-factors : ";
         
-          String link = "<div class=\"fb-share-button\" data-href=\"http://jubination.com/know-your-health-through-chat/\" data-layout=\"button_count\" data-size=\"small\" data-mobile-iframe=\"true\"><a class=\"fb-xfbml-parse-ignore\" target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjubination.com%2Fknow-your-health-through-chat%2F&amp;src=sdkpreparse\">Share</a></div>";
+          String link = "<a href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjubination.com%2Fknow-your-health-through-chat%2F&src=sdkpreparse' target='_blank'>this link on facebook</a>";
         
         //BMI
         String height=user.getTags().get("height");
