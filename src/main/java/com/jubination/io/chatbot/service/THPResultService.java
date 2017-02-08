@@ -250,14 +250,14 @@ public class THPResultService extends ResultService{
            }
            
          risk="<br/>&#9679; "+diabetesPreText+diabetesCount+midText+diabetes+"<br/><br/>";
-         risk="<br/>&#9679; "+heartPreText+heartCount+midText+heart+"<br/><br/>";
-         risk="<br/>&#9679; "+liverPreText+liverCount+midText+liver+"<br/><br/>";
-         risk="<br/>&#9679; "+kidneyPreText+kidneyCount+midText+kidney+"<br/><br/>";
-         risk="<br/>&#9679; "+vitaminPreText+vitaminCount+midText+vitamin+"<br/><br/>";
+         risk=risk+"<br/>&#9679; "+heartPreText+heartCount+midText+heart+"<br/><br/>";
+         risk=risk+"<br/>&#9679; "+liverPreText+liverCount+midText+liver+"<br/><br/>";
+         risk=risk+"<br/>&#9679; "+kidneyPreText+kidneyCount+midText+kidney+"<br/><br/>";
+         risk=risk+"<br/>&#9679; "+vitaminPreText+vitaminCount+midText+vitamin+"<br/><br/>";
          
            if(!gender){
                user.getResult().put("thyroid-text", thyroidText);
-                risk="<br/>"+thyroidText+"<br/>";
+                risk=risk+"<br/>"+thyroidText+"<br/>";
          
            }
            if(smoke&&drink){
