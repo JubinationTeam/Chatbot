@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,8 +16,6 @@ import com.jubination.io.chatbot.model.pojo.DashBot;
 import com.jubination.io.chatbot.model.pojo.Decider;
 import com.jubination.io.chatbot.model.pojo.User;
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,7 +64,7 @@ public class CoreMessageOperationService {
                 //set chatletTag
                 chatletTag.setAnswerType(chatlet.getAnswerType());
                 chatletTag.setChatletId(chatlet.getId());
-                chatletTag.setQuestion(chatlet.getBotMessages().toString());
+                //chatletTag.setQuestion(chatlet.getBotMessages().toString());
                 chatletTag.setTagType(chatlet.getTagType());
                 
                 

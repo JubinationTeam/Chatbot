@@ -31,10 +31,10 @@ public class THPResultService extends ResultService{
     LMSUpdater updater;
     private final String overweightText="You are over-weight,";
     private final String exerciseText="You don't exercise regularly,";
-    private final String smokeText="Your habits of smoking, ";
-    private final String drinkText="Alcohol consumption, ";
+    private final String smokeText="Your habit of smoking, ";
+    private final String drinkText="Your habit of alcohol consumption, ";
     private final String ageText="Your age is in the high risk-group, ";
-    private final String thyroidText="6) Thyroid : Also your gender pre-disposes you to Thyroid and other hormonal conditions";
+    private final String thyroidText="<b>Thyroid</b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
     @Override
     void saveResults(User user) {
@@ -63,7 +63,15 @@ public class THPResultService extends ResultService{
         String liver="";
         String vitamin="";
         String healthGoals="";
+        String risk="";
         
+        
+         String diabetesPreText="<b>Diabetes</b>: You have ";
+        String heartPreText="<b>Heart Diseases</b>: You have ";
+        String kidneyPreText="<b>Chronic Kidney Diseases</b>: You have ";
+        String liverPreText="<b>Chronic Liver Deiseases</b>: You have ";
+        String vitaminPreText="<b>Vitamin D and Vitamin B12 Deficiencies</b>: You have ";
+        String midText=" risk-factors : ";
         
         //BMI
         String height=user.getTags().get("height");
@@ -205,6 +213,7 @@ public class THPResultService extends ResultService{
             heartCount++;
         }
          
+        
          //Health Goals
           if(waistFat||overweight){
                 healthGoals+="&#9679; Manage your <b>Weight</b> (With this one step, we can reverse a lot of your health-risks) <br/><br/>";
@@ -240,8 +249,16 @@ public class THPResultService extends ResultService{
                     healthGoals+="&#9679; Moderate <b>Alcohol intake</b> <br/><br/>";
            }
            
+         risk="<br/>&#9679; "+diabetesPreText+diabetesCount+midText+diabetes+"<br/><br/>";
+         risk="<br/>&#9679; "+heartPreText+heartCount+midText+heart+"<br/><br/>";
+         risk="<br/>&#9679; "+liverPreText+liverCount+midText+liver+"<br/><br/>";
+         risk="<br/>&#9679; "+kidneyPreText+kidneyCount+midText+kidney+"<br/><br/>";
+         risk="<br/>&#9679; "+vitaminPreText+vitaminCount+midText+vitamin+"<br/><br/>";
+         
            if(!gender){
                user.getResult().put("thyroid-text", thyroidText);
+                risk="<br/>"+thyroidText+"<br/>";
+         
            }
            if(smoke&&drink){
                user.getResult().put("number-checkup", "<b>1 out of 6</b>");
@@ -285,6 +302,7 @@ public class THPResultService extends ResultService{
             user.getResult().put("liver-count", String.valueOf(liverCount));
             user.getResult().put("vitamin-count", String.valueOf(vitaminCount));
             
+            user.getResult().put("risk-text", risk);
             
             user.getResult().put("health-goals", healthGoals);
             

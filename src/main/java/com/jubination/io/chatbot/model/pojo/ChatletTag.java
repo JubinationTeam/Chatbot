@@ -21,7 +21,6 @@ public class ChatletTag {
     String id;
     String userId;
     String tag;
-    String question;
     String answer;
     String answerType;
     String tagType;
@@ -55,13 +54,7 @@ public class ChatletTag {
         this.tag = tag;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
+   
 
     public String getAnswer() {
         return answer;
