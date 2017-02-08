@@ -47,8 +47,7 @@ public class PostProcessingService {
       private static final int imageHabitsCount=4;
       private static final int imageStressCount=3;
       private static final int lineBreak=45;
-      private static final String link = "mailto:?subject=I wanted you to see this&amp;body=Check out Mia http://bit.ly/2jYG0xz";
-     
+    
         public ChatBotRequest convertWebChatletIntoChatBotMessage(Chatlet chatlet, UserResponse res,String sessionId){
             
            ChatBotRequest req=new ChatBotRequest();
@@ -187,9 +186,6 @@ public class PostProcessingService {
                         break;
                     case "phone":
                         value=user.getPhone();
-                        break;
-                    case "share-link":
-                        value ="<a href='"+link+"'>Mia on Chat</a>";
                         break;
                     default:
                         if(user.getResult()!=null){
