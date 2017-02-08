@@ -34,7 +34,7 @@ public class THPResultService extends ResultService{
     private final String smokeText="Your habit of smoking, ";
     private final String drinkText="Your habit of alcohol consumption, ";
     private final String ageText="Your age is in the high risk-group, ";
-    private final String thyroidText="<b>Thyroid</b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
+    private final String thyroidText="&#9679; <b>Thyroid</b>: Also your gender pre-disposes you to Thyroid and other hormonal conditions";
     
     @Override
     void saveResults(User user) {
@@ -249,11 +249,11 @@ public class THPResultService extends ResultService{
                     healthGoals+="&#9679; Moderate <b>Alcohol intake</b> <br/><br/>";
            }
            
-         risk="<br/>&#9679; "+diabetesPreText+diabetesCount+midText+diabetes+"<br/><br/>";
-         risk=risk+"<br/>&#9679; "+heartPreText+heartCount+midText+heart+"<br/><br/>";
-         risk=risk+"<br/>&#9679; "+liverPreText+liverCount+midText+liver+"<br/><br/>";
-         risk=risk+"<br/>&#9679; "+kidneyPreText+kidneyCount+midText+kidney+"<br/><br/>";
-         risk=risk+"<br/>&#9679; "+vitaminPreText+vitaminCount+midText+vitamin+"<br/><br/>";
+         risk="<br/>&#9679; "+diabetesPreText+diabetesCount+midText+diabetes+"<br/>";
+         risk=risk+"<br/>&#9679; "+heartPreText+heartCount+midText+heart+"<br/>";
+         risk=risk+"<br/>&#9679; "+liverPreText+liverCount+midText+liver+"<br/>";
+         risk=risk+"<br/>&#9679; "+kidneyPreText+kidneyCount+midText+kidney+"<br/>";
+         risk=risk+"<br/>&#9679; "+vitaminPreText+vitaminCount+midText+vitamin+"<br/>";
          
            if(!gender){
                user.getResult().put("thyroid-text", thyroidText);
