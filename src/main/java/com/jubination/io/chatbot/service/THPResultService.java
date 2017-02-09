@@ -74,7 +74,7 @@ public class THPResultService extends ResultService{
         String midText=" risk-factors : ";
         
           String link = "<a href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjubination.com%2FMiaWellness%2F&src=sdkpreparse' target='_blank'>Share on Facebook</a> or  "
-                  +"<a href='whatsapp://send?text=Wellness is happiness. And now you can generate a customized wellness plan for FREE - tailor-made just for you.  Mia can help you be proactive about health and thus avoid illness & healthcare-related costs.' data-action='share/whatsapp/share'>Share via Whatsapp</a>";
+                  +"<a href='whatsapp://send?text=Wellness is happiness And now you can generate a customized wellness plan for FREE - tailor-made just for you  Mia can help you be proactive about health and thus avoid illness & healthcare-related costs' data-action='share/whatsapp/share'>Share via Whatsapp</a>";
         
         //BMI
         String height=user.getTags().get("height");
