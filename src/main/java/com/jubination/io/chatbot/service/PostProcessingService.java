@@ -80,7 +80,7 @@ public class PostProcessingService {
                         while (reMatcher.find()) {
                             StringBuilder val=new StringBuilder(reMatcher.group());
                             
-                            if(val.toString().length()<lineBreak||val.toString().trim().endsWith("E.g.")||val.toString().trim().endsWith("e.g.")){
+                            if(val.toString().length()<lineBreak){
                                 if(reMatcher.find()){
                                     val.append(" ").append(reMatcher.group());
                                 }
