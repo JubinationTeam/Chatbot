@@ -14,6 +14,6 @@ import com.jubination.io.chatbot.model.pojo.User;
 public abstract class ResultService {
     
    abstract void saveResults(User user);
-   abstract String validatedText(String type, String text);
+   abstract String validatedText(String type, String text,User user);
     
 }

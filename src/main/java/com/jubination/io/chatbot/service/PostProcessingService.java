@@ -188,9 +188,7 @@ public class PostProcessingService {
                         value=user.getPhone();
                         break;
                     default:
-                        if(user.getResult()!=null){
-                            value=user.getResult().get(tag);
-                        }
+                        value=user.getTags().get(tag);
                         break;
                 }
         }
@@ -221,6 +219,9 @@ public class PostProcessingService {
              else if(tag.contains("stress")){
                 path+="-"+gen.generate(imageStressCount+1);
             }
+             else if(tag.contains("premium")){
+                 path+="-0";
+             }
             return preTag+path+postTag;
         }
         

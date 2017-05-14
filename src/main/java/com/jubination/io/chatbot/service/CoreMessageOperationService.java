@@ -41,7 +41,7 @@ public class CoreMessageOperationService {
         @Autowired
         PostProcessingService postProcessor;
         @Autowired
-        THPResultService resultService;
+        ReligareService resultService;
     
          //Bussiness Logic
         public Chatlet getNextChatlet(ChatletTag chatletTag){
@@ -57,7 +57,7 @@ public class CoreMessageOperationService {
                 dashBotRepository.saveObject(incoming);
                 dashBotUpdater.sendAutomatedUpdate(incoming, "incoming");
                 
-                
+                System.out.println(chatletTag.getChatletId()+"::::::::::::::::::::::::::::::::::::::::::;");
                 Chatlet chatlet =  chatletRepository.getObject(chatletTag.getChatletId());
                 
                
@@ -146,12 +146,12 @@ public class CoreMessageOperationService {
         private Chatlet getSTCAndTDC(Chatlet chatlet, ChatletTag chatletTag){
                                         
                             Iterator<String> iterator=chatlet.getValidationChatlets().keySet().iterator();
-                            
+                            User user=userRepository.getObject(chatletTag.getSessionId());
                             if(chatlet.getValidationChatlets().keySet().size()>0){
                                             while(iterator.hasNext()){
                                                 //validating block
                                                             String nextKey=iterator.next();
-                                                            String tag=resultService.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer());
+                                                            String tag=resultService.validatedText(chatlet.getTagType()+"-"+nextKey,chatletTag.getAnswer(),user);
                                                             if(tag==null){
 
                                                                 Chatlet validationChatlet=chatletRepository.getObject(chatlet.getValidationChatlets().get(nextKey));
@@ -172,22 +172,22 @@ public class CoreMessageOperationService {
                                 chatletTag.setTag(chatletTag.getAnswer());
                             }
                                             
-                                                    //update user details
-                                                    tagSetup(chatletTag);
-                                                    
-                                                    System.out.println(chatlet.getDeciders()+" "+chatlet.getTagType());
-                                                //TDC
-                                                    if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
-                                                        String deciderId=getDeciderId(chatlet, chatletTag);
-                                                        if(deciderId!=null){
-                                                            // System.out.println("TDC:");
-                                                                return chatletRepository.getObject(deciderId);
-                                                        }
-                                                        
-                                                    }
-                                            //STC
-                                            // System.out.println("STC:");
-                                             return chatletRepository.getObject(chatlet.getNext());
+                                            //update user details
+                                            tagSetup(chatletTag);
+
+                                            System.out.println(chatlet.getDeciders()+" "+chatlet.getTagType());
+                                        //TDC
+                                            if(chatlet.getDeciders()!=null&&!chatlet.getDeciders().isEmpty()){
+                                                String deciderId=getDeciderId(chatlet, chatletTag);
+                                                if(deciderId!=null){
+                                                    // System.out.println("TDC:");
+                                                        return chatletRepository.getObject(deciderId);
+                                                }
+
+                                            }
+                                    //STC
+                                    // System.out.println("STC:");
+                                     return chatletRepository.getObject(chatlet.getNext());
         }   
         private Chatlet getTVC(Chatlet chatlet, ChatletTag chatletTag) {
                                             //Parent
@@ -308,12 +308,14 @@ public class CoreMessageOperationService {
                                                                     }
                                                                 }
                                                     }
-                                                    else{
-                                                         user=userRepository.getObject(chatletTag.getSessionId());
-                                                    }
                                                     
                                                     //calculate result
                                                     if(chatletTag.getTagType().contains("result")){
+                                                        if(user==null){
+                                                             user=userRepository.getObject(chatletTag.getSessionId());
+                                                        }
+                                                        
+                                                        
                                                         if(user!=null){
                                                                 resultService.saveResults(user);
                                                         }

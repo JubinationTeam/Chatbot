@@ -345,7 +345,7 @@ public class THPResultService extends ResultService{
           
     //Validating Text based /... return if the vslidation goes wrong  any of the cases and return the value evertime the case is true
     @Override
-        String validatedText(String type, String text) {
+        String validatedText(String type, String text,User user) {
             String validatedText=null;
                 switch(type){
                     
@@ -715,8 +715,6 @@ public class THPResultService extends ResultService{
             
             return validatedText;
         }
-
  
-           
 
 }
